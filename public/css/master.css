@@ -35,7 +35,7 @@ body, html
 {
 
     background: rgba(62, 70, 123, 0.75);
-    box-shadow: 0.5vw 0 2vw black;
+    box-shadow: 5px 0 20px black;
     height: 100%;
     width: 100%;
 }

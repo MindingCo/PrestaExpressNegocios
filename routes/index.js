@@ -5,10 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Presta Express Negocios' });
 });
-router.get('/inicio', function(req, res, next) {
+router.post('/inicio', function(req, res, next) {
     res.render('cliente',{
-        title: 'Inicio',
-        prueba: 'Holi'
+        title: 'Inicio'
     });
 });
 
