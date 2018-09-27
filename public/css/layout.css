@@ -13,6 +13,7 @@ body, html
 }
 .nav
 {
+    background-color: rgb(205, 220, 57);
 	box-shadow: 0 0.5px 15px black;
 	height: 6.5%;
 	position: sticky;
@@ -32,14 +33,24 @@ body, html
 }
 .logo
 {
-    display: inline-block;
     position: relative;
+    display: inline-block;
     max-width: 6.25%;
     left: 0;
 }
 .logo>img
 {
-    max-height: 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 90%;
+}
+.options
+{
+    display: inline-block;
+    max-width: 93.73%;
+    width: 93.73%;
 }
 .content
 {
