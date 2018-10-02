@@ -20,18 +20,13 @@ router.post('/iniciosesion', (req, res, next) =>
     console.log(nombre)
     console.log(contraseña)
 
-    consulta.connect('n0m3l0', 'pen')
+    consulta.connect('Ilovebr3ad', 'pen')
     var sesion = consulta.login(nombre, contraseña)
-    console.log('El error es :');
-    console.log(sesion.sqlMessage);
-    if (sesion) res.render('error', { error: sesion })
-    else
-    {
-        console.log('El arreglo es');
-        console.log(sesion);
-        res.locals.Sesion = sesion
-        res.redirect('/inicio')
-    }
+
+    console.log('El arreglo es');
+    console.log(sesion);
+    res.locals.Sesion = sesion
+    res.redirect('/inicio')
 
     /*var con = mysql.createConnection(
     {

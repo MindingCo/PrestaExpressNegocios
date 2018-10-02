@@ -20,7 +20,7 @@ function connect(pass, db)
 function login(nombre, contraseña)
 {
     var Sesion
-    var sql = 'SELECT nom_usu, con_usu, id_tus FROM uuario WHERE nom_usu = ? AND con_usu = ?';
+    var sql = 'SELECT nom_usu, con_usu, id_tus FROM usuario WHERE nom_usu = ? AND con_usu = ?';
     con.query(sql, [nombre, contraseña], (err, result) =>
     {
         if (err) console.log(err)

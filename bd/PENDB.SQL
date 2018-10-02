@@ -7,7 +7,7 @@ CREATE TABLE Cliente(
 	ema_cli varchar(45) NOT NULL,
 	din_cli varchar(120) NOT NULL,
 	dih_cli varchar(120) NOT NULL,
-	tel_cli int NOT NULL
+	tel_cli float NOT NULL
 );
 CREATE TABLE Zona(
 	id_zon int PRIMARY KEY,
@@ -18,7 +18,7 @@ CREATE TABLE Asesor(
 	id_ase int PRIMARY KEY AUTO_INCREMENT,
 	nom_ase varchar(45) NOT NULL,
 	ema_ase varchar(45) NOT NULL,
-	tel_ase int NOT NULL,
+	tel_ase float NOT NULL,
 	id_zon int NOT NULL,
 	FOREIGN KEY(id_zon)REFERENCES Zona(id_zon)
 );
@@ -46,7 +46,7 @@ CREATE TABLE HistorialPagos(
 CREATE TABLE Gerente(
 	id_ger int PRIMARY KEY AUTO_INCREMENT,
 	nom_ger varchar(45) NOT NULL,
-	tel_ger int NOT NULL,
+	tel_ger float NOT NULL,
 	ema_ger varchar(45) NOT NULL,
 	id_zon int NOT NULL,
 	FOREIGN KEY(id_zon)REFERENCES Zona(id_zon)

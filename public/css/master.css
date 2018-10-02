@@ -1,6 +1,3 @@
-/*
-    Any device
-*/
 *
 {
     padding: 0 !important;
@@ -14,143 +11,29 @@ body, html
     padding: 0;
     width: 100vw;
 }
-.content, .terminos, .log-in
+.nav
 {
-    color: white;
+    background-color: rgb(205, 220, 57);
+	box-shadow: 0 0.5px 15px black;
+	height: 6.5%;
+	position: sticky;
+	top: 0;
+	max-height: 75px;
+	min-height: 50px;
 }
-.bg
+.logo-area, .options-area, .option
 {
-    background-attachment: fixed;
-    background-position: right;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: blur(2px) grayscale(33%);
+    display: inline-block;
+}
+.logo-area
+{
     height: 100%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
+    padding: 0 1% !important;
 }
-.content
+#logo
 {
-
-    background: rgba(62, 70, 123, 0.75);
-    box-shadow: 5px 0 20px black;
-    height: 100%;
-    width: 100%;
-}
-.header
-{
-    height: 22%;
-}
-.log
-{
-    height: 70%;
-    margin: 15% 0;
-}
-.subtitle
-{
-    text-align: center;
-    margin: 2.5%;
-}
-.log-in
-{
-    background: none;
-    border: none;
-    border-bottom: 1px solid white;
-    border-top-left-radius: 1vmin;
-    border-top-right-radius: 1vmin;
-    display: block;
-    font-size: 100%;
-    margin: 10% 5% !important;
-    padding: 2% 5% !important;
-    width: 80%;
-}
-.in-log
-{
-    border: none;
-    border-radius: 1vmin;
-}
-.terminos
-{
-    left: 50%;
     position: relative;
-    text-align: center;
+    max-height: 80%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(0, -50%);
 }
-.footer
-{
-    height: 8%;
-}
-img
-{
-    left: 50%;
-    position: relative;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 60%;
-}
-a
-{
-    color: inherit;
-    text-decoration: none;
-    font-weight: 500;
-}
-input:focus
-{
-    outline: none;
-}
-input[type="submit"]
-{
-    cursor: pointer;
-}
-.bg-log
-{
-    background-image: url('/img/bg-log.jpg');
-}
-
-/*
-    Small devices (landscape phones, 576px and up)
-*/
-@media (min-width: 576px)
-{
-
-}
-
-/*
-    Medium devices (tablets, 768px and up)
-*/
-@media (min-width: 768px)
-{
-    .content
-    {
-        width: 60%;
-    }
-    .log-in
-    {
-        background: none;
-    }
-}
-
-/*
-    Large devices (desktops, 992px and up)
-*/
-@media (min-width: 992px)
-{
-    .content
-    {
-        width: 40%;
-    }
-}
-
-/*
-    Extra large devices (large desktops, 1200px and up)
-*/
-@media (min-width: 1200px)
-{
-
-}
-
-/*    Importacion de funte "ProductSans"    */
-@font-face{font-family:'Adobe Blank';font-style:normal;font-weight:400;src:local('Adobe Blank'),local('AdobeBlank-Regular'),url(//fonts.gstatic.com/s/adobeblank/v3/ieV62YNKKGqPJteRQT8EQmob.woff2)format('woff2');}@font-face{font-family:'Product Sans';font-style:normal;font-weight:400;src:local('Product Sans'),local('ProductSans-Regular'),url(//fonts.gstatic.com/s/productsans/v9/pxiDypQkot1TnFhsFMOfGShVGdeOcEg.woff2)format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Product Sans';font-style:normal;font-weight:400;src:local('Product Sans'),local('ProductSans-Regular'),url(//fonts.gstatic.com/s/productsans/v9/pxiDypQkot1TnFhsFMOfGShVF9eO.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}

@@ -1,0 +1,23 @@
+doctype html
+html(lang='es')
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel='stylesheet', href='/css/master.css')
+        block jscss
+    body
+        .nav
+            .logo-area
+                img#logo(src='/img/logo.png')
+            .options-area
+                div.options(v-if='Usuario.tipo === "Cliente"')
+                    include navcli
+                //div.options(v-if='Usuario.tipo === "Asesor"')
+                //    include navase
+                //div.options(v-if='Usuario.tipo === "Gerente"')
+                //    include navger
+                //div.options(v-if='Usuario.tipo === "Administrador"')
+                //    include navadm 
+        .content
+            block content
