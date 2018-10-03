@@ -7,17 +7,29 @@ html(lang='es')
         link(rel='stylesheet', href='/css/master.css')
         block jscss
     body
-        .nav
-            .logo-area
-                img#logo(src='/img/logo.png')
-            .options-area
-                div.options(v-if='Usuario.tipo === "Cliente"')
-                    include navcli
-                //div.options(v-if='Usuario.tipo === "Asesor"')
-                //    include navase
-                //div.options(v-if='Usuario.tipo === "Gerente"')
-                //    include navger
-                //div.options(v-if='Usuario.tipo === "Administrador"')
-                //    include navadm 
+        div.nav
+            div.logo-area
+                img(src='/img/logo.png')
+            div.options.flexbox
+                div.option.w-3
+                    a(href="/inicio")
+                        div
+                            img.icon(src="/img/icons/icons8_Home_50px_2.png")
+                            span Inicio
+                div.option.w-3
+                    a(href="/asesor")
+                        div
+                            img.icon(src="/img/icons/icons8_User_50px.png")
+                            span Tu Asesor
+                .option.w-3
+                    a(href="/chat")
+                        div
+                            img.icon(src="/img/icons/icons8_Chat_50px.png")
+                            span Chat
+                div.option.w-3
+                    a(href='sesion')
+                        div
+                            img.icon(src="/img/icons/icons8_Access_50px.png")
+                            span Sesión
         .content
             block content
