@@ -15,33 +15,31 @@ a
 .nav
 {
     background-color: rgb(205, 220, 57);
+    box-shadow: -1px 0 10px black;
     padding: 5px 0;
     height: 5%;
     width: 100%;
+}
+.logo-area
+{
+    height: 100%;
+}
+.logo
+{
+    position: relative;
+    height: 100% !important;
+    top: 50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 }
 .options
 {
     height: 100%;
     width: 100%;
 }
-div
-{
-    display: inline-block;
-    margin: 0 0 0 0;
-}
-
-.w-3{
-    width: 25%;
-}
-
-.icon
-{
-    height: 80%;
-}
 .option
 {
     height: 100%;
-
 }
 .option > a > div
 {
@@ -54,12 +52,17 @@ div
 {
     vertical-align: middle;
 }
+.icon
+{
+    height: 80%;
+    1}
 .option > a > div > span
 {
     margin-left: 5px;
     color: white;
     font-size: 3vmin;
 }
+
 .flexbox
 {
     /* BROWSER DEFINITION */
@@ -72,3 +75,13 @@ div
     display: flex;
     display: inline-flex;
 }
+.w-1 { width:  10%; }
+.w-2 { width:  20%; }
+.w-25 { width: 25%; }
+.w-3 { width:  30%; }
+.w-4 { width:  40%; }
+.w-5 { width:  50%; }
+.w-6 { width:  60%; }
+.w-7 { width:  70%; }
+.w-8 { width:  80%; }
+.w-9 { width:  90%; }
