@@ -11,6 +11,10 @@ body, html
     padding: 0;
     width: 100vw;
 }
+a
+{
+    text-decoration: none;
+}
 .nav
 {
     background-color: rgb(205, 220, 57);
@@ -27,6 +31,9 @@ body, html
 }
 .logo-area
 {
+    border-right: 1px solid background;
+    text-align: center;
+    width: 9%;
     height: 100%;
     padding: 0 1% !important;
 }
@@ -36,4 +43,16 @@ body, html
     max-height: 80%;
     top: 50%;
     transform: translate(0, -50%);
+}
+.options-area
+{
+    position: relative;
+    top: 0;
+    text-align: center;
+    height: 100%;
+    width: 88.9%;
+}
+.options
+{
+    width: 100%;
 }
