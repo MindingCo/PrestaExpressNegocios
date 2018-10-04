@@ -17,7 +17,7 @@ function connect(pass, db)
     });
 }
 
-function login(nombre, contraseña)
+function login(nombre, contraseña, cb)
 {
     var Sesion
     var sql = 'SELECT nom_usu, con_usu, id_tus FROM usuario WHERE nom_usu = ? AND con_usu = ?';
@@ -29,10 +29,11 @@ function login(nombre, contraseña)
             var Sesion =
             {
                 Nombre: result[0].nom_usu,
-                Contraseña: result[0].con_usu,
+                Contrasena: result[0].con_usu,
                 Tipo: result[0].id_tus
             }
             console.log(Sesion)
+            cb(Sesion)
             return Sesion
         }
     })
