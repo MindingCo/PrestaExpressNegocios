@@ -1,31 +1,50 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
+const createError = require('http-errors');
+var express  = require('express');
+var session  = require('express-session');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+const path = require('path');
+var app      = express();
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var port     = process.env.PORT || 8080;
 
-var app = express();
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-// view engine setup
+require('./config/passport')(passport);
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Para el passport
+app.use(session({
+	secret: 'keysecreta',
+	resave: true,
+	saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+//rutas
+
+require('./routes/index.js')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

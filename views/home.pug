@@ -3,8 +3,12 @@ extends layouth
 append jscss
     link(rel='stylesheet', href='/css/cliente.css')
 append content
-    -var sayHoli = true
-    if sayHoli
-        p holi
-    else
-        p popo
+    
+    if user.id_tus == 1
+      p hola cliente
+    else if user.id_tus == 2
+      p hola desconocido
+    else if user.id_tus == 3
+      p hola desconocido
+    else 
+      p necesitas iniciar sesion

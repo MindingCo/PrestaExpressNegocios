@@ -7,10 +7,17 @@ html(lang='es')
         link(rel='stylesheet', href='/css/master.css')
         block jscss
     body
-        div.nav.flexbox
-            div.logo-area.w-1
+        .nav.flexbox
+            .logo-area.w-1
                 img.logo(src='/img/logo.png')
-            div.options.flexbox.w-9
-                include navcli
+            .options.flexbox.w-9
+                if user.id_tus == 1
+                  include navcli
+                else if user.id_tus == 2
+                  include navase
+                else if user.id_tus == 3
+                  include navger
+                else if user.id_tus == 4
+                  include navadm
         .content
             block content

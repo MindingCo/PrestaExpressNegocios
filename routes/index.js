@@ -1,44 +1,46 @@
-var express = require('express')
-var mysql = require('mysql')
-var router = express.Router()
-var consulta = require('../modules/ConsultaMysql');
+module.exports = function(app, passport) {
 
-/* GET home page. */
-router.get('/', (req, res, next) =>
-{
-    res.render('index',
-    {
-        title: 'Presta Express Negocios'
-    });
-});
+  /* GET home page. */
+  app.get('/', (req, res, next) =>
+  {
+      res.render('index',
+      {
+          message: req.flash('loginMessage'),
+          title: 'Presta Express Negocios'
+      });
+  });
 
-router.post('/iniciosesion', (req, res, next) =>
-{
-    let nombre = req.body.nombre
-    let contraseña = req.body.contraseña
+  app.post('/iniciosesion', passport.authenticate('local-login', {
+            successRedirect : '/inicio',
+            failureRedirect : '/',
+            failureFlash : true
+		}),
+        function(req, res) {
+            console.log("hello");
 
-    console.log(nombre)
-    console.log(contraseña)
+            if (req.body.remember) {
+              req.session.cookie.maxAge = 1000 * 60 * 3;
+            } else {
+              req.session.cookie.expires = false;
+            }
+		res.redirect('/');
+	    });
 
-    consulta.connect('Ilovebr3ad', 'pen')
-    var sesion = consulta.login(nombre, contraseña, (sesion) =>
-    {
-        console.log('El arreglo es');
-        console.log(sesion);
-        res.locals.Sesion = sesion
-        res.redirect('/inicio')
-    })
+  app.get('/inicio', isLoggedIn, function(req, res) {
+		res.render('home', {
+			user : req.user
+		});
+	});
 
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 
-});
+};
 
-router.get('/inicio', (req, res, next) =>
-{
-    res.render('home',
-    {
-        title: 'Inicio',
-        sesion: 'Puta angel'
-    });
-});
-
-module.exports = router;
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	res.redirect('/');
+}
