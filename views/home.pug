@@ -5,10 +5,12 @@ append jscss
 append content
     
     if user.id_tus == 1
-      p hola cliente
+        p hola cliente
     else if user.id_tus == 2
-      p hola desconocido
+        p hola asesor
     else if user.id_tus == 3
-      p hola desconocido
+        p hola gerente
+    else if user.id_tus == 4
+        p hola Administrador
     else 
-      p necesitas iniciar sesion
+        p necesitas iniciar sesion

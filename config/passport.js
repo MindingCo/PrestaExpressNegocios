@@ -7,43 +7,89 @@ var connection = mysql.createConnection(dbconfig.connection);
 
 connection.query('USE ' + dbconfig.database);
 
-module.exports = function(passport) {
-    passport.serializeUser(function(user, done) {
+module.exports = (passport) =>
+{
+    passport.serializeUser((user, done) =>
+    {
         done(null, user.id_usu);
     });
-
-    passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM usuario WHERE id_usu = ? ",[id], function(err, rows){
+    passport.deserializeUser((id, done) =>
+    {
+        connection.query("SELECT * FROM usuario WHERE id_usu = ? ",[id], (err, rows) =>
+        {
             console.log(err);
-            done(err, rows[0]);
+            var tipo=rows[0].id_tus;
+            var nom=rows[0].nom_usu;
+            switch (tipo)
+            {
+                case 1:
+                    connection.query("SELECT cliente.*, id_tus FROM cliente inner join usuario on nom_cli = ? limit 1",[nom], (err, rows1) =>
+                    {
+                        console.log('Este es el error');
+                        console.log(err);
+                        console.log('Esta la columna');
+                        console.log(rows1);
+                        done(err, rows1[0]);
+                    });
+                    break
+                case 2:
+                    connection.query("SELECT asesor.*, id_tus FROM asesor inner join usuario on nom_ase = ? limit 1",[nom], (err, rows1) =>
+                    {
+                        console.log('Este es el error');
+                        console.log(err);
+                        console.log('Esta la columna');
+                        console.log(rows1);
+                        done(err, rows1[0]);
+                    });
+                    break
+                case 3:
+                    connection.query("SELECT gerente.*, id_tus FROM gerente inner join usuario on nom_ger = ? limit 1",[nom], (err, rows1) =>
+                    {
+                        console.log('Este es el error');
+                        console.log(err);
+                        console.log('Esta la columna');
+                        console.log(rows1);
+                        done(err, rows1[0]);
+                    });
+                    break
+                default:
+                        done(err, rows[0]);
+                    break
+
+            }
+
         });
     });
 
     passport.use(
         'local-signup',
-        new LocalStrategy({
-            usernameField : 'username',
-            passwordField : 'password',
-            passReqToCallback : true
-        },
-        function(req, username, password, done) {
-            connection.query("SELECT * FROM usuario WHERE nom_usu = ?",[username], function(err, rows) {
+        new LocalStrategy(
+            {
+                usernameField : 'username',
+                passwordField : 'password',
+                passReqToCallback : true
+            },
+        (req, username, password, done) =>
+        {
+            connection.query("SELECT * FROM usuario WHERE nom_usu = ?",[username], (err, rows) =>
+            {
                 if (err)
                     return done(err);
-                if (rows.length) {
+                if (rows.length)
                     return done(null, false, req.flash('signupMessage', 'Usuario existente'));
-                } else {
-                    var newUserMysql = {
+                else {
+                    var newUserMysql =
+                    {
                         nom_usu: username,
                         con_usu: bcrypt.hashSync(password, null, null)
                     };
                     console.log(newUserMysql.password);
                     var insertQuery = "INSERT INTO usuario ( nom_usu, con_usu, id_tus ) values (?,?,1)";
 
-                    connection.query(insertQuery,[newUserMysql.nom_usu, newUserMysql.con_usu],function(err, rows) {
-                      if (err) {
-                        console.log(err);
-                      }
+                    connection.query(insertQuery,[newUserMysql.nom_usu, newUserMysql.con_usu],(err, rows) =>
+                    {
+                        if (err)
+                            console.log(err);
                         newUserMysql.id_usu = rows.insertId;
                         return done(null, newUserMysql);
                     });
@@ -54,19 +100,20 @@ module.exports = function(passport) {
 
     passport.use(
         'local-login',
-        new LocalStrategy({
+        new LocalStrategy(
+        {
             usernameField : 'username',
             passwordField : 'password',
             passReqToCallback : true
         },
-        function(req, username, password, done) {
-            connection.query("SELECT * FROM usuario WHERE nom_usu = ?",[username], function(err, rows){
+        (req, username, password, done) =>
+        {
+            connection.query("SELECT * FROM usuario WHERE nom_usu = ?",[username], (err, rows) =>
+            {
                 if (err)
                     return done(err);
-                if (!rows.length) {
+                if (!rows.length)
                     return done(null, false, req.flash('loginMessage', 'Usuario inexistente'));
-                }
-
                 if (!bcrypt.compareSync(password, rows[0].con_usu))
                     return done(null, false, req.flash('loginMessage', 'Contraseña incorrecta'));
 
