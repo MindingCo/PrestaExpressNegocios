@@ -2,15 +2,22 @@ extends layouth
 
 append jscss
     link(rel='stylesheet', href='/css/cliente.css')
-append content
-    
+append content    
     if user.id_tus == 1
         p hola cliente
+        p= user.nom_usu
+        p= user.id_tus
     else if user.id_tus == 2
         p hola asesor
+        p= user.nom_usu
+        p= user.id_tus
     else if user.id_tus == 3
         p hola gerente
+        p= user.nom_usu
+        p= user.id_tus
     else if user.id_tus == 4
         p hola Administrador
+        p= user.nom_usu
+        p= user.id_tus
     else 
         p necesitas iniciar sesion

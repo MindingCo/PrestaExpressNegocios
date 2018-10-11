@@ -23,7 +23,7 @@ module.exports = (passport) =>
             switch (tipo)
             {
                 case 1:
-                    connection.query("SELECT cliente.*, id_tus FROM cliente inner join usuario on nom_cli = ? limit 1",[nom], (err, rows1) =>
+                    connection.query("SELECT cliente.*, nom_usu, id_tus FROM cliente inner join usuario on nom_cli = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         console.log('Este es el error');
                         console.log(err);
@@ -33,7 +33,7 @@ module.exports = (passport) =>
                     });
                     break
                 case 2:
-                    connection.query("SELECT asesor.*, id_tus FROM asesor inner join usuario on nom_ase = ? limit 1",[nom], (err, rows1) =>
+                    connection.query("SELECT asesor.*, nom_usu, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         console.log('Este es el error');
                         console.log(err);
@@ -43,7 +43,7 @@ module.exports = (passport) =>
                     });
                     break
                 case 3:
-                    connection.query("SELECT gerente.*, id_tus FROM gerente inner join usuario on nom_ger = ? limit 1",[nom], (err, rows1) =>
+                    connection.query("SELECT gerente.*, nom_usu, id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         console.log('Este es el error');
                         console.log(err);
