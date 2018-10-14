@@ -25,8 +25,9 @@ a
 }
 .content
 {
-    width: 100%;
+    padding: 10px;
     height: 94%;
+    width: 100%;
 }
 .logo-area
 {
@@ -71,6 +72,18 @@ a
     color: white;
     font-size: 3vmin;
 }
+.sesion
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.changes, .etc
+{
+    display: block;
+    height: 50%;
+    width: 100vw;
+}
 
 
 .flexbox
@@ -110,6 +123,24 @@ a
 @media (min-width: 768px)
 {
     .hidden-sm { display: inline-block; }
+    .changes, .etc
+    {
+        display: inline-block;
+        height: 100%;
+        width: 50%;
+    }
+    .sesion
+    {
+        /* BROWSER DEFINITION */
+        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+        display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+        display: -ms-flexbox; /* TWEENER - IE 10 */
+        display: -webkit-flex; /* NEW - Chrome */
+
+        /* W3C DEFINITION */
+        display: flex;
+        display: inline-flex;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
