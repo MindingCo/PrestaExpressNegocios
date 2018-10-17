@@ -15,20 +15,19 @@ append content
                         input(class='change', name='nueva', type='password', placeholder='Nueva Contraseña', title='Contraseña con la cual ahora quiere iniciar sesion' maxlength='22', required)
                         .change-visible
                             img
-                    .input-password-text
+                    .input-password-text.input
                         input(class='change', name='confirmacion', type='password', placeholder='Confirmar Contraseña', title='Confirmar la contraseña con la cual ahora quiere iniciar sesion' maxlength='22', required)
-                            
                         .change-visible
                             img
-                    .submit
+                    .submit.style-button
                         input(class='submit', type='submit', value='Cambiar Contraseña')
         .etc
             div
-                a(href='/report-problem')
+                a.link-sesion(href='/report-problem')
                     p Reportar algun problema
             div
-                a(href='/Terminos Y Condiciones')
+                a.link-sesion(href='/Terminos Y Condiciones')
                     p Leer Terminos y Condiciones
-            div
-                a(href='/logout')
+            #logout.style-button
+                a.link-sesion(href='/logout')
                     p Cerrar Sesion
