@@ -8,36 +8,19 @@ module.exports = function(app, passport)
             title: 'Presta Express Negocios'
         });
     });
-
     app.post('/iniciosesion', passport.authenticate('local-login',
     {
         successRedirect : '/inicio',
         failureRedirect : '/',
         failureFlash : true
-    }),
-    (req, res) =>
+    }));
+    app.get('/inicio', isLoggedIn, (req, res) =>
     {
-        console.log("hello");
-
-        if (req.body.remember)
+        res.render('home',
         {
-          req.session.cookie.maxAge = 1000 * 60 * 3;
-        }
-        else
-        {
-          req.session.cookie.expires = false;
-        }
-	res.redirect('/');
-    });
-
-    /*app.get('/chat', (req, res, next) =>
-    {
-        res.render('chat',
-        {
-            title: 'Chat'
+            user : req.user
         });
     });
-    */
     app.get('/chat', isLoggedIn, (req, res) =>
     {
   		res.render('chat',
@@ -46,20 +29,19 @@ module.exports = function(app, passport)
               user : req.user
   		});
   	});
-
-  app.get('/inicio', isLoggedIn, (req, res) =>
-  {
-		res.render('home',
-        {
-			user : req.user
-		});
-	});
-
-  app.get('/logout', (req, res) =>
-  {
-    req.logout();
-    res.redirect('/');
-  });
+    app.get('/sesion', isLoggedIn, (req, res) =>
+    {
+  		res.render('sesion',
+          {
+              title: 'Sesión',
+              user : req.user
+  		});
+  	});
+    app.get('/logout', (req, res) =>
+    {
+        req.logout();
+        res.redirect('/');
+    });
 
 };
 
