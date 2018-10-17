@@ -3,6 +3,12 @@ extends layouth
 block jscss
     
 block content
-    p estoy es el chat
+    script(src="modules/socket.io.js")
+    script(src="modules/chatcliente.js")
     p= user.dih_cli
-    
+    h1 Chatea con un gerente
+    .messages
+      form(onsubmit='/return addMessage(this)',method="post")
+        input(type="text" id="username" placeholder="Tu Nombre")
+        input(type="text" id="texto" placeholder="Mensaje...", required, autofocus)
+        input(type="submit" value="Enviar")
