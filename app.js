@@ -60,30 +60,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-//Esta es parte del chat (WebSockets)
-var usuariosConectados = {};
-io.sockets.on('connection',function(socket){
-			socket.on('enviarNombre',function(datos){
-					if(usuariosConectados[datos[0]])
-							socket.emit('errorName')
-					else
-					{
-							socket.nickname = datos[0];
-							usuariosConectados[datos[0]] = socket.nickname;
-					}
-					data = [datos[0],data[1],usuariosConectados];
-					io.socket.emit('mensaje,data');
-			});
-			socket.on('enviarMensaje',function(mensaje){
-					var data[socket.nickname, mensaje];
-					io.sockets.emit('newMessage',data);
-			});
-			sockets.on('disconnect',function(){
-					delete usuariosConectados[socket.nickname];
-					data = [usuariosConectados,socket.nickname];
-					io.sockets.emit('usuariosConectados',data);
-			});
-});
-
 module.exports = app;
