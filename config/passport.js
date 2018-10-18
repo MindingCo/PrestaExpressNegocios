@@ -17,7 +17,7 @@ module.exports = (passport) =>
     {
         connection.query("SELECT * FROM usuario WHERE id_usu = ? ",[id], (err, rows) =>
         {
-            console.log(err);
+            // console.log(err);
             var tipo=rows[0].id_tus;
             var nom=rows[0].nom_usu;
             switch (tipo)
@@ -25,30 +25,30 @@ module.exports = (passport) =>
                 case 1:
                     connection.query("SELECT cliente.*, nom_usu, id_tus FROM cliente inner join usuario on nom_cli = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
-                        console.log('Este es el error');
-                        console.log(err);
-                        console.log('Esta la columna');
-                        console.log(rows1);
+                        // console.log('Este es el error');
+                        // console.log(err);
+                        // console.log('Esta la columna');
+                        // console.log(rows1);
                         done(err, rows1[0]);
                     });
                     break
                 case 2:
                     connection.query("SELECT asesor.*, nom_usu, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
-                        console.log('Este es el error');
-                        console.log(err);
-                        console.log('Esta la columna');
-                        console.log(rows1);
+                        // console.log('Este es el error');
+                        // console.log(err);
+                        // console.log('Esta la columna');
+                        // console.log(rows1);
                         done(err, rows1[0]);
                     });
                     break
                 case 3:
                     connection.query("SELECT gerente.*, nom_usu, id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
-                        console.log('Este es el error');
-                        console.log(err);
-                        console.log('Esta la columna');
-                        console.log(rows1);
+                        // console.log('Este es el error');
+                        // console.log(err);
+                        // console.log('Esta la columna');
+                        // console.log(rows1);
                         done(err, rows1[0]);
                     });
                     break
