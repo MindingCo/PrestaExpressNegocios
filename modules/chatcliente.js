@@ -1,11 +1,23 @@
-var nombre,pswd;
-var arrayNames = {};
-var websocket = io.connect();
+(function (d,io,$){
+    'use strict'
+    alert("Llego aca xD")
+    var io = io()
 
-$(document).on("ready",iniciar);
+    $('#chat-form').on('submit', function(e){
+        e.preventDefault()
+        io.emit( 'new message', $('#message-text').val() )
+        alert("Llego aca")
+        $('#message-text').val(null)
+        return false
+    })
 
-function iniciar()
-{
-    $("#body").css({height:screen.height,width:screen.width})
+    io.on('new user', function(newUser){
+      alert(newUser.message)
+    })
 
-}
+    io.on('user says', function(userSays){
+      $('#chat').append('<li>' + userSays + '</li>')
+      alert(userSays)
+    })
+
+})(document,io,jQuery)

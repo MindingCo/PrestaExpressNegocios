@@ -7,10 +7,10 @@ var morgan = require('morgan');
 const path = require('path');
 var app      = express();
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io')(server);
 server.listen(80);
 var indexRouter = require('./routes/index');
-var port     = process.env.PORT || 8080;
+var port = process.env.PORT || 8080;
 
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -59,5 +59,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+io.on('connection', (socket) => {
+    socket.broadcast.emit('new user', {message : "Ha entrado un usuario al chat"})
+    socket.on('new message', (message) => {
+        io.emit('user says', message)
+    })
+})
 
 module.exports = app;

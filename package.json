@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-      "start": "start chrome http://localhost:8080/ && node ./bin/www"
+      "start": "start chrome http://localhost:8080/ && node ./bin/www",
+      "begin": "nodemon start"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
