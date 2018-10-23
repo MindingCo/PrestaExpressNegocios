@@ -1,7 +1,7 @@
 extends layouth
 
 append content
-    .subcontent
+    .content-sesion
         .w-m-5.h-s-half
             h3 Cambiar Contraseña   
             form(method='post', action='this')
@@ -22,4 +22,11 @@ append content
                         img(src='/img/icons/icons8_Eye_32px.png')
                 input.btn(type='submit', value='Cambiar contraseña')
         .w-m-5.h-s-half
-            p Hola 
+            div#problemas
+                a(href='/reporte-problema') 
+                    .btn Informar de un problema
+            div#terminosycondiciones
+                a(href='/terminosycondiciones') Leer terminos y condiciones
+            div#logout
+                a(href='/logout') 
+                    .btn Cerrar Sesion

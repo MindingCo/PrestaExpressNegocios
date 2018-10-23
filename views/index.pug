@@ -7,6 +7,7 @@ block content
             img(src="/img/logo.png", alt="Fondo de Inicio de Sesion")
         .log
             h2.subtitle= 'Inicio de Sesion'
+            
             form(action='/iniciosesion', method='post')
                 input.log-in(type="text", name="username", placeholder="Nombre de Usuario" maxlength="20", required, autofocus)
                 input.log-in(type="password", name="password", placeholder="Contraseña", maxlength="20", required)
