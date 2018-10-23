@@ -44,9 +44,9 @@ input
     display: inline-flex;
 }
 
-[class^='w-s'],[class^='w-m'],[class^='w-l'],[class^='w-xl']
+[class|='w-s-'],[class|='w-m-'],[class|='w-l-'],[class|='w-xl-']
 {
-
+    width: 100%;
 }
 
 .w-1   { width:  10%; }
