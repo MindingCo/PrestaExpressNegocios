@@ -43,6 +43,12 @@ input
     display: flex;
     display: inline-flex;
 }
+
+[class^='w-s'],[class^='w-m'],[class^='w-l'],[class^='w-xl']
+{
+
+}
+
 .w-1   { width:  10%; }
 .w-2   { width:  20%; }
 .w-25  { width:  25%; }
@@ -59,6 +65,8 @@ input
 .hidden-sm { display: none; }
 .hidden-s { display: none; }
 
+.w-m-5   { width:  100%; }
+.h-s-half   { height:  50%; }
 
 /*
         Diseño de Plantilla
@@ -111,6 +119,21 @@ input
 /*
         Elementos
 */
+form
+{
+    display: inline-block;
+    width: 100%;
+}
+form>p, form>div, form>input
+{
+    margin-left: 5% !important;
+}
+form > .ipt
+{
+    position: relative;
+    left: 0;
+    display: block;
+}
 .btn
 {
     background-color: #eff3f6;
@@ -118,7 +141,6 @@ input
     border: 1px solid rgba(159, 163, 169, 0.2);
     border-radius: 0.25em;
     color: #24292e;
-    display: inline-block;
     padding: 6px 8px;
     margin-top: 2vh !important;
 }
@@ -152,19 +174,23 @@ input
     vertical-align: middle;
     border-left: 1px solid #24292e;
 }
-.befor-ipt { font-weight: 700; margin-top: 4vh !important;}
+.befor-ipt { font-weight: 700; margin-top: 4vh !important; margin-right: 0 !important;}
 .btn, .btn > input, .ipt, .ipt > input, .befor-ipt
 {
     font-size: 2vmin !important;
 }
 .btn, .ipt
 {
-    margin-right: 55% !important;
+    /* margin-right: 55% !important; */
 }
 h3
 {
     margin-top: 10px !important;
     display: block;
+}
+input[type=submit]
+{
+    float: right;
 }
 h3::after
 {
@@ -195,13 +221,15 @@ h3::after
 @media (min-width: 768px)
 {
     .hidden-sm { display: inline-block; }
+    .w-m-5   { width:  50%; }
+    .h-s-half{ height:  100%; }
     .changes, .etc
     {
         display: inline-block;
         height: 100%;
         width: 50%;
     }
-    .sesion
+    .content
     {
         /* BROWSER DEFINITION */
         display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
