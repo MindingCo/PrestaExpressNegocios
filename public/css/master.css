@@ -44,22 +44,13 @@ input
     display: inline-flex;
 }
 
-[class|='w-s-'],[class|='w-m-'],[class|='w-l-'],[class|='w-xl-']
+[class*='w-s-'],[class*='w-m-'],[class*='w-l-'],[class*='w-xl-']
 {
     width: 100%;
 }
 
-.w-1   { width:  10%; }
 .w-2   { width:  20%; }
 .w-25  { width:  25%; }
-.w-3   { width:  30%; }
-.w-4   { width:  40%; }
-.w-5   { width:  50%; }
-.w-6   { width:  60%; }
-.w-7   { width:  70%; }
-.w-8   { width:  80%; }
-.w-85  { width:  85%; }
-.w-9   { width:  90%; }
 .w-full{ width:  100%; }
 
 .hidden-sm { display: none; }
