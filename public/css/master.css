@@ -1,6 +1,4 @@
-/*
-        Carecteristicas Default
-*/
+/*         Carecteristicas Default         */
 *
 {
     /*font-family: 'Roboto',sans-serif;*/
@@ -28,9 +26,7 @@ input
 }
 
 
-/*
-        Ajustes para Responsive
-*/
+/*         Ajustes para Responsive         */
 .flexbox
 {
     /* BROWSER DEFINITION */
@@ -44,24 +40,17 @@ input
     display: inline-flex;
 }
 
-[class*='w-s-'],[class*='w-m-'],[class*='w-l-'],[class*='w-xl-']
-{
-    width: 100%;
-}
-
+.w-1   { width:  10%; }
 .w-2   { width:  20%; }
 .w-25  { width:  25%; }
-.w-full{ width:  100%; }
 
-.hidden-sm { display: none; }
-.hidden-s { display: none; }
+[class*='visible-']
+{
+    display: none;
+}
 
-.w-m-5   { width:  100%; }
-.h-s-half   { height:  50%; }
 
-/*
-        Diseño de Plantilla
-*/
+/*         Barra de Navegacion         */
 .nav
 {
     background-color: rgb(62, 70, 123);
@@ -107,9 +96,71 @@ input
 }
 
 
+/*         Elementos         */
+.btn
+{
+    background-color: #eff3f6;
+    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+    border: 1px solid rgba(159, 163, 169, 0.2);
+    border-radius: 0.25em;
+    color: #24292e;
+    padding: 6px 8px;
+    margin-top: 2vh !important;
+}
+.btn:hover, .btn:focus { border: 1px solid rgba(27,31,35,0.2); }
+.ipt
+{
+    background-color: #fff;
+    border: 1px solid #d1d5da;
+    border-radius: 0.25em;
+    box-shadow: inset 0 1px 2px rgba(27,31,35,0.075);
+    color: #24292e;
+    display: inline-block;
+    font-weight: lighter;
+    height: 4.5vmin;
+    margin-top: 1vh !important;
+    padding: 6px 8px;
+}
+.ipt > img
+{
+    float: right;
+    height: 100%;;
+    padding-left: 10px !important;
+    vertical-align: middle;
+    border-left: 1px solid #24292e;
+}
+.befor-ipt { font-size: 3.5vmin; font-weight: 700; margin-top: 4vh !important; margin-right: 0 !important;}
+
+.btn, .ipt { margin-left: 5% !important; margin-right: 55% !important; width: 85%; }
+.btn > input, .ipt > input { background: none; border: none; padding: 0; width: 90%;}
+.btn, .btn > input, .ipt, .ipt > input { font-size: 4vmin !important; }
+
+
+/*         Particularidades         */
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px)
+{
+    .visible-s { display: inline-block; }
+    .nav, .content { position: relative; }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px)
+{
+    .visible-m { display: inline-block; }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px)
+{
+
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px)
+{
+}
+
 /*
-        Elementos
-*/
 form
 {
     display: inline-block;
@@ -125,55 +176,7 @@ form > .ipt
     left: 0;
     display: block;
 }
-.btn
-{
-    background-color: #eff3f6;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    border: 1px solid rgba(159, 163, 169, 0.2);
-    border-radius: 0.25em;
-    color: #24292e;
-    padding: 6px 8px;
-    margin-top: 2vh !important;
-}
-.btn:hover, .btn:focus
-{
-    border: 1px solid rgba(27,31,35,0.2);
-}
-.btn > input, .ipt > input
-{
-    background: none;
-    border: none;
-    padding: 0;
-}
-.ipt
-{
-    background-color: #fff;
-    border: 1px solid #d1d5da;
-    border-radius: 0.25em;
-    box-shadow: inset 0 1px 2px rgba(27,31,35,0.075);
-    color: #24292e;
-    display: inline-block;
-    font-weight: lighter;
-    margin-top: 1vh !important;
-    padding: 6px 8px;
-}
-.ipt > img
-{
-    float: right;
-    height: 3vmin;
-    padding-left: 10px !important;
-    vertical-align: middle;
-    border-left: 1px solid #24292e;
-}
-.befor-ipt { font-weight: 700; margin-top: 4vh !important; margin-right: 0 !important;}
-.btn, .btn > input, .ipt, .ipt > input, .befor-ipt
-{
-    font-size: 2vmin !important;
-}
-.btn, .ipt
-{
-    /* margin-right: 55% !important; */
-}
+
 h3
 {
     margin-top: 10px !important;
@@ -196,49 +199,5 @@ h3::after
 }
 
 
-/*
-        Particularidades
+
 */
-
-
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px)
-{
-    .hidden-s { display: inline-block; }
-    .nav, .content { position: relative; }
-}
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px)
-{
-    .hidden-sm { display: inline-block; }
-    .w-m-5   { width:  50%; }
-    .h-s-half{ height:  100%; }
-    .changes, .etc
-    {
-        display: inline-block;
-        height: 100%;
-        width: 50%;
-    }
-    .content
-    {
-        /* BROWSER DEFINITION */
-        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
-        display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
-        display: -ms-flexbox; /* TWEENER - IE 10 */
-        display: -webkit-flex; /* NEW - Chrome */
-
-        /* W3C DEFINITION */
-        display: flex;
-        display: inline-flex;
-    }
-}
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px)
-{
-
-}
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px)
-{
-}
