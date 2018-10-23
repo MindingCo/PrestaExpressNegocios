@@ -1,21 +1,32 @@
 extends layouth
 
 append content
-    .w-5
-        h3 Cambiar Contraseña   
-        form(method='post', action='this')
-            p.befor-ipt Contraseña antigua
-            .ipt.w-4
-                input.w-85(type='password', required)
-                img(src='/img/icons/icons8_Eye_32px.png')
-            p.befor-ipt Contraseña nueva
-            .ipt.w-4
-                input.w-85(type='password', required)
-                img(src='/img/icons/icons8_Eye_32px.png')
-            p.befor-ipt Confirmar contraseña nueva
-            .ipt.w-4
-                input.w-85(type='password', required)
-                img(src='/img/icons/icons8_Eye_32px.png')
-            input.btn(type='submit', value='Cambiar contraseña')
-    .w-5
-        p Hola
+    .content-sesion
+        .w-m-5.h-s-half
+            h3 Cambiar Contraseña   
+            form(method='post', action='this')
+                .camp    
+                    p.w-6.befor-ipt Contraseña antigua
+                    .ipt.w-6
+                        input.w-85(type='password', required)
+                        img(src='/img/icons/icons8_Eye_32px.png')
+                .camp    
+                    p.w-6.befor-ipt Contraseña nueva
+                    .ipt.w-6
+                        input.w-85(type='password', required)
+                        img(src='/img/icons/icons8_Eye_32px.png')
+                .camp    
+                    p.w-6.befor-ipt Confirmar contraseña nueva
+                    .ipt.w-6
+                        input.w-85(type='password', required)
+                        img(src='/img/icons/icons8_Eye_32px.png')
+                input.btn(type='submit', value='Cambiar contraseña')
+        .w-m-5.h-s-half
+            div#problemas
+                a(href='/reporte-problema') 
+                    .btn Informar de un problema
+            div#terminosycondiciones
+                a(href='/terminosycondiciones') Leer terminos y condiciones
+            div#logout
+                a(href='/logout') 
+                    .btn Cerrar Sesion

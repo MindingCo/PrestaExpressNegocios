@@ -34,12 +34,12 @@ CREATE TABLE `asesor` (
   `id_ase` int(11) NOT NULL AUTO_INCREMENT,
   `nom_ase` varchar(45) NOT NULL,
   `ema_ase` varchar(45) NOT NULL,
-  `tel_ase` float NOT NULL,
+  `tel_ase` int(11) NOT NULL,
   `id_zon` int(11) NOT NULL,
   PRIMARY KEY (`id_ase`),
   KEY `id_zon` (`id_zon`),
   CONSTRAINT `asesor_ibfk_1` FOREIGN KEY (`id_zon`) REFERENCES `zona` (`id_zon`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `asesor` (
 
 LOCK TABLES `asesor` WRITE;
 /*!40000 ALTER TABLE `asesor` DISABLE KEYS */;
-INSERT INTO `asesor` VALUES (0, 'kk', 'kk@gmail.com', 5583599322, 1);
+INSERT INTO `asesor` VALUES (3,'kk','kk@kk.com',678653,1);
 /*!40000 ALTER TABLE `asesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,9 +65,9 @@ CREATE TABLE `cliente` (
   `ema_cli` varchar(45) NOT NULL,
   `din_cli` varchar(120) NOT NULL,
   `dih_cli` varchar(120) NOT NULL,
-  `tel_cli` float NOT NULL,
+  `tel_cli` int(11) NOT NULL,
   PRIMARY KEY (`id_cli`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (0, 'ola', 'gustavopdzz@gmail.com', 'Direccion de mi negocio', 'Direccion de mi casita', 5583599322);
+INSERT INTO `cliente` VALUES (1,'ola','ola@ola.com','calle 2','calle 3',55674357);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ DROP TABLE IF EXISTS `gerente`;
 CREATE TABLE `gerente` (
   `id_ger` int(11) NOT NULL AUTO_INCREMENT,
   `nom_ger` varchar(45) NOT NULL,
-  `tel_ger` float NOT NULL,
+  `tel_ger` int(11) NOT NULL,
   `ema_ger` varchar(45) NOT NULL,
   PRIMARY KEY (`id_ger`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -124,7 +124,7 @@ CREATE TABLE `historialpagos` (
   KEY `id_ase` (`id_ase`),
   CONSTRAINT `historialpagos_ibfk_1` FOREIGN KEY (`id_cli`) REFERENCES `cliente` (`id_cli`),
   CONSTRAINT `historialpagos_ibfk_2` FOREIGN KEY (`id_ase`) REFERENCES `asesor` (`id_ase`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +133,7 @@ CREATE TABLE `historialpagos` (
 
 LOCK TABLES `historialpagos` WRITE;
 /*!40000 ALTER TABLE `historialpagos` DISABLE KEYS */;
+INSERT INTO `historialpagos` VALUES (2,1,3,'2018-10-05',500,''),(3,1,3,'2018-10-06',500,'');
 /*!40000 ALTER TABLE `historialpagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +217,7 @@ CREATE TABLE `tipousuario` (
 
 LOCK TABLES `tipousuario` WRITE;
 /*!40000 ALTER TABLE `tipousuario` DISABLE KEYS */;
-INSERT INTO `tipousuario` VALUES (0,'Cliente'),(0,'Asesor'),(0,'Gerente'),(0,'Administrador');
+INSERT INTO `tipousuario` VALUES (1,'Cliente'),(2,'kk');
 /*!40000 ALTER TABLE `tipousuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +245,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (0,2,'kk','$2a$10$kTPa7gWtAJGxXHR.KL5mZ.LZgbagvzb0OkBJ6gdMGkGnRn1EY5ufe'),(0,1,'ola','$2a$10$sFgzt/S39FEkhcMQB7Q4TuZ8D5gdyact1EBrepiTMbKpv2oTEnTEy');
+INSERT INTO `usuario` VALUES (3,2,'kk','$2a$10$kTPa7gWtAJGxXHR.KL5mZ.LZgbagvzb0OkBJ6gdMGkGnRn1EY5ufe'),(4,1,'cc','$2a$10$n.nBxdyPjAJ7b.LYzrMqT.In4lnxQRh0sgf79hMi2r61tCOCXTLf.'),(5,1,'ola','$2a$10$sFgzt/S39FEkhcMQB7Q4TuZ8D5gdyact1EBrepiTMbKpv2oTEnTEy');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +257,7 @@ DROP TABLE IF EXISTS `zona`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `zona` (
-  `id_zon` int(11) NOT NULL AUTO_INCREMENT,
+  `id_zon` int(11) NOT NULL,
   `nom_zon` varchar(45) NOT NULL,
   PRIMARY KEY (`id_zon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -268,7 +269,7 @@ CREATE TABLE `zona` (
 
 LOCK TABLES `zona` WRITE;
 /*!40000 ALTER TABLE `zona` DISABLE KEYS */;
-INSERT INTO `zona` VALUES (0, 'Norte'), (0, 'Sur'), (0, 'Oeste'), (0, 'Este');
+INSERT INTO `zona` VALUES (1,'norte');
 /*!40000 ALTER TABLE `zona` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -281,4 +282,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-04  0:43:28
+-- Dump completed on 2018-10-23  1:24:20
