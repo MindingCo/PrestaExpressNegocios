@@ -6,6 +6,7 @@ append jscss
          src = "https://code.jquery.com/jquery-2.1.1.min.js")
     script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js")
 append content
+<<<<<<< HEAD
     .container
       .row
         form.col.s12
@@ -24,3 +25,38 @@ append content
           p= message  
                   
         
+=======
+    .col.s12.m6.section.s-h-half
+        h5 Cambiar Contraseña
+        .divider
+        form.col.s12(method='post', action='this')
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#antigua.validate.col.s10(type='password', data-length="10", required)
+                        label(for='antigua') Contraseña antigua
+                        img.right(src='/img/icons/icons8_Eye_32px.png')
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#nueva.validate.col.s10(type='password', data-length="10", required)
+                        label(for='nueva') Contraseña nueva
+                        img.right(src='/img/icons/icons8_Eye_32px.png')
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#confirmacion.validate.col.s10(type='password', data-length="10", required)
+                        label(for='confirmacion') Confirmar contraseña nueva
+                        img.right(src='/img/icons/icons8_Eye_32px.png')
+            .section.right-align
+                input.btn.hoverable(type='submit', value='Guardar cambios')
+    .col.s12.m6.s-h-half
+        .left-align
+            a(href='/reporte-problema') 
+                .btn Informar de un problema
+        .center-align
+            a(href='/terminosycondiciones') Leer terminos y condiciones
+        .center-align.bottom
+            a(href='/logout') 
+                .btn.hoverable Cerrar Sesion
+>>>>>>> b2982fc59be63df31b1232f7c843472a0f745e5a
