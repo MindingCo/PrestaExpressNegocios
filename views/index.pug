@@ -12,7 +12,9 @@ block content
                 input.log-in(type="text", name="username", placeholder="Nombre de Usuario" maxlength="20", required, autofocus)
                 input.log-in(type="password", name="password", placeholder="Contraseña", maxlength="20", required)
                 input.log-in.in-log(type="submit", name="logear", value="Iniciar Sesion")
+            
         .footer
+          p= message
             .terminos
                 a(href="/terminosycondiciones")
                     p Leer Terminos y Condiciones

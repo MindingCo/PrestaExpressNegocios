@@ -66,10 +66,11 @@ module.exports = (passport) =>
         new LocalStrategy(
             {
                 usernameField : 'username',
+                typeField : 'type',
                 passwordField : 'password',
                 passReqToCallback : true
             },
-        (req, username, password, done) =>
+        (req, username, password, type, done) =>
         {
             connection.query("SELECT * FROM usuario WHERE nom_usu = ?",[username], (err, rows) =>
             {
@@ -80,13 +81,14 @@ module.exports = (passport) =>
                 else {
                     var newUserMysql =
                     {
+                        id_tus: type,
                         nom_usu: username,
                         con_usu: bcrypt.hashSync(password, null, null)
                     };
                     console.log(newUserMysql.password);
-                    var insertQuery = "INSERT INTO usuario ( nom_usu, con_usu, id_tus ) values (?,?,1)";
+                    var insertQuery = "INSERT INTO usuario ( nom_usu, con_usu, id_tus ) values (?,?,?)";
 
-                    connection.query(insertQuery,[newUserMysql.nom_usu, newUserMysql.con_usu],(err, rows) =>
+                    connection.query(insertQuery,[newUserMysql.nom_usu, newUserMysql.con_usu, newUserMysql.id_tus],(err, rows) =>
                     {
                         if (err)
                             console.log(err);
@@ -121,4 +123,43 @@ module.exports = (passport) =>
             });
         })
     );
+
+
+    passport.use(
+        'mcontra',
+        new LocalStrategy(
+        {
+            contraantigua : 'contraactual',
+            nuevacontra : 'newcontra',
+            connuevacontra: 'connewacontra'
+        },
+        (req, contraantigua, nuevacontra, connuevacontra,done) =>
+        {
+          if (nuevacontra != connuevacontra) {
+            return done(null, false, req.flash('mcontraMessage', 'La nueva contraseña no coincide en los campos'));
+          }
+          connection.query("SELECT * FROM usuario WHERE id_usu = ?",[req.user.id_cli], (err, rows) =>
+            {
+                if (err)
+                    return done(err);
+                if (!bcrypt.compareSync(contraantigua, rows[0].con_usu))
+                    return done(null, false, req.flash('mcontraMessage', 'La contraseña actual no coincide'));
+                var con_usu= bcrypt.hashSync(nuevacontra, null, null)
+                connection.query("UPDATE usuario set con_usu= ? where id_usu = ?",[con_usu,req.user.id_cli], (err, rows) =>
+                      {
+                          if (err)
+                              return done(err);
+                          connection.query("SELECT * from usuario where id_usu= ?",[req.user.id_cli], (err, rows) =>
+                                    {
+                                        if (err)
+                                            return done(err);
+                                        return done(null, rows[0]);
+                          });
+                    });
+            });
+        })
+    );
+
+
+
 };

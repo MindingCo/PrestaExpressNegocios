@@ -18,7 +18,16 @@ module.exports = function(app, passport)
         failureRedirect : '/',
         failureFlash : true
     }));
-    app.get('/inicio', autorizacion, cons.pagos);
+
+    app.get('/agregarusuario', autorizacion,(req, res, next) =>
+    {
+        res.render('agregarusu',
+        {
+            user: req.user,
+        });
+    });
+
+    app.get('/inicio', autorizacion, cons.home);
 
     app.get('/cliasesor', autorizacion, cons.asesor);
 
@@ -34,11 +43,17 @@ module.exports = function(app, passport)
     {
   		res.render('sesion',
           {
+              message: req.flash('mcontraMessage'),
               title: 'Sesión',
               user : req.user
   		});
   	});
-    app.get('/logout', (req, res) =>
+
+    app.post('/sesion', autorizacion, cons.mcontraseña);
+
+    app.post('/agregarusuario', autorizacion, cons.agregarusu);
+
+    app.get('/logout', autorizacion,(req, res) =>
     {
         req.logout();
         res.redirect('/');
@@ -49,5 +64,5 @@ module.exports = function(app, passport)
 function isLoggedIn(req, res, next) {
  if (req.isAuthenticated()) return next();
  if (req.method == 'GET') req.session.returnTo = req.originalUrl;
- res.redirect('/login');
+ res.redirect('/');
 };

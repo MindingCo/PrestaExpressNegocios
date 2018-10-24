@@ -1,0 +1,33 @@
+extends layouth
+
+append content
+    .content-sesion
+        .w-m-5.h-s-half
+            h3 Agregar usuario   
+            form(method='post', action='agregarusuario')
+                .camp    
+                    p.w-6.befor-ipt Nombre de usuario
+                    .ipt.w-6
+                        input.w-85(type='text',name='username', required)
+                        img(src='/img/icons/icons8_Eye_32px.png')
+                .camp    
+                    p.w-6.befor-ipt Contraseña 
+                    .ipt.w-6
+                        input.w-85(type='password', name='password',required)
+                        img(src='/img/icons/icons8_Eye_32px.png')
+                .camp    
+                    p.w-6.befor-ipt Confirmar contraseña nueva
+                    .ipt.w-6
+                        input.w-85(type='password',name='repassword', required)
+                        img(src='/img/icons/icons8_Eye_32px.png')
+                
+                .camp    
+                    p.w-6.befor-ipt Tipo de usuario
+                    .ipt.w-6
+                        input.w-85(type='text',name='type', required)
+                
+                input.btn(type='submit', value='Agregar contra')
+        div
+          p Aquí abajo va el mensaje 
+          p= message  
+          
