@@ -1,25 +1,27 @@
-(function (d,io,$){
-    'use strict'
+
+$(document).ready(function() {
+
+
     alert("Llego aca 1")
-    var io = io('http://localhost:8081', {forceNew: true})
+    var socket = io('http://localhost:8081', {forceNew: true})
     alert("LLego aqui 2")
 
-    $('#chat-form').on('submit', function (e){
+    $('#enviar').click(function(){
         alert("Inicio funcion")
-        e.preventDefault()
-        io.emit( 'new message', $('#message-text').val() )
+        //e.preventDefault()
+        socket.emit('new_message', $('#message-text').val());
         alert("Llego aca 3")
         $('#message-text').val(null)
         return false
     })
 
-    io.on('new user', function (newUser){
+    socket.on('new_user', function (newUser){
       alert(newUser.message)
     })
 
-    io.on('user says', function (userSays){
+    socket.on('user_says', function (userSays){
       $('#chat').append('<li>' + userSays + '</li>')
       alert(userSays)
     })
 
-})(document, io, jQuery)
+})//(document, io, jQuery)
