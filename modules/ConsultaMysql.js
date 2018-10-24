@@ -82,10 +82,9 @@ controller.asesor = (req, res) => {
 };
 
 controller.mcontraseña = (req, res) => {
-    var message='';
     var cona= req.body.contraactual;
     var conn= req.body.newcontra;
-    var cconn=req.body.connewacontra;
+    var cconn=req.body.connewcontra;
 
     if (conn!=cconn) {
       res.render('sesion', {
@@ -93,29 +92,34 @@ controller.mcontraseña = (req, res) => {
          message: "La nueva contraseña no coincide en ambos campos"
        });
     }
-    connection.query('SELECT * FROM usuario where nom_usu= ?',[req.user.nom_cli],(err, usu) => {
-        if (err) {
-        res.json(err);
-        }
-        if (!bcrypt.compareSync(cona, usu[0].con_usu)) {
-         console.log('contra incorrecta');
-         res.render('sesion', {
-            user: req.user,
-            message:  "Contraseña actual incorrecta"
-          });
-        }
-        var con_usu= bcrypt.hashSync(conn, null, null);
-        connection.query('UPDATE usuario set con_usu= ? where id_usu= ?',[con_usu, usu[0].id_usu],(err, ase) => {
-         if (err) {
+    else {
+      connection.query('SELECT * FROM usuario where nom_usu= ?',[req.user.nom_cli],(err, usu) => {
+          if (err) {
           res.json(err);
-         }
-         console.log('Todo bien');
-         res.render('sesion', {
-            user: req.user,
-            message:"Se ha cambiado la contraseña con éxito."
-         });
-        });
-    });
+          }
+          if (!bcrypt.compareSync(cona, usu[0].con_usu)) {
+           console.log('contra incorrecta');
+           res.render('sesion', {
+              user: req.user,
+              message:  "Contraseña actual incorrecta"
+            });
+          }
+          else {
+            var con_usu= bcrypt.hashSync(conn, null, null);
+            connection.query('UPDATE usuario set con_usu= ? where id_usu= ?',[con_usu, usu[0].id_usu],(err, ase) => {
+             if (err) {
+              res.json(err);
+             }
+             console.log('Todo bien');
+             res.render('sesion', {
+                user: req.user,
+                message:"Se ha cambiado la contraseña con éxito."
+             });
+            });
+          }
+      });
+    }
+
 };
 
 
