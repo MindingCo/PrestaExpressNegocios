@@ -1,32 +1,36 @@
 extends layouth
 
 append content
-    .content-sesion
-        .w-m-5.h-s-half
-            h3 Cambiar Contraseña   
-            form(method='post', action='this')
-                .camp    
-                    p.w-6.befor-ipt Contraseña antigua
-                    .ipt.w-6
-                        input.w-85(type='password', required)
-                        img(src='/img/icons/icons8_Eye_32px.png')
-                .camp    
-                    p.w-6.befor-ipt Contraseña nueva
-                    .ipt.w-6
-                        input.w-85(type='password', required)
-                        img(src='/img/icons/icons8_Eye_32px.png')
-                .camp    
-                    p.w-6.befor-ipt Confirmar contraseña nueva
-                    .ipt.w-6
-                        input.w-85(type='password', required)
-                        img(src='/img/icons/icons8_Eye_32px.png')
-                input.btn(type='submit', value='Cambiar contraseña')
-        .w-m-5.h-s-half
-            div#problemas
-                a(href='/reporte-problema') 
-                    .btn Informar de un problema
-            div#terminosycondiciones
-                a(href='/terminosycondiciones') Leer terminos y condiciones
-            div#logout
-                a(href='/logout') 
-                    .btn Cerrar Sesion
+    .col.s12.m6.section.s-h-half
+        h5 Cambiar Contraseña
+        .divider
+        form.col.s12(method='post', action='this')
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#antigua.validate.col.s10(type='password', data-length="10", required)
+                        label(for='antigua') Contraseña antigua
+                        img.right(src='/img/icons/icons8_Eye_32px.png')
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#nueva.validate.col.s10(type='password', data-length="10", required)
+                        label(for='nueva') Contraseña nueva
+                        img.right(src='/img/icons/icons8_Eye_32px.png')
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#confirmacion.validate.col.s10(type='password', data-length="10", required)
+                        label(for='confirmacion') Confirmar contraseña nueva
+                        img.right(src='/img/icons/icons8_Eye_32px.png')
+            .section.right-align
+                input.btn.hoverable(type='submit', value='Guardar cambios')
+    .col.s12.m6.s-h-half
+        .left-align
+            a(href='/reporte-problema') 
+                .btn Informar de un problema
+        .center-align
+            a(href='/terminosycondiciones') Leer terminos y condiciones
+        .center-align.bottom
+            a(href='/logout') 
+                .btn.hoverable Cerrar Sesion
