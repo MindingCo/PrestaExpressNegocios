@@ -6,46 +6,29 @@ append jscss
          src = "https://code.jquery.com/jquery-2.1.1.min.js")
     script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js")
 append content
-<<<<<<< HEAD
-    .container
-      .row
-        form.col.s12
-          .row 
-            .input-field.col.s6
-              i.material-icons.prefix  account_circle
-              input.active.validate(placeholder="Contraseña actual" type="text" name="contraactual" id="contraactual")
-              label(for="contraactual" required) Contraseña actual
-            .input-field.col.s6
-              label(for="newcontra") Contraseña Nueva  
-              input.validate(placeholder="Nueva contraseña" type="password" name="newcontra" id="newcontra" required)
-            
-      
-      .card-panel.teal.lighten-2
-          p Aquí abajo va el mensaje 
-          p= message  
-                  
-        
-=======
     .col.s12.m6.section.s-h-half
         h5 Cambiar Contraseña
         .divider
-        form.col.s12(method='post', action='this')
+        form.col.s12(method='post', action='/sesion')
+            .card-panel.teal.lighten-2
+                p Aquí abajo va el mensaje 
+                p= message  
             .section
                 .row
                     .input-field.valign-wrapper
-                        input#antigua.validate.col.s10(type='password', data-length="10", required)
+                        input#antigua.validate.col.s10(name='contraactual', type='password', data-length="10", required)
                         label(for='antigua') Contraseña antigua
                         img.right(src='/img/icons/icons8_Eye_32px.png')
             .section
                 .row
                     .input-field.valign-wrapper
-                        input#nueva.validate.col.s10(type='password', data-length="10", required)
+                        input#nueva.validate.col.s10(name='newcontra', type='password', data-length="10", required)
                         label(for='nueva') Contraseña nueva
                         img.right(src='/img/icons/icons8_Eye_32px.png')
             .section
                 .row
                     .input-field.valign-wrapper
-                        input#confirmacion.validate.col.s10(type='password', data-length="10", required)
+                        input#confirmacion.validate.col.s10(name='connewcontra', type='password', data-length="10", required)
                         label(for='confirmacion') Confirmar contraseña nueva
                         img.right(src='/img/icons/icons8_Eye_32px.png')
             .section.right-align
@@ -59,4 +42,3 @@ append content
         .center-align.bottom
             a(href='/logout') 
                 .btn.hoverable Cerrar Sesion
->>>>>>> b2982fc59be63df31b1232f7c843472a0f745e5a
