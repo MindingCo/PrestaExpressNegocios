@@ -10,9 +10,6 @@ append content
         h5 Cambiar Contraseña
         .divider
         form.col.s12(method='post', action='/sesion')
-            .card-panel.teal.lighten-2
-                p Aquí abajo va el mensaje 
-                p= message  
             .section
                 .row
                     .input-field.valign-wrapper
@@ -31,8 +28,10 @@ append content
                         input#confirmacion.validate.col.s10(name='connewcontra', type='password', data-length="10", required)
                         label(for='confirmacion') Confirmar contraseña nueva
                         img.right(src='/img/icons/icons8_Eye_32px.png')
-            .section.right-align
-                input.btn.hoverable(type='submit', value='Guardar cambios')
+            .input-field.left.inline.text-white.red
+                span.helper-text= message
+            .section.right.inline
+                input#submit.btn.hoverable(type='submit', value='Guardar cambios', disabled)
     .col.s12.m6.s-h-half
         .left-align
             a(href='/reporte-problema') 
