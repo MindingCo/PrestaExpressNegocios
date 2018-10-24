@@ -6,19 +6,7 @@ module.exports = (app, passport) => {
 		failureFlash: true
 	}));
 
-	// Registro
-	/*app.get('/signup', isLoggedIn, (req, res) => {
-		res.render('signup', {
-			message: req.flash('signupMessage')
-		});
-	});
 
-	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile',
-		failureRedirect: '/signup',
-		failureFlash: true // allow flash messages
-	}));
-*/
 	//vista de inicio
 	app.get('/home', isLoggedIn, customerController.list);
 

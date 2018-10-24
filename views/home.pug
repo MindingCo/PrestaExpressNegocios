@@ -7,6 +7,14 @@ append content
         p hola cliente
         p= user.nom_usu
         p= user.id_tus
+        div    
+          table
+            for pago in pagos
+              tr
+                td= pago.id_pag
+                td= pago.mon_pag
+                td= pago.fec_pag
+              
     else if user.id_tus == 2
         p hola asesor
         p= user.nom_usu
