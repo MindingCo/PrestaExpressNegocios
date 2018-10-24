@@ -1,10 +1,7 @@
 
-$(document).ready(function() {
-
-
-    alert("Llego aca 1")
-    var socket = io('http://localhost:8081', {forceNew: true})
-    alert("LLego aqui 2")
+$(document).ready(function()
+{
+    var socket = io('http://'+location.hostname+':8081', {forceNew: true})
 
     $('#enviar').click(function(){
         alert("Inicio funcion")
@@ -14,7 +11,7 @@ $(document).ready(function() {
         return false
     })
 
-    socket.on('new_user', function(newUser){
+    socket.on('new_user', (newUser) =>{
       alert(newUser.message)
       alert("LLego aqui 4")
     })
