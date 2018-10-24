@@ -43,9 +43,9 @@ module.exports = function(app, passport)
     {
   		res.render('sesion',
           {
-              message: req.flash('mcontraMessage'),
               title: 'Sesión',
-              user : req.user
+              user : req.user,
+              message:''
   		});
   	});
 
