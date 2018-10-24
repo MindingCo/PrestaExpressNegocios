@@ -3,11 +3,11 @@ extends layouth
 block jscss
     
 block content
-    script(src="http://"+location.hostname+":8081/socket.io/socket.io.js")
+    script(src="http://192.168.20.196:8081/socket.io/socket.io.js")
     script(src="/js/chatcliente.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     script(src="/js/jquery-3.3.1.min.js")
     h1 Chatea con un gerente
     ul(id="chat")
-      input(type="text" ,id="message-text", placeholder="Tu Mensaje", required)
-    input(type='button', value='Enviar', id='enviar')
+      input#message-text(type="text" , placeholder="Tu Mensaje", required)
+    input#enviar(type='button', value='Enviar')
