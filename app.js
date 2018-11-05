@@ -5,9 +5,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 const path = require('path');
+
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(8081);
+
 server.listen(80);
 var indexRouter = require('./routes/index');
 var port = process.env.PORT || 8080;
@@ -61,9 +63,11 @@ app.use(function(err, req, res, next) {
 });
 
 io.on('connection', (socket) => {
-    socket.broadcast.emit('new user', {message : "Ha entrado un usuario al chat"})
-    socket.on('new message', (message) => {
-        io.emit('user says', message)
+	console.log(socket.id);
+    //socket.broadcast.emit('new user', {message : "Ha entrado un usuario al chat"})
+    socket.on('new_message', (message) => {
+				console.log(message);
+        io.emit('new_message', message);
     })
 })
 

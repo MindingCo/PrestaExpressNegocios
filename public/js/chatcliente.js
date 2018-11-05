@@ -1,25 +1,31 @@
-(function (d,io,$){
-    'use strict'
-    alert("Llego aca 1")
-    var io = io('http://localhost:8081', {forceNew: true})
-    alert("LLego aqui 2")
 
-    $('#chat-form').on('submit', function (e){
-        alert("Inicio funcion")
-        e.preventDefault()
-        io.emit( 'new message', $('#message-text').val() )
-        alert("Llego aca 3")
+$(document).ready(function()
+{
+    var socket = io('http://'+location.hostname+':8081', {forceNew: true})
+    function mandarMsj()
+    {
+        socket.emit('new_message', $('#message-text').val());
         $('#message-text').val(null)
         return false
+    }
+    $("#message-text").keypress(function(e)
+    {
+        if(e.which == 13)
+            mandarMsj()
     })
 
-    io.on('new user', function (newUser){
-      alert(newUser.message)
+    $('#enviar').click(function(){ mandarMsj() })
+
+
+    socket.on('new_user', (newUser) =>{
     })
 
-    io.on('user says', function (userSays){
+    socket.on('new_message', (mensaje) =>{
+      $('#chat').append('<li>' + mensaje + '</li>')
+    });
+
+    socket.on('user_says', function(userSays){
       $('#chat').append('<li>' + userSays + '</li>')
-      alert(userSays)
     })
 
-})(document, io, jQuery)
+})//(document, io, jQuery)
