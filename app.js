@@ -5,9 +5,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 const path = require('path');
+
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(8081);
+
 server.listen(80);
 var indexRouter = require('./routes/index');
 var port = process.env.PORT || 8080;

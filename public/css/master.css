@@ -11,6 +11,7 @@ body >.row{ padding-top: 20px; height: 95vh;}
 .vertical-wrapper{ position: relative;}
 .vertical-wrapper > .bottom { position: absolute; bottom: 0;}
 .s-h-half{ height: 50%;}
+.border-circle { border-radius: 3px;} .border-circle > span {padding: 5px 10px;}
 
 /*         Barra de Navegacion         */
 .nav

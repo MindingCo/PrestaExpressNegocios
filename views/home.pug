@@ -6,7 +6,7 @@ append jscss
 append content    
     if user.id_tus == 1
         blockquote
-          h2= user.nom_usu
+          h2= user.nom_cli
         .row
           .col.s4
           .col.s4
@@ -19,28 +19,58 @@ append content
           table.responsive-table
             thead 
               tr  
-                th Id pago
                 th Monto pagado
                 th Fecha pago
                 th Comentario
             tbody
               for pago in pagos
                 tr
-                  td= pago.id_pag
-                  td= pago.mon_pag
                   td= pago.fec_pag
-                
+                  td= pago.mon_pag
+                  td= pago.com_pag            
         br
-        a(href="/agregarusuario")
-          p Ir a agregar 
+        a(href="/admin/registrar")
+          p Ir a agregar
+        
     else if user.id_tus == 2
         p hola asesor
-        p= user.nom_usu
+        p= user.nom_ase
         p= user.id_tus
+        p= message
+        
     else if user.id_tus == 3
-        p hola gerente
-        p= user.nom_usu
-        p= user.id_tus
+      blockquote
+        h2= user.nom_ger
+      .row
+        .col.s4
+        .col.s4
+        .col.s4  
+          input.right-align(placeholder='Filtrar asesor')
+      
+      br
+      .divider
+      .section
+        table.responsive-table
+          thead 
+            tr  
+              th Nombre del Asesor
+              th Zona
+              th
+          tbody
+            each asesor in asesores
+              tr
+                td= asesor.nom_ase
+                td= asesor.nom_zon
+                td 
+                  a.btn(href="/gerente/asesor/"+asesor.id_ase) Más detalles
+                  a.btn(href="/geolocalizacion/"+asesor.id_ase) Geolocalizar
+              
+      if (message.lenght)
+       .card-panel.red 
+        p=message
+      br
+      a(href="/admin/registrar")
+        p Ir a agregar
     else if user.id_tus == 4
         p hola Administrador
         p= user.nom_usu
