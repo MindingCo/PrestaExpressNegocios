@@ -1,0 +1,20 @@
+extends layouth
+
+append jscss
+    
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+
+append content
+  .rows
+  
+  blockquote  
+    h2= cliente.nom_cli
+  
+  br
+  for pago in pagos
+    .divider
+    .section
+        p  #{pago.fec_pag}
+        p  #{pago.mon_pag}
+        p  #{pago.com_pag}  
+          
