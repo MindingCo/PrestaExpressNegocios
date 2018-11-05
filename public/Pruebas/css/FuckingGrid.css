@@ -44,8 +44,22 @@ body { font-size:80%; }
 .container { padding:0.01em 0.2em; }
 .container:after, .container:before{content:"", display:table; clear:both }
 .row>.card {padding:0 8px; margin: 0.56561%; box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
+.nav-icon { width: 2em; }
+ /*    chat     */
+.chat-container { z-index: 2; }
+.chat, .catch-chat {  }
+.catch-chat {  }
+/*    sombras    */
+.floating {
+    -webkit-box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
 /*    decoracion elementos y textos    */
-.align-middle { vertical-align:  middle; }
+.hidden-l {  position: absolute; right: 100%; top: 0%;}
+.hidden-r {  position: absolute; left: 100%; top: 0%;}
+
+.va-middle { vertical-align:  middle; }
+.ha-middle { text-align: center; }
 .margin{margin:1em!important}.margin-t{margin-top:1em!important}.margin-b{margin-bottom:1em!important}
 .margin-l{margin-left:1em!important}.margin-r{margin-right:1em!important}
 .Oborder{border:0!important}.border{border:1px solid #ccc!important}
