@@ -28,8 +28,8 @@ append content
                         input#confirmacion.validate.col.s10(name='connewcontra', type='password', data-length="10", required)
                         label(for='confirmacion') Confirmar contraseña nueva
                         img.right(src='/img/icons/icons8_Eye_32px.png')
-            .input-field.left.inline.text-white.red
-                span.helper-text= message
+            .input-field.left.inline.red.border-circle
+                span.helper-text.white-text= message
             .section.right.inline
                 input#submit.btn.hoverable(type='submit', value='Guardar cambios', disabled)
     .col.s12.m6.s-h-half
