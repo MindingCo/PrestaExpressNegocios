@@ -1,0 +1,46 @@
+extends layouth
+append jscss
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+    script(type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js")
+    script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js")
+append content
+    .col.s12.m6.section.s-h-half
+        h5 Prestamo
+        .divider
+        form.col.s12(method='post', action='/admin/agpre')
+            .card-panel.teal.lighten-2
+                p Aquí abajo va el mensaje 
+                p= message  
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#cliente.validate.col.s10(name='cliente', type='text', required)
+                        label(for='cliente') Cliente
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#nueva.validate.col.s10(name='asesor', type='text', required)
+                        label(for='nueva') Asesor 
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#moi.validate.col.s10(name='montoi', type='text', required)
+                        label(for='moi') Moi
+            .section
+                .row
+                    .input-field.valign-wrapper
+                        input#mod.validate.col.s10(name='montod', type='text', required)
+                        label(for='mod') Mod
+            .section.right-align
+                input.btn.hoverable(type='submit', value='Guardar cambios')
+    .col.s12.m6.s-h-half
+        .left-align
+            a(href='/reporte-problema') 
+                .btn Informar de un problema
+        .center-align
+            a(href='/terminosycondiciones') Leer terminos y condiciones
+        .center-align.bottom
+            a(href='/logout') 
+                .btn.hoverable Cerrar Sesion

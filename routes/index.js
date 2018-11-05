@@ -1,10 +1,19 @@
-const cons = require('../modules/ConsultaMysql');
+const cons = require('../modules/ConsultaMysqlU');
+const consc = require('../modules/ConsultaMysqlC');
+const consas = require('../modules/ConsultaMysqlAs');
+const consg = require('../modules/ConsultaMysqlG');
+const consad = require('../modules/ConsultaMysqlAd');
 const aut = require('./auto.js');
-const autorizacion = [aut.requiresLogin];
 
+const autorizacion = [aut.requiresLogin];
+const autorizacionc = [aut.requiresLogin, aut.cliente.hasAuthorization];
+const autorizacionas = [aut.requiresLogin, aut.asesor.hasAuthorization];
+const autorizaciong = [aut.requiresLogin, aut.gerente.hasAuthorization];
+const autorizacionad = [aut.requiresLogin, aut.administrador.hasAuthorization];
 module.exports = function(app, passport)
 {
-    app.get('/', (req, res, next) =>
+    //routes users
+    app.get('/', aut.islog,(req, res, next) =>
     {
         res.render('index',
         {
@@ -19,7 +28,63 @@ module.exports = function(app, passport)
         failureFlash : true
     }));
 
-    app.get('/agregarusuario', autorizacion,(req, res, next) =>
+    app.get('/inicio', autorizacion, cons.home);
+
+    app.get('/sesion', autorizacion, (req, res) =>
+    {
+      res.render('sesion',
+      {
+        title: 'Sesión',
+        user : req.user
+      });
+    });
+
+    app.post('/sesion', autorizacion, cons.mcontraseña);
+
+    app.get('/logout', autorizacion,(req, res) =>
+    {
+      req.logout();
+      res.redirect('/');
+    });
+
+    // routes cliente
+
+    app.get('/cliente/chat', autorizacionc, (req, res) =>
+    {
+      res.render('chat',
+      {
+        title: 'Chat',
+        user : req.user
+      });
+    });
+
+    app.get('/cliente/asesor', autorizacionc, consc.asesor);
+
+    // routes Asesor
+    app.get('/asesor/cartera', autorizacionas, consas.cartera);
+
+    app.get('/asesor/cliente/:id', autorizacionas,consas.consultarcliente);
+
+    app.post('/asesor/pago/:id', autorizacionas,consas.pago);
+
+    app.get('/asesor/chat', autorizacionas, (req, res) =>
+    {
+      res.render('chat',
+      {
+        title: 'Chat',
+        user : req.user
+      });
+    });
+
+    //routes gerente
+    app.get('/gerente/agenda', autorizaciong, consg.agenda);
+
+    app.get('/gerente/asesor/:id', autorizaciong,consg.consultarasesor);
+
+    app.get('/gerente/cliente/:id', autorizaciong,consg.consultarcliente);
+
+    //routes Administrador
+    app.get('/admin/registrar', autorizacion,(req, res, next) =>
     {
         res.render('agregarusu',
         {
@@ -27,42 +92,23 @@ module.exports = function(app, passport)
         });
     });
 
-    app.get('/inicio', autorizacion, cons.home);
+    app.post('/admin/agregarusuario', autorizacion, consad.agregarusu);
 
-    app.get('/cliasesor', autorizacion, cons.asesor);
-
-    app.get('/chat', isLoggedIn, (req, res) =>
+    app.get('/admin/agprestamo', autorizacion,(req, res, next) =>
     {
-  		res.render('chat',
-          {
-              title: 'Chat',
-              user : req.user
-  		});
-  	});
-    app.get('/sesion', isLoggedIn, (req, res) =>
-    {
-  		res.render('sesion',
-          {
-              title: 'Sesión',
-              user : req.user,
-              message:''
-  		});
-  	});
-
-    app.post('/sesion', autorizacion, cons.mcontraseña);
-
-    app.post('/agregarusuario', autorizacion, cons.agregarusu);
-
-    app.get('/logout', autorizacion,(req, res) =>
-    {
-        req.logout();
-        res.redirect('/');
+        res.render('agregarprestamo',
+        {
+            user: req.user,
+        });
     });
 
-};
+    app.post('/admin/agpre', autorizacion, consad.agregarprestamo);
 
-function isLoggedIn(req, res, next) {
- if (req.isAuthenticated()) return next();
- if (req.method == 'GET') req.session.returnTo = req.originalUrl;
- res.redirect('/');
+    app.get('/admin/agenda', autorizacion, consad.gerentes);
+
+    app.get('/admin/gerente/:id', autorizacion,consad.gerenteyasesores);
+
+    app.get('/admin/asesor/:id', autorizacion,consad.asesoryclientes);
+
+    app.get('/admin/cliente/:id', autorizacion,consad.consultarcliente);
 };

@@ -1,0 +1,42 @@
+extends layouth
+
+append jscss
+    link(rel='stylesheet', href='/css/cliente.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+append content   
+        blockquote
+          h2= user.nom_ase
+       
+        .row
+          .col.s4
+          .col.s4
+          .col.s4  
+            input.right-align(placeholder='Filtrar cliente')
+        
+        br
+        .divider
+        .section
+          table.responsive-table
+            thead 
+              tr  
+                th Id Cliente
+                th Nombre
+                th Email
+                th Dirección negocios
+                th Telefono
+                th
+            tbody
+              for cliente in clientes
+                tr
+                  td= cliente.id_cli
+                  td= cliente.nom_cli
+                  td= cliente.din_cli
+                  td= cliente.tel_cli
+                  td 
+                    a.btn(href="/asesor/cliente/"+cliente.id_cli) Detalles del cliente
+        
+        .divider
+        .section
+            p= message              
+                    
+                    

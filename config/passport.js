@@ -29,11 +29,12 @@ module.exports = (passport) =>
                         // console.log(err);
                         // console.log('Esta la columna');
                         // console.log(rows1);
+
                         done(err, rows1[0]);
                     });
                     break
                 case 2:
-                    connection.query("SELECT asesor.*, nom_usu, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT asesor.*, nom_usu,id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         // console.log('Este es el error');
                         // console.log(err);
@@ -43,7 +44,7 @@ module.exports = (passport) =>
                     });
                     break
                 case 3:
-                    connection.query("SELECT gerente.*, nom_usu, id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT gerente.*, nom_usu,id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         // console.log('Este es el error');
                         // console.log(err);
@@ -60,7 +61,7 @@ module.exports = (passport) =>
 
         });
     });
-
+/*
     passport.use(
         'local-signup',
         new LocalStrategy(
@@ -99,7 +100,7 @@ module.exports = (passport) =>
             });
         })
     );
-
+    */
     passport.use(
         'local-login',
         new LocalStrategy(
@@ -110,7 +111,7 @@ module.exports = (passport) =>
         },
         (req, username, password, done) =>
         {
-            connection.query("SELECT * FROM usuario WHERE nom_usu = ?",[username], (err, rows) =>
+            connection.query("SELECT * FROM usuario WHERE use_usu = ?",[username], (err, rows) =>
             {
                 if (err)
                     return done(err);
@@ -124,41 +125,6 @@ module.exports = (passport) =>
         })
     );
 
-
-    passport.use(
-        'mcontra',
-        new LocalStrategy(
-        {
-            contraantigua : 'contraactual',
-            nuevacontra : 'newcontra',
-            connuevacontra: 'connewacontra'
-        },
-        (req, contraantigua, nuevacontra, connuevacontra,done) =>
-        {
-          if (nuevacontra != connuevacontra) {
-            return done(null, false, req.flash('mcontraMessage', 'La nueva contraseña no coincide en los campos'));
-          }
-          connection.query("SELECT * FROM usuario WHERE id_usu = ?",[req.user.id_cli], (err, rows) =>
-            {
-                if (err)
-                    return done(err);
-                if (!bcrypt.compareSync(contraantigua, rows[0].con_usu))
-                    return done(null, false, req.flash('mcontraMessage', 'La contraseña actual no coincide'));
-                var con_usu= bcrypt.hashSync(nuevacontra, null, null)
-                connection.query("UPDATE usuario set con_usu= ? where id_usu = ?",[con_usu,req.user.id_cli], (err, rows) =>
-                      {
-                          if (err)
-                              return done(err);
-                          connection.query("SELECT * from usuario where id_usu= ?",[req.user.id_cli], (err, rows) =>
-                                    {
-                                        if (err)
-                                            return done(err);
-                                        return done(null, rows[0]);
-                          });
-                    });
-            });
-        })
-    );
 
 
 

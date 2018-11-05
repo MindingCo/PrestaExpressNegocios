@@ -5,5 +5,5 @@ module.exports = {
         'password': 'cotibola'
     },
 	'database': 'pen',
-  'users_table': 'usuario'
+  'users_table':'usuario'
 };
