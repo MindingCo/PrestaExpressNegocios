@@ -8,24 +8,29 @@ aside.hide-m-down.w.fifth.h-full
         .container
             p.truncate(title=user.nom_usu)
                 img.nav-icon.margin-r.va-middle(src="/img/icons/icons8_Credit_Card_50px.png", alt="")
-                user.nom_usu
+                span= user.nom_usu
             hr
+            a(href="/inicio")
             p.large
                 b.indigo-text.text-darken-4.truncate
                     img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="")
                     span Inicio
+            a(href="/asesor")
             p.large
                 b.indigo-text.text-darken-4.truncate
                     img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_New_Contact_50px.png", alt="")
                     span Agenda
+            a(href="/ingresos")
             p.large
                 b.indigo-text.text-darken-4.truncate
                     img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
                     span Ingresos
+            a(href="/chat")
             p.large
                 b.indigo-text.text-darken-4.truncate
                     img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Services_50px.png", alt="")
                     span Ajustes
+            a(href='/sesion')
             p.large
                 b.indigo-text.text-darken-4.truncate
                     img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="")
@@ -33,22 +38,27 @@ aside.hide-m-down.w.fifth.h-full
 //-    navbar
 .hide-l-up.w.full.bottom.container.row.red
     .w.fifth
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="")
-            span.hide-s Inicio
+        a(href="/inicio")
+            p.white-text.truncate.ha-middle
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="")
+                span.hide-s Inicio
     .w.fifth
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_New_Contact_50px.png", alt="")
-            span.hide-s  Agenda
+        a(href="/asesor")
+            p.white-text.truncate.ha-middle
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_New_Contact_50px.png", alt="")
+                span.hide-s  Agenda
     .w.fifth
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Stocks_50px.png", alt="")
-            span.hide-s Ingresos
+        a(href="/ingresos")
+            p.white-text.truncate.ha-middle
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Stocks_50px.png", alt="")
+                span.hide-s Ingresos
     .w.fifth
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Services_50px.png", alt="")
-            span.hide-s Ajustes
+        a(href="/chat")
+            p.white-text.truncate.ha-middle
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Services_50px.png", alt="")
+                span.hide-s Ajustes
     .w.fifth
+        a(href='/sesion')
         p.white-text.truncate.ha-middle
             img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="")
             span.hide-s Sesión

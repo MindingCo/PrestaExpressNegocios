@@ -8,42 +8,50 @@ aside.hide-m-down.w.fifth.h-full
         .container
             p.truncate(title=user.nom_usu)
                 img.nav-icon.margin-r.va-middle(src="/img/icons/icons8_Credit_Card_50px.png", alt="")
-                user.nom_usu
+                span= user.nom_usu
             hr
-            p.large
-                b.indigo-text.text-darken-4.truncate
-                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="") 
-                    span Inicio
-            p.large
-                b.indigo-text.text-darken-4.truncate
-                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Team_50px.png", alt="")
-                    span Cartera
-            p.large
-                b.indigo-text.text-darken-4.truncate
-                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Handshake_50px.png", alt="")
-                    span Cobros
-            p.large
-                b.indigo-text.text-darken-4.truncate
-                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="")
-                    span Sesión
+            a(href="/inicio")
+                p.large
+                    b.indigo-text.text-darken-4.truncate(title= "Inicio")
+                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="") 
+                        span Inicio
+            a(href="/asesor/cartera")
+                p.large
+                    b.indigo-text.text-darken-4.truncate(title= "Cartera")
+                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Team_50px.png", alt="")
+                        span Cartera
+            a(href="/asesor/cobros")
+                p.large
+                    b.indigo-text.text-darken-4.truncate(title= "Cobros")
+                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Handshake_50px.png", alt="")
+                        span Cobros
+            a(href='/sesion')
+                p.large
+                    b.indigo-text.text-darken-4.truncate(title= "Sesión")
+                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="")
+                        span Sesión
 //-    navbar
 .hide-l-up.w.full.bottom.container.row.red
     .w.quarter
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="")
-            span.hide-s Inicio
+        a(href="/inicio")
+            p.white-text.truncate.ha-middle(title= "Inicio")
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="")
+                span.hide-s Inicio
     .w.quarter
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Team_50px.png", alt="")
-            span.hide-s  Cartera
+        a(href="/asesor/cartera")
+            p.white-text.truncate.ha-middle(title= "Cartera")
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Team_50px.png", alt="")
+                span.hide-s  Cartera
     .w.quarter
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Handshake_50px.png", alt="")
-            span.hide-s Cobros
+        a(href="/asesor/cobros")
+            p.white-text.truncate.ha-middle(title= "Cobros")
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Handshake_50px.png", alt="")
+                span.hide-s Cobros
     .w.quarter
-        p.white-text.truncate.ha-middle
-            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="")
-            span.hide-s Sesión
+        a(href='/sesion')
+            p.white-text.truncate.ha-middle(title= "Sesión")
+                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="")
+                span.hide-s Sesión
 //- .option.w-25
 //-     a(href="/inicio")
 //-         div
