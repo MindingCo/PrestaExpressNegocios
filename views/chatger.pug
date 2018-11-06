@@ -1,0 +1,182 @@
+extends layouth
+append jscss
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='/css/chat.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+    script(type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js")
+    script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js")
+append content
+            .col.m3.s12.white.title#title
+                    .row#buscacli
+                        .input-field.valign-wrapper
+                            i.material-icons search
+                            input#antigua.active.col.s10(name='buscarchat', type='text', data-length="10",placeholder="Buscar clientes")
+                    .col.m12.s12.white.users#users
+                        .row#lista              
+                            ul.usercon
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu
+                                        br
+                                        br    
+                                        p.left Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        p= user.nom_usu 
+                                        br
+                                        br 
+                                             
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions      
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left.left= user.nom_usu
+                                        br
+                                        br    
+                                        p.left Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        p= user.nom_usu 
+                                        br
+                                        br 
+                                             
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions   
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left.left= user.nom_usu
+                                        br
+                                        br    
+                                        p.left Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        h5.left= user.nom_usu 
+                                        br
+                                        br 
+                                        p Test, which is a new approach to have all solutions
+                                li.contacts
+                                    .row.white.center.z-depth-1.section#clientact 
+                                        p= user.nom_usu                      
+            .col.m6.white.message
+                ul.conectados
+                    li.mensa
+                        .row.white.center.z-depth-1.section#mensamensa
+                            .row.teal.lighten-2.mensajeenv
+                                p hola esta es una prueba 
+                            br
+                            br
+                            .row.right.grey.lighten-3.mensajeenv
+                                p probando
+                            br
+                            br
+                            br
+                            br
+                            .row.teal.lighten-2.mensajeenv
+                                p hola esta es una prueba 
+                            br
+                            br
+                            
+                            .row.right.grey.lighten-3.mensajeenv
+                                p probando
+                            br
+                            br
+                            br
+                            br
+                            .row.teal.lighten-2.mensajeenv
+                                p hola esta es una prueba 
+                            br
+                            br
+                            .row.right.grey.lighten-3.mensajeenv
+                                p probando
+                            br
+                            br
+                            br
+                            br                           
+                               
+                    li.envmen
+                        .row.white.center.z-depth-1.section
+                                .input-field.col.s8
+                                    input#antigua.validate.col.s10(name='', type='text', data-length="10", required, placeholder="Mensaje")
+                        
+                                a(class='btn-small' href='#') Enviar              
+            .col.m3.cyan.lighten-5.conf   
+                .background
+                    
+                .container
+                    ul
+                        li
+                            h4.titulos= user.nom_usu  
+                        li
+                            .divider
+                        li
+                            a(class="waves-effect")
+                                i.material-icons phone
+                            h6.titulos= 557879
+                        br
+                        li
+                            a(class="waves-effect")
+                                i.material-icons mail
+                            h6.titulos ola@gmail.com
+                        br
+                        li
+                            a(class="waves-effect")
+                                i.material-icons account_balance    
+                            p.titulos Av.Michigan Col.SanJuan Num.512
+                        li
+                            .divider
+                        li
+                            p.titulos Historial del cliente
+                        br
+                        li
+                            p.titulos Porcentaje de pago
+                            .row.green
+                                p probando
+                            p.titulos 100%
+                        li
