@@ -1,0 +1,15 @@
+//-    chat container
+.chat-container.w.full.h-full.row.hidden-l
+    //-    necessary scripts
+    script(src="http://localhost:8081/socket.io/socket.io.js")
+    script(src="/js/chatcliente.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src="/js/jquery-3.3.1.min.js")
+    //-    chat
+    .chat.h-full.w.s-fivesixth.m-half.l-third.xl-third.red.floating
+        h1 Chatea con un gerente
+        ul(id="chat")
+          input#message-text(type="text" , placeholder="Tu Mensaje", required)
+        input#enviar(type='button', value='Enviar')
+    //-    catch animation
+    .catch-chat.h-full.w.s-sixth.m-half.l-twothird.xl-twothird
