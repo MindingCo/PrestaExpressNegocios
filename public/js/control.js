@@ -10,4 +10,12 @@ $(document).ready(() =>
     {
         $('#submit').prop('disabled', ($('#nueva').val() != '' && $('#confirmacion').val() != '' && $('#antigua').val() != '') && ($('#nueva').val() == $('#confirmacion').val()) ? false : true)
     })
+    $('.catch-chat').click(function ()
+    {
+        $('.chat-container').animate({right: "100%"}, 1000)
+    })
+    $('.chat-animation').click(function ()
+    {
+        $('.chat-container').animate({right: "0%"}, 1000)
+    })
 })

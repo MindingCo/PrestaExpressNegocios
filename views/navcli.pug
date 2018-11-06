@@ -1,20 +1,67 @@
-.option.w-25
-    a(href="/inicio")
-        div
-            img.icon(src="/img/icons/icons8_Home_50px_2.png")
-            span.visible-s Inicio
-.option.w-25
-    a(href="/cliente/asesor")
-        div
-            img.icon(src="/img/icons/icons8_User_50px.png")
-            span.visible-s Tu Asesor
-.option.w-25
-    a(href="/cliente/chat")
-        div
-            img.icon(src="/img/icons/icons8_Chat_50px.png")
-            span.visible-s Chat
-.option.w-25
-    a(href='/sesion')
-        div
-            img.icon(src="/img/icons/icons8_Access_50px.png")
-            span.visible-s Sesión
+//-    asidebar
+aside.hide-m-down.w.fifth.h-full
+    .white.grey-text.h-full.w.full.grey.lighten-4
+        div.display-container
+            img(src="/img/banner-header.jpg", style="width:100%;", alt="Avatar")
+            .display-bottomleft.container.white-text(style="width:100%")
+                h4.truncate= user.nom_usu
+        .container
+            p.truncate(title=user.nom_usu)
+                img.nav-icon.margin-r.va-middle(src="/img/icons/icons8_Credit_Card_50px.png", alt="")
+                user.nom_usu
+            hr
+            p.large
+                b.indigo-text.text-darken-4.truncate
+                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="")
+                    span Inicio
+            p.large
+                b.indigo-text.text-darken-4.truncate
+                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_User_50px.png", alt="")
+                    span Tu Asesor
+            p.large.chat-animation
+                b.indigo-text.text-darken-4.truncate
+                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Chat_50px.png", alt="")
+                    span Chat
+            p.large
+                b.indigo-text.text-darken-4.truncate
+                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="")
+                    span Sesión
+//-    navbar
+.hide-l-up.w.full.bottom.container.row.red
+    .w.quarter
+        p.white-text.truncate.ha-middle
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="") 
+            span.hide-s Inicio
+    .w.quarter
+        p.white-text.truncate.ha-middle
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_User_50px.png", alt="") 
+            span.hide-s  Tu Asesor
+    .w.quarter.chat-animation
+        p.white-text.truncate.ha-middle
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Chat_50px.png", alt="") 
+            span.hide-s Chat
+    .w.quarter
+        p.white-text.truncate.ha-middle
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="") 
+            span.hide-s Sesión
+
+//- .option.w-25
+//-     a(href="/inicio")
+//-         div
+//-             img.icon(src="/img/icons/icons8_Home_50px_2.png")
+//-             span.visible-s Inicio
+//- .option.w-25
+//-     a(href="/cliente/asesor")
+//-         div
+//-             img.icon(src="/img/icons/icons8_User_50px.png")
+//-             span.visible-s Tu Asesor
+//- .option.w-25
+//-     a(href="/cliente/chat")
+//-         div
+//-             img.icon(src="/img/icons/icons8_Chat_50px.png")
+//-             span.visible-s Chat
+//- .option.w-25
+//-     a(href='/sesion')
+//-         div
+//-             img.icon(src="/img/icons/icons8_Access_50px.png")
+//-             span.visible-s Sesión
