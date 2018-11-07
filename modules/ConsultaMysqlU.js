@@ -41,11 +41,15 @@ controller.home = (req, res) => {
         console.log(asesores);
         if (err) {
          res.json(err);
+         console.log(err);
         }
-        res.render('home', {
-          user: req.user,
-          asesores: asesores,
-          message: req.flash('info')
+        connection.query('Select * from cliente', (err, clientes) => {
+            if(err) console.log(err);
+            res.render('home', {
+              user: req.user,
+              asesores: asesores,
+              clientes: clientes
+            });
         });
       });
     }
