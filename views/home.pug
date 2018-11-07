@@ -1,21 +1,21 @@
 extends layouth
 
 append jscss
-    link(rel='stylesheet', href='/css/cliente.css')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+    //- link(rel='stylesheet', href='/css/cliente.css')
+    //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
 append content    
     if user.id_tus == 1
-        blockquote
-          h2= user.nom_cli
-        .row
-          .col.s4
-          .col.s4
-          .col.s4  
-            input.right-align(placeholder='Filtrar pago')
-        
-        br
+        .container.margin
+            h3 Pagos Realizados
+        //- .row
+        //-   .col.s4
+        //-   .col.s4
+        //-   .col.s4  
+        //-     input.right-align(placeholder='Filtrar pago')
         .divider
         .section
+          -var dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"];
+          -var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
           table.responsive-table
             thead 
               tr  
@@ -25,9 +25,9 @@ append content
             tbody
               for pago in pagos
                 tr
-                  td= pago.fec_pag
-                  td= pago.mon_pag
-                  td= pago.com_pag            
+                    td= pago.mon_pag
+                    td= `${pago.fec_pag.getDate()} ${dias[pago.fec_pag.getDay()]} / ${meses[pago.fec_pag.getMonth()]} / ${pago.fec_pag.getFullYear()}`
+                    td= pago.com_pag            
         br
         a(href="/admin/registrar")
           p Ir a agregar

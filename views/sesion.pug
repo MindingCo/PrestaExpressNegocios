@@ -1,39 +1,44 @@
 extends layouth
+
 append jscss
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
-    script(type = "text/javascript"
-         src = "https://code.jquery.com/jquery-2.1.1.min.js")
-    script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js")
+    script(type = "text/javascript", src = "https://code.jquery.com/jquery-2.1.1.min.js")
 append content
-    .col.s12.m6.section.s-h-half
-        h5 Cambiar Contraseña
-        .divider
-        form.col.s12(method='post', action='/sesion')
-            .section
+    .row.h-full
+        .w.s-full.m-full.l-half.xl-half.h-s-half.h-m-full.h-l-full.h-xl-full    
+            b
+                h3 Cambiar Contraseña
+            .divider
+            form.w.full.container(method='post', action='/sesion')
+                br
                 .row
-                    .input-field.valign-wrapper
-                        input#antigua.validate.col.s10(name='contraactual', type='password', data-length="10", required)
+                    .input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
+                        input#antigua.validate.w.xl-fivesixth(name='contraactual', type='password', data-length="10", required)
                         label(for='antigua') Contraseña antigua
                         img.right(src='/img/icons/icons8_Eye_32px.png')
-            .section
+                br
                 .row
-                    .input-field.valign-wrapper
-                        input#nueva.validate.col.s10(name='newcontra', type='password', data-length="10", required)
+                    .input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
+                        input#nueva.validate.w.xl-fivesixth(name='newcontra', type='password', data-length="10", required)
                         label(for='nueva') Contraseña nueva
                         img.right(src='/img/icons/icons8_Eye_32px.png')
-            .section
+                br
                 .row
-                    .input-field.valign-wrapper
-                        input#confirmacion.validate.col.s10(name='connewcontra', type='password', data-length="10", required)
+                    .input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
+                        input#confirmacion.validate.w.xl-fivesixth(name='connewcontra', type='password', data-length="10", required)
                         label(for='confirmacion') Confirmar contraseña nueva
                         img.right(src='/img/icons/icons8_Eye_32px.png')
-    .col.s12.m6.s-h-half
-        .left-align
-            a(href='/reporte-problema') 
-                .btn Informar de un problema
-        .center-align
-            a(href='/terminosycondiciones') Leer terminos y condiciones
-        .center-align.bottom
-            a(href='/logout') 
-                .btn.hoverable Cerrar Sesion
+                br
+                .input-field.left.inline.text-white.red
+                    span.helper-text= message
+                .w.l-threequarter.xl-threequarter
+                    input#submit.btn.hoverable.right(type='submit', value='Guardar cambios', disabled)
+        .w.s-full.m-full.l-half.xl-half.display-container.h-s-half.h-m-half.h-l-full.h-xl-full
+            .left-align
+                a(href='/reporte-problema') 
+                    .btn Informar de un problema
+            .center-align
+                a(href='/terminosycondiciones') Leer terminos y condiciones
+            .display-bottommiddle
+                a(href='/logout')
+                    .btn.hoverable Cerrar sesion
+    script(type = "text/javascript", src = "/js/materialize.min.js")
