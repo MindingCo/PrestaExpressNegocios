@@ -18,23 +18,42 @@ connection.query('USE ' + dbconfig.database);
             monto: req.body.montorecibido,
             com: req.body.comen
         };
+        var mof= pre[0].mof_pre - parseInt(req.body.montorecibido);
         console.log(pago);
-        connection.query('select id_pre, nom_cli from prestamo natural join cliente where id_cli= ? and moi_pre != mof_pre',[id], (err, idpre) => {
+        connection.query('select id_pre, nom_cli, mof_pre, mod_pre, moi_pre from prestamo natural join cliente where id_cli= ? and mof_pre != 0',[id], (err, pre) => {
           if (err) {
           console.log(err);
           res.json(err);
           }
-
-          connection.query('insert into historialpagos values (0,?,?,?,?)',[idpre[0].id_pre, pago.fecha, pago.monto, pago.com], (err, resul) => {
-            if(err) console.log(err);
+          if (pre[0].mod_pre < parseInt(req.body.montorecibido)) {
             res.render('home', {
               user: req.user,
-              message: 'El pago del cliente ' +idpre[0].nom_cli+ ' registrado con éxito'
+              message: 'El monto recibido no puede ser mayor al que se debe de cobrar'
            });
-          });
-        });
+          }
+          else {
+           if (0 > mof) {
+             res.render('home', {
+               user: req.user,
+               message: 'Con el monto recibido, el total pagado sobrepasa a lo que se debe de pagar en total del présamo'
+             });
+            }
+            else {
 
-    }
+             connection.query('insert into historialpagos values (0,?,?,?,?)',[pre[0].id_pre, pago.fecha, pago.monto, pago.com], (err, resul) => {
+               if(err) console.log(err);
+               connection.query('update prestamo set mof_pre= ? where id_pre= ?',[mof, pre[0].id_pre], (err, exit) => {
+                 if(err) console.log(err);
+                 res.render('home', {
+                   user: req.user,
+                   message: 'El pago ha sido registrado con exito'
+                });
+               });
+              });
+            }
+          }
+        });
+      }
 
       controller.cartera = (req, res) => {
             connection.query('select id_cli,nom_cli,din_cli,tel_cli from prestamo natural join cliente where id_ase = ? and moi_pre != mof_pre',[req.user.id_ase], (err, cartera) => {
