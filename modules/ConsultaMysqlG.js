@@ -19,6 +19,7 @@ connection.query('USE ' + dbconfig.database);
           });
         };
 
+
   controller.consultarasesor = (req, res) => {
             const { id }  = req.params;
               console.log(id);

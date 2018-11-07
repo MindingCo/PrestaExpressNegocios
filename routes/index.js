@@ -83,6 +83,14 @@ module.exports = function(app, passport)
 
     app.get('/gerente/cliente/:id', autorizaciong,consg.consultarcliente);
 
+    app.get('/G-Localizacion', autorizaciong, (req,res, next) =>
+    {
+      res.render('G-Localizacion',
+      {
+        user : req.user
+      });
+    });
+
     //routes Administrador
     app.get('/admin/registrar', autorizacion,(req, res, next) =>
     {
