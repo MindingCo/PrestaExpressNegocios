@@ -5,33 +5,76 @@ append jscss
     //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
 append content    
     if user.id_tus == 1
-        .container.margin
-            h3 Pagos Realizados
-        //- .row
-        //-   .col.s4
-        //-   .col.s4
-        //-   .col.s4  
-        //-     input.right-align(placeholder='Filtrar pago')
-        .divider
-        .section
-          -var dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"];
-          -var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-          table.responsive-table
-            thead 
-              tr  
-                th Monto pagado
-                th Fecha pago
-                th Comentario
-            tbody
-              for pago in pagos
-                tr
-                    td= pago.mon_pag
-                    td= `${pago.fec_pag.getDate()} ${dias[pago.fec_pag.getDay()]} / ${meses[pago.fec_pag.getMonth()]} / ${pago.fec_pag.getFullYear()}`
-                    td= pago.com_pag            
-        br
-        a(href="/admin/registrar")
-          p Ir a agregar
-        
+        -var parseDate = function parseDate(date) { let dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()} de ${meses[date.getMonth()]} del ${date.getFullYear()}`; }
+        //-     Datos del Prestamo
+        section.margin.beautyCard.floating.white
+            .container.margin-t
+                p.margin0.marginy
+                    img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Credit_Card_50px.png", alt="")
+                    b.indigo-text.darken-3 Prestamo
+            .divider
+            .section.row
+                .data.inline.w.fifth
+                    h6.va-middle.sub_title.ha-middle.indigo-text N° Prestamo
+                    h3.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= user.id_pre
+                .data.inline.w.fifth
+                    h6.va-middle.sub_title.ha-middle.indigo-text Fecha del prestamo
+                    h5.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= parseDate(user.fec_pre)
+                .data.inline.w.fifth
+                    h6.va-middle.sub_title.ha-middle.indigo-text Cantidad
+                    h3.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= `$${user.moi_pre}`
+                .data.inline.w.fifth
+                    h6.va-middle.sub_title.ha-middle.indigo-text Monto faltante
+                    h3.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= `$${user.id_pre}`
+                .data.inline.w.fifth
+                    h6.va-middle.sub_title.ha-middle.indigo-text Monto diario
+                    h3.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= `$${user.id_pre}`
+            .container.marginy-t
+                p.margin0.margin-l.marginy-b.indigo-text Asesor
+            .divider.w.half.margin-l
+            .section.row
+                .data.inline.w.sixth &nbsp;
+                .data.inline.w.quarter
+                    h6.va-middle.sub_title.ha-middle.indigo-text Nombre
+                    h3.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= user.nom_ase
+                .data.inline.w.sixth &nbsp;
+                .data.inline.w.quarter
+                    h6.va-middle.sub_title.ha-middle.indigo-text Celular
+                    h3.va-middle.ha-middle
+                        b.deep-orange-text.darken-4= user.tel_ase
+        //-     Historial de pagos
+        section.margin.beautyCard.floating.white
+            .container.margin-t
+                p.margin0.marginy 
+                    img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
+                    b.indigo-text.darken-3 Pagos
+            .divider
+            .section.row
+                .data.inline.w.third
+                    h6.va-middle.sub_title.ha-middle.indigo-text Monto pagado
+                .data.inline.w.third
+                    h6.va-middle.sub_title.ha-middle.indigo-text Fecha
+                .data.inline.w.third
+                    h6.va-middle.sub_title.ha-middle.indigo-text Comentario
+            for pago in pagos
+                .section.row
+                    .data.inline.w.third.row
+                        .w.third &nbsp;
+                        h3.va-middle.ha-middle.w.third
+                            b.deep-orange-text.darken-4.blocked= `$${pago.mon_pag}`
+                    .data.inline.w.third.row
+                        .w.sixth &nbsp;
+                        h5.va-middle.ha-middle.w.fivesixth
+                            b.deep-orange-text.darken-4.blocked= parseDate(pago.fec_pag)
+                    .data.inline.w.third
+                        h6.va-middle.ha-middle
+                            b.deep-orange-text.darken-4.blocked= pago.com_pag
     else if user.id_tus == 2
         p hola asesor
         p= user.nom_ase
@@ -46,7 +89,8 @@ append content
         .col.s4
         .col.s4  
           input.right-align(placeholder='Filtrar asesor')
-      
+      //- Multiproceso: Muchos procesadoress con un proceso cada uno
+      //- Multitarea: Varios procesos en un procesador
       br
       .divider
       .section

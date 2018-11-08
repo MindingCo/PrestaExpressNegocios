@@ -23,7 +23,7 @@ module.exports = (passport) =>
             switch (tipo)
             {
                 case 1:
-                    connection.query("select cliente.*, id_tus, id_pre, nom_ase, fec_pre, moi_pre, mof_pre, mod_pre from cliente natural join prestamo natural join asesor natural join usuario where nom_cli = ? and mof_pre != 0 limit 1;",[nom, nom], (err, rows1) =>
+                    connection.query("select cliente.*, id_tus, id_pre, nom_ase, tel_ase, fec_pre, moi_pre, mof_pre, mod_pre from cliente natural join prestamo natural join asesor natural join usuario where nom_cli = ? and mof_pre != 0 limit 1;",[nom, nom], (err, rows1) =>
                     {
                         // console.log('Este es el error');
                         // console.log(err);
