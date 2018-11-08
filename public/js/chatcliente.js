@@ -1,7 +1,7 @@
 
 $(document).ready(function()
 {
-    var socket = io('http://'+location.hostname+':8081', {forceNew: true})
+    var socket = io('http://localhost:8081')
     function mandarMsj()
     {
         socket.emit('new_message', $('#message-text').val());

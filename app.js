@@ -8,9 +8,9 @@ const path = require('path');
 
 var app = express();
 var server = require('http').Server(app);
-var io = require('socket.io')(8081);
 
-server.listen(80);
+var io = require('socket.io').listen();
+
 var indexRouter = require('./routes/index');
 var port = process.env.PORT || 8080;
 
