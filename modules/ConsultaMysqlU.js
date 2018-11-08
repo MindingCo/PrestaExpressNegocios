@@ -1,5 +1,6 @@
 const controller = {};
 
+const crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 var dbconfig = require('../config/database');
@@ -8,7 +9,7 @@ connection.query('USE ' + dbconfig.database);
 
 controller.home = (req, res) => {
     if (req.user.id_tus === 1) {
-      connection.query('SELECT fec_pag,mon_pag,com_pag FROM HistorialPagos natural join prestamo WHERE id_cli = ? AND moi_pre != mof_pre;',[req.user.id_cli], (err, pagos) => {
+      connection.query('SELECT fec_pag,mon_pag,com_pag FROM HistorialPagos natural join prestamo WHERE id_cli = ? AND mof_pre != 0;',[req.user.id_cli], (err, pagos) => {
         console.log(pagos);
         if (err) {
          res.json(err);
@@ -45,6 +46,7 @@ controller.home = (req, res) => {
         }
         connection.query('Select * from cliente', (err, clientes) => {
             if(err) console.log(err);
+            console.log(clientes);
             res.render('home', {
               user: req.user,
               asesores: asesores,
