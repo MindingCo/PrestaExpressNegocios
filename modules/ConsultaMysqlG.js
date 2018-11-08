@@ -23,7 +23,7 @@ connection.query('USE ' + dbconfig.database);
   controller.consultarasesor = (req, res) => {
             const { id }  = req.params;
               console.log(id);
-              connection.query('select id_cli,nom_cli,ema_cli,din_cli,tel_cli,nom_ase,ema_ase,tel_ase,nom_zon from prestamo natural join cliente natural join asesor natural join zona where id_ase = ?',[id], (err, asesorycartera) => {
+              connection.query('select id_cli,nom_cli,ema_cli,din_cli,tel_cli,nom_ase,ema_ase,tel_ase,nom_zon from prestamo natural join cliente natural join asesor natural join zona where id_ase = ? and mof_pre != 0',[id], (err, asesorycartera) => {
                 if (err) {
                 console.log(err);
                 res.json(err);

@@ -1,11 +1,16 @@
 const controller = {};
 
+const crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 var dbconfig = require('../config/database');
 var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
+let iv = 'asdpiadsjfasdfxw';
+let key = 'cdsadskjldsdskjd';
+let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
+var cipher = crypto.createCipheriv('aes-256-cbc', keyto, iv);
 
 controller.agregarusu = (req, res) => {
     var usu= req.body;
@@ -23,6 +28,9 @@ controller.agregarusu = (req, res) => {
            message: "La contraseña no coincide en ambos campos"
          });
       }
+      var buf = cipher.update(usu.nombre, 'utf8', 'hex')
+      buf += cipher.final('hex')
+      console.log(buf);
       connection.query('SELECT * FROM usuario where use_usu= ?',[usu.username],(err, user) => {
           if (err) {
           console.log(err);
@@ -109,7 +117,7 @@ controller.agregarusu = (req, res) => {
       if (err) console.log(err);
       console.log(cliente);
       if (cliente.length) {
-        connection.query('select * from prestamo where id_cli = ? and moi_pre != mof_pre',[cliente[0].id_cli], (err, prestamo) => {
+        connection.query('select * from prestamo where id_cli = ? and mof_pre != 0',[cliente[0].id_cli], (err, prestamo) => {
           if(err) console.log(err);
           console.log(prestamo);
           if (prestamo.length) {
@@ -178,7 +186,7 @@ controller.agregarusu = (req, res) => {
   controller.asesoryclientes = (req, res) => {
     const { id }  = req.params;
       console.log(id);
-      connection.query('select id_cli,nom_cli,ema_cli,din_cli,tel_cli,nom_ase,ema_ase,tel_ase,nom_zon from prestamo natural join cliente natural join asesor natural join zona where id_ase = ?',[id], (err, asesorycartera) => {
+      connection.query('select id_cli,nom_cli,ema_cli,din_cli,tel_cli,nom_ase,ema_ase,tel_ase,nom_zon from prestamo natural join cliente natural join asesor natural join zona where id_ase = ? and mof_pre != 0',[id], (err, asesorycartera) => {
         if (err) {
         console.log(err);
         res.json(err);

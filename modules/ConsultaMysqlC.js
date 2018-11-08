@@ -9,7 +9,7 @@ connection.query('USE ' + dbconfig.database);
 
 controller.asesor = (req, res) => {
 
-    connection.query('SELECT nom_ase,ema_ase,tel_ase,nom_zon FROM prestamo natural join asesor natural join zona WHERE id_cli = ? AND moi_pre != mof_pre',[req.user.id_cli],(err, ase) => {
+    connection.query('SELECT nom_ase,ema_ase,tel_ase,nom_zon FROM prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli],(err, ase) => {
       console.log(req.user);
       console.log(ase);
      if (err) {

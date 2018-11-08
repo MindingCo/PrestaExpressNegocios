@@ -83,9 +83,9 @@ module.exports = function(app, passport)
 
     app.get('/gerente/cliente/:id', autorizaciong,consg.consultarcliente);
 
-    app.get('/G-Localizacion', autorizaciong, (req,res, next) =>
+    app.get('/Localizacion', autorizaciong, (req,res, next) =>
     {
-      res.render('G-Localizacion',
+      res.render('Localizacion',
       {
         user : req.user
       });
