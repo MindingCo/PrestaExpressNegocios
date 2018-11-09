@@ -63,6 +63,8 @@ module.exports = function(app, passport)
     // routes Asesor
     app.get('/asesor/cartera', autorizacionas, consas.cartera);
 
+    app.get('/asesor/cobros', autorizacionas, consas.cobros);
+
     app.get('/asesor/cliente/:id', autorizacionas,consas.consultarcliente);
 
     app.post('/asesor/pago/:id', autorizacionas,consas.pago);
