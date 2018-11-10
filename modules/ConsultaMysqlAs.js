@@ -143,34 +143,73 @@ function decrypt(text){
       }
 
       controller.cobros = (req,res) => {
+          var dt = new Date();
+          var month = dt.getMonth()+1;
+          var day = dt.getDate();
+          var year = dt.getFullYear();
+          var f= year + '-' + month + '-' + day;
           connection.query('SELECT * from cliente natural join prestamo where id_ase = ? and mof_pre != 0',[req.user.id_ase],(err, result) => {
             if (err) {
               console.log(err);
               res.json(err);
             }
-            var dcartera=[];
-            var dprestamos=[];
-            for (var i = 0; i < result.length; i++) {
-              var cliente= {
-                id_cli: result[i].id_cli,
-                nom_cli: decrypt(result[i].nom_cli),
-                din_cli: decrypt(result[i].din_cli),
-                tel_cli: decrypt(result[i].tel_cli)
-              };
-              dcartera.push(cliente);
-              var prestamo= {
-                id_pre: result[0].id_pre,
-                fec_pre: result[0].fec_pre,
-                moi_pre: decrypt(result[0].moi_pre),
-                mof_pre: result[0].mof_pre,
-                mod_pre: decrypt(result[0].mod_pre)
-              };
-              dprestamos.push(prestamo);
-            }
-            res.render('a-cobros', {
-              user: req.user,
-              clientes: dcartera,
-              prestamos: dprestamos
+            connection.query('SELECT * from prestamo natural join historialpagos where id_ase= ? and mof_pre != 0 and fec_pag= ?',[req.user.id_ase, f], (err, result1) => {
+              var dcartera=[];
+              var dprestamos=[];
+              if (result1.length) {
+                for (var j = 0; j < result1.length; j++) {
+                  for (var i = 0; i < result.length; i++) {
+                    if (result[i].id_cli != result1[j].id_cli) {
+                      var cliente= {
+                        id_cli: result[i].id_cli,
+                        nom_cli: decrypt(result[i].nom_cli),
+                        din_cli: decrypt(result[i].din_cli),
+                        tel_cli: decrypt(result[i].tel_cli)
+                      };
+                      dcartera.push(cliente);
+                      var prestamo= {
+                        id_pre: result[0].id_pre,
+                        fec_pre: result[0].fec_pre,
+                        moi_pre: decrypt(result[0].moi_pre),
+                        mof_pre: result[0].mof_pre,
+                        mod_pre: decrypt(result[0].mod_pre)
+                      };
+                      dprestamos.push(prestamo);
+                    }
+                  }
+                }
+                res.render('a-cobros', {
+                  user: req.user,
+                  clientes: dcartera,
+                  prestamos: dprestamos
+                });
+              }
+              else {
+                for (var i = 0; i < result.length; i++) {
+                    var cliente= {
+                      id_cli: result[i].id_cli,
+                      nom_cli: decrypt(result[i].nom_cli),
+                      din_cli: decrypt(result[i].din_cli),
+                      tel_cli: decrypt(result[i].tel_cli)
+                    };
+                    dcartera.push(cliente);
+                    var prestamo= {
+                      id_pre: result[0].id_pre,
+                      fec_pre: result[0].fec_pre,
+                      moi_pre: decrypt(result[0].moi_pre),
+                      mof_pre: result[0].mof_pre,
+                      mod_pre: decrypt(result[0].mod_pre)
+                    };
+                    dprestamos.push(prestamo);
+                }
+                console.log(dcartera);
+                console.log(dprestamos);
+                res.render('a-cobros', {
+                  user: req.user,
+                  clientes: dcartera,
+                  prestamos: dprestamos
+                });
+              }
             });
           });
       }
