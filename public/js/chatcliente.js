@@ -1,7 +1,7 @@
 
 $(document).ready(function()
 {
-    var socket = io('http://localhost:8081')
+    var socket = io('http://'+location.hostname+':8081', {forceNew: true})
     function mandarMsj()
     {
         socket.emit('new_message', $('#message-text').val());
@@ -18,6 +18,7 @@ $(document).ready(function()
 
 
     socket.on('new_user', (newUser) =>{
+      console.log("NewUser")
     })
 
     socket.on('new_message', (mensaje) =>{
@@ -28,4 +29,4 @@ $(document).ready(function()
       $('#chat').append('<li>' + userSays + '</li>')
     })
 
-})//(document, io, jQuery)
+})
