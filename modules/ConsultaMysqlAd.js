@@ -7,10 +7,6 @@ var dbconfig = require('../config/database');
 var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
-let iv = 'asdpiadsjfasdfxw';
-let key = 'cdsadskjldsdskjd';
-let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
-var cipher = crypto.createCipheriv('aes-256-cbc', keyto, iv);
 
 controller.agregarusu = (req, res) => {
     var usu= req.body;
@@ -28,9 +24,6 @@ controller.agregarusu = (req, res) => {
            message: "La contraseña no coincide en ambos campos"
          });
       }
-      var buf = cipher.update(usu.nombre, 'utf8', 'hex')
-      buf += cipher.final('hex')
-      console.log(buf);
       connection.query('SELECT * FROM usuario where use_usu= ?',[usu.username],(err, user) => {
           if (err) {
           console.log(err);
@@ -51,12 +44,14 @@ controller.agregarusu = (req, res) => {
                      if (err) {
                        console.log(err);
                      }
-                     console.log(algo);
-                     console.log('Todo bien');
-                     res.render('agregarusu', {
-                        user: req.user,
-                        message:"Se ha agregado el cliente "+ usu.nombre +" a la base."
-                     });
+                     else {
+                         console.log(algo);
+                         console.log('Todo bien');
+                         res.render('agregarusu', {
+                            user: req.user,
+                            message:"Se ha agregado el cliente "+ usu.nombre +" a la base."
+                         });
+                     }
                   });
                 break;
               case "2":
