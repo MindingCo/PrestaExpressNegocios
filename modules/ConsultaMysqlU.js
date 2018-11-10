@@ -69,7 +69,8 @@ controller.home = (req, res) => {
           var cli= {
             id_cli: clientes[i].id_cli,
             nom_cli: decrypt(clientes[i].nom_cli),
-            din_cli: clientes[i].ema_cli,
+            ema_cli: clientes[i].ema_cli,
+            din_cli: decrypt(clientes[i].din_cli),
             dih_cli: decrypt(clientes[i].dih_cli),
             tel_cli: decrypt(clientes[i].tel_cli)
           };

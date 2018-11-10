@@ -167,7 +167,7 @@ function decrypt(text){
               };
               dprestamos.push(prestamo);
             }
-            res.render('', {
+            res.render('a-cobros', {
               user: req.user,
               clientes: dcartera,
               prestamos: dprestamos
