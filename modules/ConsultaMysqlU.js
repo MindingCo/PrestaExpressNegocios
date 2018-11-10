@@ -127,11 +127,12 @@ controller.home = (req, res) => {
     }
 
     if (req.user.id_tus === 4) {
-      connection.query('call getHistorialpago(?)',[req.user.id_cli], (err, pagos) => {
+      connection.query('SELECT * from prestamos order by id_pre DECS limit 100',[req.user.id_cli], (err, pagos,) => {
         console.log(req.user);
         console.log(pagos);
         if (err) {
          res.json(err);
+         console.log(err);
         }
         res.render('home', {
           user: req.user,
@@ -154,11 +155,13 @@ controller.mcontraseña = (req, res) => {
        });
     }
     else {
-      var nombre= encrypt(req.user.nom_cli)
-      connection.query('SELECT * FROM usuario where nom_usu= ?',[nombre],(err, usu) => {
+      var nombre= req.user.use_usu;
+      connection.query('SELECT * FROM usuario where use_usu= ?',[nombre],(err, usu) => {
           if (err) {
           res.json(err);
+          console.log(err);
           }
+          console.log(usu);
           if (!bcrypt.compareSync(cona, usu[0].con_usu)) {
            console.log('contra incorrecta');
            res.render('sesion', {

@@ -45,7 +45,7 @@ module.exports = (passport) =>
             switch (tipo)
             {
                 case 1:
-                    connection.query("select cliente.*, id_tus from cliente inner join usuario on nom_cli = ? and nom_usu= ?",[nom, nom], (err, rows1) =>
+                    connection.query("select cliente.*,use_usu, id_tus from cliente inner join usuario on nom_cli = ? and nom_usu= ?",[nom, nom], (err, rows1) =>
                     {
                         if (err) {
                           console.log(err);
@@ -63,7 +63,8 @@ module.exports = (passport) =>
                               dih_cli: decrypt(rows1[0].dih_cli),
                               tel_cli: decrypt(rows1[0].tel_cli),
                               id_tus: rows1[0].id_tus,
-                              id_pre: idpre[0].id_pre
+                              id_pre: idpre[0].id_pre,
+                              use_usu: rows1[0].use_usu
                             };
                             done(err, usuario);
                           });
@@ -72,7 +73,7 @@ module.exports = (passport) =>
                     });
                     break
                 case 2:
-                    connection.query("SELECT asesor.*, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT asesor.*,use_usu, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         if (err) {
                           console.log(err);
@@ -83,7 +84,8 @@ module.exports = (passport) =>
                             nom_ase: decrypt(nom),
                             ema_ase: rows1[0].ema_ase,
                             tel_ase: decrypt(rows1[0].tel_ase),
-                            id_tus: rows1[0].id_tus
+                            id_tus: rows1[0].id_tus,
+                            use_usu: rows1[0].use_usu
                             };
                             done(err, asesor);
                         }
@@ -91,7 +93,7 @@ module.exports = (passport) =>
                     });
                     break
                 case 3:
-                    connection.query("SELECT gerente.*, nom_usu,id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT gerente.*, use_usu,id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                       if (err) {
                         console.log(err);
@@ -102,7 +104,8 @@ module.exports = (passport) =>
                           nom_ger: decrypt(nom),
                           ema_ger: rows1[0].ema_ger,
                           tel_ger: decrypt(rows1[0].tel_ger),
-                          id_tus: rows1[0].id_tus
+                          id_tus: rows1[0].id_tus,
+                          use_usu: rows1[0].use_usu
                           };
                           done(err,gerente);
                         }
