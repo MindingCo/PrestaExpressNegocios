@@ -26,21 +26,33 @@ function decrypt(text){
 };
 
 controller.asesor = (req, res) => {
-    connection.query('SELECT nom_ase,ema_ase,tel_ase,nom_zon FROM prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli],(err, ase) => {
+    connection.query('SELECT id_ase,nom_ase,ema_ase,tel_ase,nom_zon FROM prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli],(err, ase) => {
       console.log(req.user);
       console.log(ase);
        if (err) {
         res.json(err);
+        console.log(err);
        }
        var asesor= {
+         id_ase: ase[0].id_ase,
          nom_ase: decrypt(ase[0].nom_ase),
          ema_ase: ase[0].ema_ase,
          tel_ase: decrypt(ase[0].tel_ase),
-         nom_zona: ase[0].nom_zon
+         nom_zon: ase[0].nom_zon
        }
-       res.render('asesor', {
-          user: req.user,
-          ase: asesor
+       connection.query('Select * from jerarquia natural join gerente where id_ase = ?',[asesor.id_ase], (err, ger) => {
+         if (err) console.log(err);
+         var gerente= {
+           id_ger: ger[0].id_ger,
+           nom_ger: decrypt(ger[0].nom_ger),
+           ema_ger: ger[0].ema_ger,
+           tel_ger: decrypt(ger[0].tel_ger)
+         }
+         res.render('asesor', {
+            user: req.user,
+            ase: asesor,
+            ger: gerente
+         });
        });
     });
 };

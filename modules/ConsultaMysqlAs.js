@@ -150,7 +150,7 @@ function decrypt(text){
             }
             var dcartera=[];
             var dprestamos=[];
-            for (var i = 0; i < cartera.length; i++) {
+            for (var i = 0; i < result.length; i++) {
               var cliente= {
                 id_cli: result[i].id_cli,
                 nom_cli: decrypt(result[i].nom_cli),
