@@ -3,18 +3,20 @@ extends layouth
 append jscss
 
 append content
-  .rows
-    .col.s4
-      h1 Conoce a tu asesor
+    .rows
+        .col.s4
+            h1 Conoce a tu asesor
   
-  blockquote  
-    h2= user.nom_usu
+    blockquote  
+        h2= user.nom_usu
   
-  br
-  for as in ase
+    br
     .divider
     .section
-        p Nombre de tu asesor actual: #{as.nom_ase}
-        p Email: #{as.ema_ase}
-        p Telefono: #{as.tel_ase}  
+        p Nombre de tu asesor actual:
+        p= asesor.nom_ase
+        p Email:
+        p= asesor.ema_ase
+        p Telefono:
+        p= asesor.tel_ase
           

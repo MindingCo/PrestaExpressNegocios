@@ -1,11 +1,30 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
+const crypto = require('crypto');
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
 
 connection.query('USE ' + dbconfig.database);
+
+let iv = 'asdpiadsjfasdfxw';
+let key = 'cdsadskjldsdskjd';
+let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
+
+  function encrypt(text){
+    var cipher = crypto.createCipheriv('aes-256-cbc', keyto, iv);
+    var crypted = cipher.update(text,'utf8','hex')
+    crypted += cipher.final('hex');
+    return crypted;
+  };
+
+  function decrypt(text){
+    var decipher = crypto.createDecipheriv('aes-256-cbc', keyto, iv)
+    var dec = decipher.update(text,'hex','utf8')
+    dec += decipher.final('utf8');
+    return dec;
+  };
 
 module.exports = (passport) =>
 {
@@ -17,43 +36,84 @@ module.exports = (passport) =>
     {
         connection.query("SELECT * FROM usuario WHERE id_usu = ? ",[id], (err, rows) =>
         {
-            // console.log(err);
+            if (err) {
+              console.log(err);
+            }
             var tipo=rows[0].id_tus;
-            var nom=rows[0].nom_usu;
+            var nom= rows[0].nom_usu;
+
             switch (tipo)
             {
                 case 1:
-                    connection.query("select cliente.*, id_tus, id_pre, nom_ase, fec_pre, moi_pre, mof_pre, mod_pre from cliente natural join prestamo natural join asesor natural join usuario where nom_cli = ? and mof_pre != 0 limit 1;",[nom, nom], (err, rows1) =>
+                    connection.query("select cliente.*, id_tus from cliente inner join usuario on nom_cli = ? and nom_usu= ?",[nom, nom], (err, rows1) =>
                     {
-                        // console.log('Este es el error');
-                        // console.log(err);
-                        // console.log('Esta la columna');
-                        // console.log(rows1);
+                        if (err) {
+                          console.log(err);
+                        }
+                        else {
+                          console.log(rows1[0].id_cli);
+                          connection.query('SELECT id_pre from prestamo where id_cli= ? order by id_pre DESC',[rows1[0].id_cli], (err, idpre) => {
+                            console.log(idpre);
+                            if (err) console.log(err);
+                            var usuario = {
+                              id_cli: rows1[0].id_cli,
+                              nom_cli: decrypt(nom),
+                              ema_cli: rows1[0].ema_cli,
+                              din_cli: decrypt(rows1[0].din_cli),
+                              dih_cli: decrypt(rows1[0].dih_cli),
+                              tel_cli: decrypt(rows1[0].tel_cli),
+                              id_tus: rows1[0].id_tus,
+                              id_pre: idpre[0].id_pre
+                            };
+                            done(err, usuario);
+                          });
+                        }
 
-                        done(err, rows1[0]);
                     });
                     break
                 case 2:
-                    connection.query("SELECT asesor.*, nom_usu,id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT asesor.*, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
-                        // console.log('Este es el error');
-                        // console.log(err);
-                        // console.log('Esta la columna');
-                        // console.log(rows1);
-                        done(err, rows1[0]);
+                        if (err) {
+                          console.log(err);
+                        }
+                        else {
+                          var asesor = {
+                            id_ase: rows1[0].id_ase,
+                            nom_ase: decrypt(nom),
+                            ema_ase: rows1[0].ema_ase,
+                            tel_ase: decrypt(rows1[0].tel_ase),
+                            id_tus: rows1[0].id_tus
+                            };
+                            done(err, asesor);
+                        }
+
                     });
                     break
                 case 3:
                     connection.query("SELECT gerente.*, nom_usu,id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
-                        // console.log('Este es el error');
-                        // console.log(err);
-                        // console.log('Esta la columna');
-                        // console.log(rows1);
-                        done(err, rows1[0]);
+                      if (err) {
+                        console.log(err);
+                      }
+                      else {
+                        var gerente = {
+                          id_ger: rows1[0].id_ger,
+                          nom_ger: decrypt(nom),
+                          ema_ger: rows1[0].ema_ger,
+                          tel_ger: decrypt(rows1[0].tel_ger),
+                          id_tus: rows1[0].id_tus
+                          };
+                          done(err,gerente);
+                        }
                     });
                     break
                 default:
+                        var admin= {
+                            id_usu: rows1[0].id_usu,
+                            nom_usu: decrypt(nom),
+                            use_usu: rows1[0].use_usu
+                        };
                         done(err, rows[0]);
                     break
 
@@ -111,6 +171,7 @@ module.exports = (passport) =>
         },
         (req, username, password, done) =>
         {
+
             connection.query("SELECT * FROM usuario WHERE use_usu = ?",[username], (err, rows) =>
             {
                 if (err)

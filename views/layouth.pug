@@ -10,9 +10,9 @@ html
         
         
         block jscss
-    body
-        <div class="content h-full">
-            <div class="row h-full">
+    body.gradient-color-060
+        .content.h-full
+            .row.h-full
                 //-    navs
                 if user.id_tus == 1
                     include navcli
@@ -23,7 +23,7 @@ html
                 else if user.id_tus == 4
                     include navadm
                 //-    content
-                .w.s-full.m-full.l-fourfifth.xl-fourfifth.card
+                .w.s-full.m-full.l-fourfifth.xl-fourfifth.marginy.scroller
                     block content
         if user.id_tus == 1 || user.id_tus == 3
             include chatp

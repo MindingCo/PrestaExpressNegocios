@@ -2,40 +2,36 @@ extends layouth
 
 append jscss
     
-append content   
-        blockquote
-          h2= user.nom_ase
-       
-        .row
-          .col.s4
-          .col.s4
-          .col.s4  
-            input.right-align(placeholder='Filtrar cliente')
-        
-        br
+append content
+    section.margin.beautyCard.floating.white
+        .container.margin-t
+            p.margin0.marginy 
+                img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
+                b.deep-purple-text.text-darken-2 Cartera
         .divider
-        .section
-          table.responsive-table
-            thead 
-              tr  
-                th Id Cliente
-                th Nombre
-                th Email
-                th Dirección negocios
-                th Telefono
-                th
-            tbody
-              for cliente in clientes
-                tr
-                  td= cliente.id_cli
-                  td= cliente.nom_cli
-                  td= cliente.din_cli
-                  td= cliente.tel_cli
-                  td 
-                    a.btn(href="/asesor/cliente/"+cliente.id_cli) Detalles del cliente
-        
-        .divider
-        .section
-            p= message              
-                    
-                    
+        .section.row
+            .data.inline.w.quarter
+                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Nombre
+            .data.inline.w.quarter
+                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de negocio
+            .data.inline.w.quarter
+                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de hogar
+            .data.inline.w.quarter
+                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Telefono
+        - var n = 0
+        while n < (clientes.length < 10 ? clientes.length : 10)
+            .section.row
+                .data.inline.w.quarter
+                    h5.va-middle.ha-middle
+                        b.light-blue-text.text-darken-3= clientes[n].nom_cli
+                .data.inline.w.quarter.row
+                    .w.sixth &nbsp;
+                    h5.va-middle.ha-middle.w.twothird
+                        b.light-blue-text.text-darken-3.blocked= clientes[n].din_cli
+                .data.inline.w.quarter.row
+                    .w.sixth &nbsp;
+                    h5.va-middle.ha-middle.w.twothird
+                        b.light-blue-text.text-darken-3.blocked= clientes[n].dih_cli
+                .data.inline.w.quarter
+                    h5.va-middle.ha-middle
+                        b.light-blue-text.text-darken-3= clientes[n++].tel_cli
