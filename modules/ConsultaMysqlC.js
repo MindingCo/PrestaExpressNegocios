@@ -50,8 +50,8 @@ controller.asesor = (req, res) => {
          }
          res.render('asesor', {
             user: req.user,
-            ase: asesor,
-            ger: gerente
+            asesor: asesor,
+            gerente: gerente
          });
        });
     });

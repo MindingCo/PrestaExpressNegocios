@@ -17,23 +17,23 @@ append content
                 .data.inline.w.fifth
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 N° Prestamo
                     h3.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= user.id_pre
+                        b.light-blue-text.text-darken-3= prestamo.id_pre
                 .data.inline.w.fifth
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Fecha del prestamo
                     h5.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= parseDate(user.fec_pre)
+                        b.light-blue-text.text-darken-3= parseDate(prestamo.fec_pre)
                 .data.inline.w.fifth
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Cantidad
                     h3.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= `$${user.moi_pre}`
+                        b.light-blue-text.text-darken-3= `$${prestamo.moi_pre}`
                 .data.inline.w.fifth
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Monto faltante
                     h3.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= `$${user.id_pre}`
+                        b.light-blue-text.text-darken-3= `$${prestamo.mof_pre}`
                 .data.inline.w.fifth
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Monto diario
                     h3.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= `$${user.id_pre}`
+                        b.light-blue-text.text-darken-3= `$${prestamo.mod_pre}`
             .container.marginy-t
                 p.margin0.margin-l.marginy-b.grey-text.text-darken-3 Asesor
             .divider.w.half.margin-l
@@ -42,12 +42,12 @@ append content
                 .data.inline.w.quarter
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Nombre
                     h3.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= user.nom_ase
+                        b.light-blue-text.text-darken-3= asesor.nom_ase
                 .data.inline.w.sixth &nbsp;
                 .data.inline.w.quarter
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Celular
                     h3.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= user.tel_ase
+                        b.light-blue-text.text-darken-3= asesor.tel_ase
         //-     Historial de pagos
         section.margin.beautyCard.floating.white
             .container.margin-t
