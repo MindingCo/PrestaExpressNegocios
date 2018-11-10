@@ -18,4 +18,31 @@ $(document).ready(() =>
     {
         $('.chat-container').animate({right: "0%"}, 1000)
     })
+
+    $(".first_part-form").click(function()
+    {
+        let form = $(this).parent('form')
+        if (form.attr('actived-second_part') == 'false')
+        {
+            form.attr('actived-second_part', 'true')
+            $.ajax ({
+                url: "/form_cobros.html",
+                success: function(result) {
+                    form.append(result);
+                    form.children(".second_part-form").hide(0, function ()
+                    {
+                        form.children(".second_part-form").show(1000)
+                    })
+                }
+            });
+        }
+        else
+        {
+            form.attr('actived-second_part', 'false')
+            form.children(".second_part-form").hide(500, function ()
+            {
+                form.children(".second_part-form").remove()
+            })
+        }
+    })
 })
