@@ -35,11 +35,11 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
             var dagenda= [];
             for (var i = 0; i < agenda.length; i++) {
               var asesor= {
-                id_ase: agenda[0].id_ase,
-                nom_ase: decrypt(agenda[0].nom_ase),
-                ema_ase: agenda[0].ema_ase,
-                tel_ase: decrypt(agenda[0].tel_ase),
-                nom_zona: agenda[0].nom_zon
+                id_ase: agenda[i].id_ase,
+                nom_ase: decrypt(agenda[i].nom_ase),
+                ema_ase: agenda[i].ema_ase,
+                tel_ase: decrypt(agenda[i].tel_ase),
+                nom_zona: agenda[i].nom_zon
               }
               dagenda.push(asesor);
             }
