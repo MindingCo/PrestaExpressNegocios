@@ -27,34 +27,98 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
   }
 
 controller.home = (req, res) => {
+    console.log(req.user.id_cli);
     if (req.user.id_tus === 1) {
-      connection.query('SELECT * FROM HistorialPagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli], (err, pagos) => {
+      connection.query('SELECT * FROM historialpagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli], (err, pagos) => {
         console.log(pagos);
         if (err) {
          res.json(err);
+         console.log(err);
         }
-        var prestamo= {
-          id_pre: pagos[0].id_pre,
-          fec_pre: pagos[0].fec_pre,
-          moi_pre: decrypt(pagos[0].moi_pre),
-          mof_pre: pagos[0].mof_pre,
-          mod_pre: decrypt(pagos[0].mod_pre)
-        };
-        var asesor= {
-          id_ase: pagos[0].id_ase,
-          nom_ase: decrypt(pagos[0].nom_ase),
-          ema_ase: pagos[0].ema_ase,
-          tel_ase: decrypt(pagos[0].tel_ase),
-          nom_zon: pagos[0].nom_zon
+        if (pagos.length) {
+          var prestamo= {
+            id_pre: pagos[0].id_pre,
+            fec_pre: pagos[0].fec_pre,
+            moi_pre: decrypt(pagos[0].moi_pre),
+            mof_pre: pagos[0].mof_pre,
+            mod_pre: decrypt(pagos[0].mod_pre)
+          };
+          var asesor= {
+            id_ase: pagos[0].id_ase,
+            nom_ase: decrypt(pagos[0].nom_ase),
+            ema_ase: pagos[0].ema_ase,
+            tel_ase: decrypt(pagos[0].tel_ase),
+            nom_zon: pagos[0].nom_zon
+          }
+          console.log(prestamo);
+          console.log(asesor);
+          res.render('home', {
+               user: req.user,
+               pagos: pagos,
+               prestamo: prestamo,
+               asesor: asesor
+          });
         }
-        console.log(prestamo);
-        console.log(asesor);
-        res.render('home', {
-             user: req.user,
-             pagos: pagos,
-             prestamo: prestamo,
-             asesor: asesor
-        });
+        else {
+          connection.query('SELECT * FROM HistorialPagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? order by id_pre DESC limit 1',[req.user.id_cli], (err, pagos1) => {
+            console.log(pagos1);
+            if (err) {
+             res.json(err);
+             console.log(err);
+            }
+            if (pagos1.length) {
+              var prestamo= {
+                id_pre: pagos1[0].id_pre,
+                fec_pre: pagos1[0].fec_pre,
+                moi_pre: decrypt(pagos1[0].moi_pre),
+                mof_pre: pagos1[0].mof_pre,
+                mod_pre: decrypt(pagos1[0].mod_pre)
+              };
+              var asesor= {
+                id_ase: pagos1[0].id_ase,
+                nom_ase: decrypt(pagos1[0].nom_ase),
+                ema_ase: pagos1[0].ema_ase,
+                tel_ase: decrypt(pagos1[0].tel_ase),
+                nom_zon: pagos1[0].nom_zon
+              }
+              console.log(prestamo);
+              console.log(asesor);
+              res.render('home', {
+                   user: req.user,
+                   pagos: pagos,
+                   prestamo: prestamo,
+                   asesor: asesor
+              });
+            }
+            else {
+              connection.query('Select * from prestamo natural join asesor natural join zona where id_cli= ?',[req.user.id_cli], (err, pres) =>{
+                var pags=[];
+                var prestamo= {
+                  id_pre: pres[0].id_pre,
+                  fec_pre: pres[0].fec_pre,
+                  moi_pre: decrypt(pres[0].moi_pre),
+                  mof_pre: pres[0].mof_pre,
+                  mod_pre: decrypt(pres[0].mod_pre)
+                };
+                var asesor= {
+                  id_ase: pres[0].id_ase,
+                  nom_ase: decrypt(pres[0].nom_ase),
+                  ema_ase: pres[0].ema_ase,
+                  tel_ase: decrypt(pres[0].tel_ase),
+                  nom_zon: pres[0].nom_zon
+                }
+                console.log(prestamo);
+                console.log(asesor);
+                res.render('home', {
+                     user: req.user,
+                     pagos: pags,
+                     prestamo: prestamo,
+                     asesor: asesor
+                });
+              });
+            }
+         });
+        }
       });
     }
 
@@ -127,17 +191,32 @@ controller.home = (req, res) => {
     }
 
     if (req.user.id_tus === 4) {
-      connection.query('SELECT * from prestamos order by id_pre DECS limit 100',[req.user.id_cli], (err, pagos,) => {
+      connection.query('SELECT * from prestamo natural join cliente natural join asesor order by id_pre DESC limit 100',[req.user.id_cli], (err, result) => {
         console.log(req.user);
-        console.log(pagos);
         if (err) {
          res.json(err);
          console.log(err);
         }
+        var dprestamos=[];
+        for (var i = 0; i < result.length; i++) {
+            var prestamo= {
+              id_pre: result[0].id_pre,
+              fec_pre: result[0].fec_pre,
+              moi_pre: decrypt(result[0].moi_pre),
+              mof_pre: result[0].mof_pre,
+              mod_pre: decrypt(result[0].mod_pre),
+              id_cli: result[i].id_cli,
+              nom_cli: decrypt(result[i].nom_cli),
+              ema_cli: result[i].ema_cli,
+              din_cli: decrypt(result[i].din_cli),
+              dih_cli: decrypt(result[i].dih_cli),
+              tel_cli: decrypt(result[i].tel_cli)
+            };
+            dprestamos.push(prestamo);
+        }
         res.render('home', {
           user: req.user,
-          pagos: pagos,
-          message: req.flash('info')
+          prestamos: dprestamos
         });
       });
     }
