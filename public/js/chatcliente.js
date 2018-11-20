@@ -1,6 +1,7 @@
 
 $(document).ready(function()
 {
+
     var socket = io('http://'+location.hostname+':8081', {forceNew: true})
     function mandarMsj()
     {
