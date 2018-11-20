@@ -42,7 +42,11 @@ controller.agregarusu = (req, res) => {
       connection.query('SELECT * FROM usuario where use_usu= ?',[usu.username],(err, user) => {
           if (err) {
           console.log(err);
-          res.json(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
           }
           if (user.length) {
            console.log('Existe el usuario');
@@ -71,20 +75,34 @@ controller.agregarusu = (req, res) => {
                   connection.query('call registrarCliente(?,?,?,?,?,?,?)',[usu.username, con_usu,nombre,usu.email,dirnegocio,dircasa,tel],(err, algo) => {
                      if (err) {
                        console.log(err);
+                       res.render('error', {
+                          user: req.user,
+                          message:"Ha ocurrido un error.",
+                          error: err
+                        });
                      }
-                     console.log(algo);
-                     console.log('Todo bien');
-                     res.render('agregarusu', {
-                        user: req.user,
-                        message:"Se ha agregado el cliente "+ usu.username +" a la base."
-                     });
+                     else {
+                       console.log(algo);
+                       console.log('Todo bien');
+                       res.render('agregarusu', {
+                          user: req.user,
+                          message:"Se ha agregado el cliente "+ usu.username +" a la base."
+                       });
+                     }
                   });
                 break;
               case "2":
                   var superior= encrypt(usu.supe)
                   console.log("superior: \n" + superior);
                   connection.query('select id_ger from gerente where nom_ger= ?', [superior], (err, id) => {
-                    if (err) console.log(err);
+                    if (err) {
+                      console.log(err);
+                      res.render('error', {
+                         user: req.user,
+                         message:"Ha ocurrido un error.",
+                         error: err
+                       });
+                    }
                     if (id.length) {
                       connection.query('call registrarAsesor(?,?,?,?,?,?)',[usu.username, con_usu,nombre,usu.email,tel,parseInt(usu.zona)],(err, rows) => {
                          console.log(id);
@@ -114,6 +132,12 @@ controller.agregarusu = (req, res) => {
                   connection.query('call registrarGerente(?,?,?,?,?)',[usu.username, con_usu,nombre,usu.email,tel],(err, algo) => {
                      if (err) {
                        console.log(err);
+                       console.log(err);
+                       res.render('error', {
+                          user: req.user,
+                          message:"Ha ocurrido un error.",
+                          error: err
+                        });
                      }
                      console.log('Todo bien');
                      res.render('agregarusu', {
@@ -136,11 +160,25 @@ controller.agregarusu = (req, res) => {
     var f= year + '-' + month + '-' + day;
     var nombre = encrypt(req.body.cliente)
     connection.query('select * from cliente where nom_cli= ?',[nombre], (err, cliente) => {
-      if (err) console.log(err);
+      if (err) {
+        console.log(err);
+        res.render('error', {
+           user: req.user,
+           message:"Ha ocurrido un error.",
+           error: err
+         });
+      }
       console.log(cliente);
       if (cliente.length) {
         connection.query('select * from prestamo where id_cli = ? and mof_pre != 0',[cliente[0].id_cli], (err, prestamo) => {
-          if(err) console.log(err);
+          if(err) {
+            console.log(err);
+            res.render('error', {
+               user: req.user,
+               message:"Ha ocurrido un error.",
+               error: err
+             });
+          }
           console.log(prestamo);
           if (prestamo.length) {
             res.render('agregarprestamo', {
@@ -151,12 +189,26 @@ controller.agregarusu = (req, res) => {
           else {
             var vasesor= encrypt(req.body.asesor)
             connection.query('select * from asesor where nom_ase= ?',[vasesor],(err, asesor) => {
-              if (err) console.log(err);
+              if (err) {
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
+              }
               var montoinicial= encrypt(req.body.montoi)
               var montoadar= encrypt(req.body.montod)
               if (asesor.length) {
                 connection.query('insert into prestamo values (0,?,?,?,?,?,?)',[cliente[0].id_cli,asesor[0].id_ase,f,montoinicial,req.body.montoi,montoadar],(err, result) => {
-                  if (err) console.log(err);
+                  if (err) {
+                    console.log(err);
+                    res.render('error', {
+                       user: req.user,
+                       message:"Ha ocurrido un error.",
+                       error: err
+                     });
+                  }
                   res.render('agregarprestamo', {
                     user: req.user,
                     message: 'El prestamo del cliente ' +cliente[0].nom_cli+ ' registrado con éxito'
@@ -184,7 +236,14 @@ controller.agregarusu = (req, res) => {
 
   controller.gerentes = (req, res) => {
     connection.query('select * from gerente', (err, gerentes) => {
-      if (err) console.log(err);
+      if (err) {
+        console.log(err);
+        res.render('error', {
+           user: req.user,
+           message:"Ha ocurrido un error.",
+           error: err
+         });
+      }
       var dgerentes=[];
       for (var i = 0; i < gerentes.length; i++) {
         var gerente = {
@@ -207,8 +266,12 @@ controller.agregarusu = (req, res) => {
       console.log(id);
       connection.query('select * from jerarquia natural join gerente natural join asesor natural join zona where id_ger = ?',[id], (err, gerenteyasesores) => {
         if (err) {
-        console.log(err);
-        res.json(err);
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
         }
         var gerente = {
           id_ger: gerenteyasesores[0].id_ger,
@@ -241,8 +304,12 @@ controller.agregarusu = (req, res) => {
       console.log(id);
       connection.query('select * from prestamo natural join cliente natural join asesor natural join zona where id_ase = ? and mof_pre != 0',[id], (err, asesorycartera) => {
         if (err) {
-        console.log(err);
-        res.json(err);
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
         }
         console.log(asesorycartera);
         if (asesorycartera.length) {
@@ -264,7 +331,15 @@ controller.agregarusu = (req, res) => {
             };
             dcartera.push(cliente);
           }
-          connection.query('select * from jerarquia natural join gerente where id_ase = ?',[id], (err, result), => {
+          connection.query('select * from jerarquia natural join gerente where id_ase = ?',[id], (err, result) => {
+            if (err) {
+              console.log(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
+            }
             var gerente = {
               id_ger: result[0].id_ger,
               nom_ger: decrypt(result[0].nom_ger),
@@ -281,6 +356,14 @@ controller.agregarusu = (req, res) => {
         }
         else {
           connection.query('select * from jerarquia natural join asesor natural join gerente natural join zona where id_ase= ?',[id],(err, result) => {
+            if (err) {
+              console.log(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
+            }
             var asesor= {
               nom_ase: decrypt(result[0].nom_ase),
               ema_ase: result[0].ema_ase,
@@ -309,7 +392,11 @@ controller.agregarusu = (req, res) => {
           connection.query('select * from cliente natural join prestamo natural join asesor natural join zona where id_cli= ? and mof_pre= 0',[id], (err, result) => {
             if (err) {
               console.log(err);
-              res.json(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
             }
             if (result.length) {
               var cliente= {
@@ -336,7 +423,14 @@ controller.agregarusu = (req, res) => {
                 dprestamos.push(prestamo);
               }
               connection.query('select * from cliente natural join prestamo natural join asesor natural join zona natural join historialpagos where id_cli= ? and mof_pre != 0',[id],(err, result1) => {
-                if (err) console.log(err);
+                if (err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
                 var asesor= {
                   nom_ase: decrypt(result1[0].nom_ase),
                   ema_ase: result1[0].ema_ase,
@@ -370,7 +464,14 @@ controller.agregarusu = (req, res) => {
             }
             else {
               connection.query('select * from cliente natural join prestamo natural join asesor natural join zona natural join historialpagos where id_cli= ? and mof_pre != 0',[id],(err, result1) => {
-                if (err) console.log(err);
+                if (err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
                 var asesor= {
                   nom_ase: decrypt(result1[0].nom_ase),
                   ema_ase: result1[0].ema_ase,

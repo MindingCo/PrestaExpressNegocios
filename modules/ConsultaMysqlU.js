@@ -32,8 +32,12 @@ controller.home = (req, res) => {
       connection.query('SELECT * FROM historialpagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli], (err, pagos) => {
         console.log(pagos);
         if (err) {
-         res.json(err);
-         console.log(err);
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
         }
         if (pagos.length) {
           var prestamo= {
@@ -63,8 +67,12 @@ controller.home = (req, res) => {
           connection.query('SELECT * FROM HistorialPagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? order by id_pre DESC limit 1',[req.user.id_cli], (err, pagos1) => {
             console.log(pagos1);
             if (err) {
-             res.json(err);
-             console.log(err);
+              console.log(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
             }
             if (pagos1.length) {
               var prestamo= {
@@ -92,6 +100,14 @@ controller.home = (req, res) => {
             }
             else {
               connection.query('Select * from prestamo natural join asesor natural join zona where id_cli= ?',[req.user.id_cli], (err, pres) =>{
+                if (err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
                 var pags=[];
                 var prestamo= {
                   id_pre: pres[0].id_pre,
@@ -126,7 +142,12 @@ controller.home = (req, res) => {
       connection.query('select cliente.* from cliente natural join prestamo where id_ase= ? and mof_pre != 0 limit 10',[req.user.id_ase], (err, clientes) => {
         console.log(req.user);
         if (err) {
-         res.json(err);
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
         }
         var dclientes=[];
         for (var i = 0; i < clientes.length; i++) {
@@ -153,8 +174,12 @@ controller.home = (req, res) => {
         console.log(req.user);
         console.log(asesores);
         if (err) {
-         res.json(err);
-         console.log(err);
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
         }
         else {
           var dasesores=[];
@@ -167,7 +192,14 @@ controller.home = (req, res) => {
             dasesores.push(ases);
           }
           connection.query('Select * from cliente', (err, clientes) => {
-              if(err) console.log(err);
+              if(err) {
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
+              }
               console.log(clientes);
               var dclientes=[];
               for (var i = 0; i < clientes.length; i++) {
@@ -194,8 +226,12 @@ controller.home = (req, res) => {
       connection.query('SELECT * from prestamo natural join cliente natural join asesor order by id_pre DESC limit 100',[req.user.id_cli], (err, result) => {
         console.log(req.user);
         if (err) {
-         res.json(err);
-         console.log(err);
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
         }
         var dprestamos=[];
         for (var i = 0; i < result.length; i++) {
@@ -237,8 +273,12 @@ controller.mcontraseña = (req, res) => {
       var nombre= req.user.use_usu;
       connection.query('SELECT * FROM usuario where use_usu= ?',[nombre],(err, usu) => {
           if (err) {
-          res.json(err);
-          console.log(err);
+            console.log(err);
+            res.render('error', {
+               user: req.user,
+               message:"Ha ocurrido un error.",
+               error: err
+             });
           }
           console.log(usu);
           if (!bcrypt.compareSync(cona, usu[0].con_usu)) {
@@ -252,7 +292,12 @@ controller.mcontraseña = (req, res) => {
             var con_usu= bcrypt.hashSync(conn, null, null);
             connection.query('UPDATE usuario set con_usu= ? where id_usu= ?',[con_usu, usu[0].id_usu],(err, ase) => {
              if (err) {
-              res.json(err);
+               console.log(err);
+               res.render('error', {
+                  user: req.user,
+                  message:"Ha ocurrido un error.",
+                  error: err
+                });
              }
              console.log('Todo bien');
              res.render('sesion', {

@@ -29,8 +29,12 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
           console.log(req.user);
           connection.query('select id_ase,nom_ase,ema_ase,tel_ase,nom_zon from jerarquia natural join asesor natural join zona where id_ger = ?',[req.user.id_ger], (err, agenda) => {
             if (err) {
-             console.log(err);
-             res.json(err);
+              console.log(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
             }
             var dagenda= [];
             for (var i = 0; i < agenda.length; i++) {
@@ -44,7 +48,14 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
               dagenda.push(asesor);
             }
             connection.query('Select * from cliente', (err, clientes) => {
-                if(err) console.log(err);
+                if(err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
                 console.log(clientes);
                 var dclientes=[];
                 for (var i = 0; i < clientes.length; i++) {
@@ -73,8 +84,12 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
               console.log(id);
               connection.query('select id_cli,nom_cli,ema_cli,din_cli,dih_cli,tel_cli,nom_ase,ema_ase,tel_ase,nom_zon from prestamo natural join cliente natural join asesor natural join zona where id_ase = ? and mof_pre != 0',[id], (err, asesorycartera) => {
                 if (err) {
-                console.log(err);
-                res.json(err);
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
                 }
                 console.log(asesorycartera);
                 var asesor= {
@@ -110,7 +125,11 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
             connection.query('select cliente.*, fec_pag, mon_pag,com_pag from cliente natural join historialpagos where id_cli= ?',[id], (err, cliente) => {
               if (err) {
                 console.log(err);
-                res.json(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
               }
               else {
                 var dcliente= {

@@ -37,6 +37,7 @@ module.exports = (passport) =>
         connection.query("SELECT * FROM usuario WHERE id_usu = ? ",[id], (err, rows) =>
         {
             if (err) {
+              return done(err);
               console.log(err);
             }
             var tipo=rows[0].id_tus;
@@ -48,13 +49,17 @@ module.exports = (passport) =>
                     connection.query("select cliente.*,use_usu, id_tus from cliente inner join usuario on nom_cli = ? and nom_usu= ?",[nom, nom], (err, rows1) =>
                     {
                         if (err) {
+                          return done(err);
                           console.log(err);
                         }
                         else {
                           console.log(rows1[0].id_cli);
                           connection.query('SELECT id_pre from prestamo where id_cli= ? order by id_pre DESC',[rows1[0].id_cli], (err, idpre) => {
                             console.log(idpre);
-                            if (err) console.log(err);
+                            if (err) {
+                                console.log(err);
+                                return done(err);
+                            }
                             var usuario = {
                               id_cli: rows1[0].id_cli,
                               nom_cli: decrypt(nom),
@@ -66,17 +71,18 @@ module.exports = (passport) =>
                               id_pre: idpre[0].id_pre,
                               use_usu: rows1[0].use_usu
                             };
+                            console.log(usuario);
                             done(err, usuario);
                           });
                         }
-
-                    });
-                    break
+                      });
+                  break
                 case 2:
                     connection.query("SELECT asesor.*,use_usu, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         if (err) {
                           console.log(err);
+                          return done(err);
                         }
                         else {
                           var asesor = {
@@ -97,6 +103,7 @@ module.exports = (passport) =>
                     {
                       if (err) {
                         console.log(err);
+                        return done(err);
                       }
                       else {
                         var gerente = {
@@ -121,7 +128,6 @@ module.exports = (passport) =>
                     break
 
             }
-
         });
     });
 /*
@@ -174,7 +180,6 @@ module.exports = (passport) =>
         },
         (req, username, password, done) =>
         {
-
             connection.query("SELECT * FROM usuario WHERE use_usu = ?",[username], (err, rows) =>
             {
                 if (err)

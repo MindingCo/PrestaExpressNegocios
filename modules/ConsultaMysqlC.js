@@ -30,8 +30,12 @@ controller.asesor = (req, res) => {
       console.log(req.user);
       console.log(ase);
        if (err) {
-        res.json(err);
-        console.log(err);
+         console.log(err);
+         res.render('error', {
+            user: req.user,
+            message:"Ha ocurrido un error.",
+            error: err
+          });
        }
        var asesor= {
          id_ase: ase[0].id_ase,
@@ -41,7 +45,14 @@ controller.asesor = (req, res) => {
          nom_zon: ase[0].nom_zon
        }
        connection.query('Select * from jerarquia natural join gerente where id_ase = ?',[asesor.id_ase], (err, ger) => {
-         if (err) console.log(err);
+         if (err){
+           console.log(err);
+           res.render('error', {
+              user: req.user,
+              message:"Ha ocurrido un error.",
+              error: err
+            });
+         }
          var gerente= {
            id_ger: ger[0].id_ger,
            nom_ger: decrypt(ger[0].nom_ger),

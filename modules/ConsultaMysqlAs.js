@@ -41,8 +41,12 @@ function decrypt(text){
         connection.query('select id_pre, nom_cli, mof_pre, mod_pre, moi_pre from prestamo natural join cliente where id_cli= ? and mof_pre != 0',[id], (err, pre) => {
           var mof= pre[0].mof_pre - parseInt(req.body.montorecibido);
           if (err) {
-          console.log(err);
-          res.json(err);{}
+            console.log(err);
+            res.render('error', {
+               user: req.user,
+               message:"Ha ocurrido un error.",
+               error: err
+             });
           }
           if (decrypt(pre[0].mod_pre) < parseInt(req.body.montorecibido)) {
             res.render('home', {
@@ -59,9 +63,23 @@ function decrypt(text){
            }
            else {
              connection.query('insert into historialpagos values (0,?,?,?,?)',[pre[0].id_pre, pago.fecha, pago.monto, pago.com], (err, resul) => {
-               if(err) console.log(err);
+               if(err) {
+                 console.log(err);
+                 res.render('error', {
+                    user: req.user,
+                    message:"Ha ocurrido un error.",
+                    error: err
+                  });
+               }
                connection.query('update prestamo set mof_pre= ? where id_pre= ?',[mof, pre[0].id_pre], (err, exit) => {
-                 if(err) console.log(err);
+                 if(err) {
+                   console.log(err);
+                   res.render('error', {
+                      user: req.user,
+                      message:"Ha ocurrido un error.",
+                      error: err
+                    });
+                 }
                  res.render('home', {
                    user: req.user,
                    message: 'El pago ha sido registrado con exito'
@@ -76,8 +94,12 @@ function decrypt(text){
       controller.cartera = (req, res) => {
             connection.query('select id_cli,nom_cli,din_cli,dih_cli,tel_cli from prestamo natural join cliente where id_ase = ? and  mof_pre != 0',[req.user.id_ase], (err, cartera) => {
               if (err) {
-              console.log(err);
-              res.json(err);
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
               }
               console.log(cartera);
               var dcartera=[];
@@ -111,7 +133,11 @@ function decrypt(text){
           connection.query('select * from cliente natural join prestamo where id_cli= ? and mof_pre != 0',[id], (err, cliente) => {
             if (err) {
               console.log(err);
-              res.json(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
             }
             console.log(cliente);
             var dcliente= {
@@ -123,7 +149,14 @@ function decrypt(text){
               tel_cli: decrypt(cliente[0].tel_cli)
             };
             connection.query('select * from historialpagos natural join prestamo where id_cli= ? and fec_pag= ?',[id, f], (err, est) => {
-              if (err) console.log(err);
+              if (err) {
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
+              }
               console.log(est);
               if (est.length) {
                 res.render('a-cliente', {
@@ -151,9 +184,21 @@ function decrypt(text){
           connection.query('SELECT * from cliente natural join prestamo where id_ase = ? and mof_pre != 0',[req.user.id_ase],(err, result) => {
             if (err) {
               console.log(err);
-              res.json(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
             }
             connection.query('SELECT * from prestamo natural join historialpagos where id_ase= ? and mof_pre != 0 and fec_pag= ?',[req.user.id_ase, f], (err, result1) => {
+              if (err) {
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
+              }
               var dcartera=[];
               var dprestamos=[];
               if (result1.length) {
