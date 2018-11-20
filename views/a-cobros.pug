@@ -17,16 +17,18 @@ append content
             .data.inline.w.third
                 h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Monto faltante
         - var n = 0
-        while n < (clientes.length < 10 ? clientes.length : 10)
-            .section.row
-                .data.inline.w.third
-                    h5.va-middle.ha-middle
-                        b.light-blue-text.text-darken-3= clientes[n].nom_cli
-                .data.inline.w.third.row
-                    .w.sixth &nbsp;
-                    h5.va-middle.ha-middle.w.twothird
-                        b.light-blue-text.text-darken-3.blocked= prestamos[n].mod_pre
-                .data.inline.w.third.row
-                    .w.sixth &nbsp;
-                    h5.va-middle.ha-middle.w.twothird
-                        b.light-blue-text.text-darken-3.blocked= prestamos[n].mof_pre
+        for cliente in clientes
+            form.cobroshoy(name= cliente.id_cli, method='post', action=`/asesor/pago/+${cliente.id_cli}`, actived-second_part="false")
+                .section.row.first_part-form
+                    .data.inline.w.third
+                        h5.va-middle.ha-middle
+                            b.light-blue-text.text-darken-3= cliente.nom_cli
+                    .data.inline.w.third.row
+                        .w.sixth &nbsp;
+                        h5.va-middle.ha-middle.w.twothird
+                            b.light-blue-text.text-darken-3.blocked= prestamos[n].mod_pre
+                    .data.inline.w.third.row
+                        .w.sixth &nbsp;
+                        h5.va-middle.ha-middle.w.twothird
+                            b.light-blue-text.text-darken-3.blocked= prestamos[n].mof_pre
+                

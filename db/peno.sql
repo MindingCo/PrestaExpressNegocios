@@ -246,7 +246,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (37,1,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','$2a$10$r03AMCZ6KBWxv1Fw.8vakO40JnRyAn5JB9yUkmJlNLc3MyiJeHo4C','priegod'),(38,2,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','$2a$10$TgcNzDJR9BKgw6ZES7q0Rer7LS/KmMJqhBfzHUHSLFZz3l3gOcFM.','asepr'),(39,3,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','$2a$10$lg2Wsjkt4Ci7r97RCuDNQOmVbVkrfGnopSDc.K1H4y55CX7lIiPA.','gpr');
+INSERT INTO `usuario` VALUES (37,1,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','$2a$10$r03AMCZ6KBWxv1Fw.8vakO40JnRyAn5JB9yUkmJlNLc3MyiJeHo4C','clipru'),(38,2,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','$2a$10$TgcNzDJR9BKgw6ZES7q0Rer7LS/KmMJqhBfzHUHSLFZz3l3gOcFM.','asepru'),(39,3,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','$2a$10$lg2Wsjkt4Ci7r97RCuDNQOmVbVkrfGnopSDc.K1H4y55CX7lIiPA.','gerpru');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,9 +309,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarAsesor`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300),IN telefono varchar(100), IN zona int)
 BEGIN
         INSERT INTO Asesor VALUES
-        (0,nombre,email,teléfono,zona);  
+        (0,nombre,email,teléfono,zona);
         INSERT INTO usuario VALUES
-        (0,2,nombre,password,user);  
+        (0,2,nombre,password,user);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -331,9 +331,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarCliente`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300), IN dir_neg VARCHAR(300), IN dir_casa VARCHAR(300),IN telefono varchar(100))
 BEGIN
         INSERT INTO cliente VALUES
-        (0,nombre,email,dir_neg,dir_casa,telefono);  
+        (0,nombre,email,dir_neg,dir_casa,telefono);
         INSERT INTO usuario VALUES
-        (0,1,nombre,password,user);  
+        (0,1,nombre,password,user);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -353,9 +353,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarGerente`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300),IN telefono varchar(100))
 BEGIN
         INSERT INTO Gerente VALUES
-        (0,nombre, telefono, email);  
+        (0,nombre, telefono, email);
         INSERT INTO usuario VALUES
-        (0,3,nombre,password,user);  
+        (0,3,nombre,password,user);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
