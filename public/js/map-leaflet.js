@@ -5,8 +5,8 @@ const tileURL2 = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png';
 
 const tile = L.tileLayer(tileURL2);
 
-// Socket Io
-const sockets = ios.connect();
+// Socket IO
+var sockets = io('http://'+location.hostname+':8081', {forceNew: true})
 
 // Marker
 const marker = L.marker([50.5, 30.5]); // kiev, ukraine
