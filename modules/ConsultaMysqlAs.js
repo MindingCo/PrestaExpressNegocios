@@ -3,9 +3,9 @@ var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 var dbconfig = require('../config/database');
 var connection = mysql.createConnection(dbconfig.connection);
-connection.query('USE ' + dbconfig.database);
 const crypto = require('crypto');
 
+connection.query('USE ' + dbconfig.database);
 let iv = 'asdpiadsjfasdfxw';
 let key = 'cdsadskjldsdskjd';
 let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
@@ -80,10 +80,7 @@ function decrypt(text){
                       error: err
                     });
                  }
-                 res.render('home', {
-                   user: req.user,
-                   message: 'El pago ha sido registrado con exito'
-                });
+                 res.redirect('/asesor/cliente/'+id);
                });
               });
             }

@@ -120,11 +120,11 @@ module.exports = (passport) =>
                     break
                 default:
                         var admin= {
-                            id_usu: rows1[0].id_usu,
-                            nom_usu: decrypt(nom),
-                            use_usu: rows1[0].use_usu
+                            id_usu: rows[0].id_usu,
+                            id_tus: rows[0].id_tus,
+                            use_usu: rows[0].use_usu
                         };
-                        done(err, rows[0]);
+                        done(err, admin);
                     break
 
             }
@@ -180,6 +180,7 @@ module.exports = (passport) =>
         },
         (req, username, password, done) =>
         {
+
             connection.query("SELECT * FROM usuario WHERE use_usu = ?",[username], (err, rows) =>
             {
                 if (err)

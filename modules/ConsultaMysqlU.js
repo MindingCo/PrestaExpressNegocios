@@ -250,6 +250,7 @@ controller.home = (req, res) => {
             };
             dprestamos.push(prestamo);
         }
+        console.log(dprestamos);
         res.render('home', {
           user: req.user,
           prestamos: dprestamos

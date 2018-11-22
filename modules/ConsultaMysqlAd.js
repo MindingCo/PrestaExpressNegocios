@@ -7,6 +7,9 @@ var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 const crypto = require('crypto');
 
+let iv = 'asdpiadsjfasdfxw';
+let key = 'cdsadskjldsdskjd';
+let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').substr(0, 32);
 
 function encrypt(text){
   var cipher = crypto.createCipheriv('aes-256-cbc', keyto, iv);
