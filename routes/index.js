@@ -49,6 +49,15 @@ module.exports = function(app, passport)
 
     // routes cliente
 
+    app.get('/cliente/chat', autorizacionc, (req, res) =>
+    {
+      res.render('chat',
+      {
+        title: 'Chat',
+        user : req.user
+      });
+    });
+
     app.get('/cliente/asesor', autorizacionc, consc.asesor);
 
     // routes Asesor
@@ -60,17 +69,18 @@ module.exports = function(app, passport)
 
     app.post('/asesor/pago/:id', autorizacionas,consas.pago);
 
-    //routes gerente
-    app.get('/gerente/agenda', autorizaciong, consg.agenda);
-
-    app.get('pp', autorizaciong, (req, res) =>
+    app.get('/asesor/chat', autorizacionas, (req, res) =>
     {
-      res.render('pp.html',
+      res.render('chat',
       {
         title: 'Chat',
         user : req.user
       });
     });
+
+    //routes gerente
+    app.get('/gerente/agenda', autorizaciong, consg.agenda);
+
 
     app.get('/gerente/asesor/:id', autorizaciong,consg.consultarasesor);
 
@@ -85,31 +95,31 @@ module.exports = function(app, passport)
     });
 
     //routes Administrador
-    app.get('/admin/registrar', autorizacionad,(req, res, next) =>
+    app.get('/admin/registrar', autorizacion,(req, res, next) =>
     {
         res.render('agregarusu',
         {
-            user: req.user,
+            user: req.user
         });
     });
 
-    app.post('/admin/agregarusuario', autorizacionad, consad.agregarusu);
+    app.post('/admin/agregarusuario', autorizacion, consad.agregarusu);
 
-    app.get('/admin/agprestamo', autorizacionad,(req, res, next) =>
+    app.get('/admin/agprestamo', autorizacion,(req, res, next) =>
     {
-        res.render('agregarpestamo',
+        res.render('agregarprestamo',
         {
-            user: req.user,
+            user: req.user
         });
     });
 
-    app.post('/admin/agpre', autorizacionad, consad.agregarprestamo);
+    app.post('/admin/agpre', autorizacion, consad.agregarprestamo);
 
-    app.get('/admin/agenda', autorizacionad, consad.gerentes);
+    app.get('/admin/agenda', autorizacion, consad.gerentes);
 
-    app.get('/admin/gerente/:id', autorizacionad,consad.gerenteyasesores);
+    app.get('/admin/gerente/:id', autorizacion,consad.gerenteyasesores);
 
-    app.get('/admin/asesor/:id', autorizacionad,consad.asesoryclientes);
+    app.get('/admin/asesor/:id', autorizacion,consad.asesoryclientes);
 
-    app.get('/admin/cliente/:id', autorizacionad,consad.consultarcliente);
+    app.get('/admin/cliente/:id', autorizacion,consad.consultarcliente);
 };

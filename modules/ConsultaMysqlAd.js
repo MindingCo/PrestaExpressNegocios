@@ -314,7 +314,6 @@ controller.agregarusu = (req, res) => {
              error: err
            });
         }
-        console.log(asesorycartera);
         if (asesorycartera.length) {
           var asesor= {
             nom_ase: decrypt(asesorycartera[0].nom_ase),
@@ -326,7 +325,7 @@ controller.agregarusu = (req, res) => {
           for (var i = 0; i < asesorycartera.length; i++) {
             var cliente= {
               id_cli: asesorycartera[i].id_cli,
-              nom_cli: decrypt(cartera[i].nom_cli),
+              nom_cli: decrypt(asesorycartera[i].nom_cli),
               ema_cli: asesorycartera[i].ema_cli,
               din_cli: decrypt(asesorycartera[i].din_cli),
               dih_cli: decrypt(asesorycartera[i].dih_cli),
@@ -334,6 +333,8 @@ controller.agregarusu = (req, res) => {
             };
             dcartera.push(cliente);
           }
+          console.log(dcartera);
+          console.log(asesor);
           connection.query('select * from jerarquia natural join gerente where id_ase = ?',[id], (err, result) => {
             if (err) {
               console.log(err);
@@ -349,6 +350,7 @@ controller.agregarusu = (req, res) => {
               ema_ger: result[0].ema_ger,
               tel_ger: decrypt(result[0].tel_ger),
             };
+            console.log(gerente);
             res.render('', {
               user: req.user,
               asesor: asesor,
@@ -379,10 +381,13 @@ controller.agregarusu = (req, res) => {
               ema_ger: result[0].ema_ger,
               tel_ger: decrypt(result[0].tel_ger),
             };
+            console.log(asesor);
+            console.log(gerente);
             res.render('', {
               user: req.user,
               asesor: asesor,
-              gerente: gerente
+              gerente: gerente,
+              msg: 'El asesor no tiene una cartera actual'
            });
           });
         }
@@ -392,7 +397,7 @@ controller.agregarusu = (req, res) => {
   controller.consultarcliente = (req, res) => {
           const { id }  = req.params;
           console.log(id);
-          connection.query('select * from cliente natural join prestamo natural join asesor natural join zona where id_cli= ? and mof_pre= 0',[id], (err, result) => {
+          connection.query('select * from cliente natural join prestamo natural join asesor natural join zona where id_cli= ?',[id], (err, result) => {
             if (err) {
               console.log(err);
               res.render('error', {
@@ -425,6 +430,7 @@ controller.agregarusu = (req, res) => {
                 }
                 dprestamos.push(prestamo);
               }
+              console.log(dprestamos);
               connection.query('select * from cliente natural join prestamo natural join asesor natural join zona natural join historialpagos where id_cli= ? and mof_pre != 0',[id],(err, result1) => {
                 if (err) {
                   console.log(err);
@@ -455,6 +461,9 @@ controller.agregarusu = (req, res) => {
                     mof_pre: result1[0].mof_pre,
                     mod_pre: decrypt(result1[0].mod_pre)
                 }
+                console.log(asesor);
+                console.log(cliente);
+                console.log(prestamo);
                 res.render('', {
                   user: req.user,
                   cliente: cliente,
@@ -496,6 +505,9 @@ controller.agregarusu = (req, res) => {
                     mof_pre: result1[0].mof_pre,
                     mod_pre: decrypt(result1[0].mod_pre)
                 }
+                console.log(cliente);
+                console.log(prestamo);
+                console.log(asesor);
                 res.render('', {
                   user: req.user,
                   cliente: cliente,

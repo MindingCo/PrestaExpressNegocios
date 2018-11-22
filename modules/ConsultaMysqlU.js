@@ -149,23 +149,31 @@ controller.home = (req, res) => {
              error: err
            });
         }
-        var dclientes=[];
-        for (var i = 0; i < clientes.length; i++) {
-          var cli= {
-            id_cli: clientes[i].id_cli,
-            nom_cli: decrypt(clientes[i].nom_cli),
-            ema_cli: clientes[i].ema_cli,
-            din_cli: decrypt(clientes[i].din_cli),
-            dih_cli: decrypt(clientes[i].dih_cli),
-            tel_cli: decrypt(clientes[i].tel_cli)
-          };
-          dclientes.push(cli);
+        if (clientes.length) {
+          var dclientes=[];
+          for (var i = 0; i < clientes.length; i++) {
+            var cli= {
+              id_cli: clientes[i].id_cli,
+              nom_cli: decrypt(clientes[i].nom_cli),
+              ema_cli: clientes[i].ema_cli,
+              din_cli: decrypt(clientes[i].din_cli),
+              dih_cli: decrypt(clientes[i].dih_cli),
+              tel_cli: decrypt(clientes[i].tel_cli)
+            };
+            dclientes.push(cli);
+          }
+          console.log(dclientes);
+          res.render('home', {
+            user: req.user,
+            clientes: dclientes
+          });
         }
-        console.log(dclientes);
-        res.render('home', {
-          user: req.user,
-          clientes: dclientes
-        });
+        else {
+          res.render('home', {
+            user: req.user,
+            msg: 'No tienes una cartera por el momento'
+          });
+        }
       });
     }
 
@@ -182,42 +190,72 @@ controller.home = (req, res) => {
            });
         }
         else {
-          var dasesores=[];
-          for (var i = 0; i < asesores.length; i++) {
-            var ases= {
-              id_ase: asesores[i].id_ase,
-              nom_ase: decrypt(asesores[i].nom_ase),
-              tel_ase: decrypt(asesores[i].tel_ase)
-            };
-            dasesores.push(ases);
+          if (asesores.length) {
+            var dasesores=[];
+            for (var i = 0; i < asesores.length; i++) {
+              var ases= {
+                id_ase: asesores[i].id_ase,
+                nom_ase: decrypt(asesores[i].nom_ase),
+                tel_ase: decrypt(asesores[i].tel_ase)
+              };
+              dasesores.push(ases);
+            }
+            connection.query('Select * from cliente limit 50', (err, clientes) => {
+                if(err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
+                console.log(clientes);
+                var dclientes=[];
+                for (var i = 0; i < clientes.length; i++) {
+                  var cli= {
+                    nom_cli: decrypt(clientes[i].nom_cli),
+                    din_cli: clientes[i].ema_cli,
+                    tel_cli: decrypt(clientes[i].tel_cli)
+                  };
+                  dclientes.push(cli);
+                }
+                console.log(dclientes);
+                console.log(dasesores);
+                res.render('home', {
+                  user: req.user,
+                  asesores: dasesores,
+                  clientes: dclientes
+                });
+            });
           }
-          connection.query('Select * from cliente', (err, clientes) => {
-              if(err) {
-                console.log(err);
-                res.render('error', {
-                   user: req.user,
-                   message:"Ha ocurrido un error.",
-                   error: err
-                 });
-              }
-              console.log(clientes);
-              var dclientes=[];
-              for (var i = 0; i < clientes.length; i++) {
-                var cli= {
-                  nom_cli: decrypt(clientes[i].nom_cli),
-                  din_cli: clientes[i].ema_cli,
-                  tel_cli: decrypt(clientes[i].tel_cli)
-                };
-                dclientes.push(cli);
-              }
-              console.log(dclientes);
-              console.log(dasesores);
-              res.render('home', {
-                user: req.user,
-                asesores: dasesores,
-                clientes: dclientes
-              });
-          });
+          else {
+            connection.query('Select * from cliente limit 50', (err, clientes) => {
+                if(err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
+                console.log(clientes);
+                var dclientes=[];
+                for (var i = 0; i < clientes.length; i++) {
+                  var cli= {
+                    nom_cli: decrypt(clientes[i].nom_cli),
+                    din_cli: clientes[i].ema_cli,
+                    tel_cli: decrypt(clientes[i].tel_cli)
+                  };
+                  dclientes.push(cli);
+                }
+                console.log(dclientes);
+                res.render('home', {
+                  user: req.user,
+                  msg: 'No tienes asesores a cargo',
+                  clientes: dclientes
+                });
+            });
+          }
         }
       });
     }
@@ -233,28 +271,36 @@ controller.home = (req, res) => {
              error: err
            });
         }
-        var dprestamos=[];
-        for (var i = 0; i < result.length; i++) {
-            var prestamo= {
-              id_pre: result[0].id_pre,
-              fec_pre: result[0].fec_pre,
-              moi_pre: decrypt(result[0].moi_pre),
-              mof_pre: result[0].mof_pre,
-              mod_pre: decrypt(result[0].mod_pre),
-              id_cli: result[i].id_cli,
-              nom_cli: decrypt(result[i].nom_cli),
-              ema_cli: result[i].ema_cli,
-              din_cli: decrypt(result[i].din_cli),
-              dih_cli: decrypt(result[i].dih_cli),
-              tel_cli: decrypt(result[i].tel_cli)
-            };
-            dprestamos.push(prestamo);
+        if (result.length) {
+          var dprestamos=[];
+          for (var i = 0; i < result.length; i++) {
+              var prestamo= {
+                id_pre: result[i].id_pre,
+                fec_pre: result[i].fec_pre,
+                moi_pre: decrypt(result[i].moi_pre),
+                mof_pre: result[i].mof_pre,
+                mod_pre: decrypt(result[i].mod_pre),
+                id_cli: result[i].id_cli,
+                nom_cli: decrypt(result[i].nom_cli),
+                ema_cli: result[i].ema_cli,
+                din_cli: decrypt(result[i].din_cli),
+                dih_cli: decrypt(result[i].dih_cli),
+                tel_cli: decrypt(result[i].tel_cli)
+              };
+              dprestamos.push(prestamo);
+          }
+          console.log(dprestamos);
+          res.render('home', {
+            user: req.user,
+            prestamos: dprestamos
+          });
         }
-        console.log(dprestamos);
-        res.render('home', {
-          user: req.user,
-          prestamos: dprestamos
-        });
+        else {
+          res.render('home', {
+            user: req.user,
+            msg:'No hay préstamos'
+          });
+        }
       });
     }
 };
