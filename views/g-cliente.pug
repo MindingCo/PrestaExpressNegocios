@@ -9,10 +9,12 @@ append content
     h2= cliente.nom_cli
   
   br
-  for pago in pagos
-    .divider
-    .section
-        p  #{pago.fec_pag}
-        p  #{pago.mon_pag}
-        p  #{pago.com_pag}  
-          
+  if pagos
+    for pago in pagos
+      .divider
+      .section
+          p  #{pago.fec_pag}
+          p  #{pago.mon_pag}
+          p  #{pago.com_pag}  
+  if msg
+    p= msg
