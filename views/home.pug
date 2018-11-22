@@ -6,8 +6,41 @@ append jscss
 append content    
     if user.id_tus == 1
         -var parseDate = function parseDate(date) { let dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()} de ${meses[date.getMonth()]} del ${date.getFullYear()}`; }
+        -var LasteDate = function LasteDate(diario, faltante) { let hoy = new Date(); let diasfaltantes = faltante/diario; diasfaltantes += Math.floor(diasfaltantes/7); hoy.setDate(hoy.getDate() + diasfaltantes); return hoy; }
         //-     Datos del Prestamo
-        section.margin.beautyCard.floating.white
+        .col.full.xl-half
+            .card
+                li.card-header.deep-orange.accent-2
+                    .card-title
+                        img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
+                        h4.flight-card-title.inline= 'Prestamo '
+                        span.ultra-small.m-0.ml-2.inline.white-text= `#${prestamo.id_pre}`
+                        p.flight-card-date= parseDate(prestamo.fec_pre)
+                .card-content-bg.white-text
+                    .card-content
+                        .row.flight-state-wrapper
+                            .col.five_twelfths.ha-center
+                                .flight-state
+                                    p.ultra-small Monsto diario
+                                    h4.margin= `$${prestamo.mod_pre}`
+                            .col.sixth.display-container
+                                img.icon.flight-icon.display-topmiddle(src="/img/icons/white/icons8_Money_50px.png", alt="")
+                            .col.five_twelfths.ha-center
+                                .flight-state
+                                    p.ultra-small Monsto faltante
+                                    h4.margin= `$${prestamo.mof_pre}`
+                        .row
+                            .col.half.ha-center
+                                .flight-info
+                                  p.small
+                                      span.grey-text.text-lighten-4 Prestamo inicial :
+                                  p.small.mt-2= `$${prestamo.moi_pre}`
+                            .col.half.ha-center.flight-state-two
+                                .flight-info
+                                    p.small
+                                        span.grey-text.text-lighten-4 Acabas el :
+                                    p.small.mt-2= parseDate(LasteDate(prestamo.mod_pre, prestamo.mof_pre))
+        section.margin
             .container.margin-t
                 p.margin0.marginy
                     img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Credit_Card_50px.png", alt="")
