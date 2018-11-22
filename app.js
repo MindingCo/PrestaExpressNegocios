@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Para el passport
 app.use(session({
-	secret: 'keysecreta',
+	secret: 'ssdspeoirnvjdfhjds',
 	resave: true,
 	saveUninitialized: true
 }));
