@@ -49,17 +49,13 @@ function decrypt(text){
              });
           }
           if (decrypt(pre[0].mod_pre) < parseInt(req.body.montorecibido)) {
-            res.render('home', {
-              user: req.user,
-              message: 'El monto recibido no puede ser mayor al que se debe de cobrar'
-           });
+            res.redirect('/asesor/cliente/'+id);
+            console.log(req.baseUrl);
          }
           else {
            if (0 > mof) {
-             res.render('home', {
-               user: req.user,
-               message: 'Con el monto recibido, el total pagado sobrepasa a lo que se debe de pagar en total del présamo'
-             });
+             res.redirect('/asesor/cliente/'+id);
+             console.log(req.baseUrl);
            }
            else {
              connection.query('insert into historialpagos values (0,?,?,?,?)',[pre[0].id_pre, pago.fecha, pago.monto, pago.com], (err, resul) => {
@@ -81,6 +77,7 @@ function decrypt(text){
                     });
                  }
                  res.redirect('/asesor/cliente/'+id);
+                 console.log(req.baseUrl);
                });
               });
             }
@@ -99,22 +96,30 @@ function decrypt(text){
                  });
               }
               console.log(cartera);
-              var dcartera=[];
-              for (var i = 0; i < cartera.length; i++) {
-                var cliente= {
-                  id_cli: cartera[i].id_cli,
-                  nom_cli: decrypt(cartera[i].nom_cli),
-                  ema_cli: cartera[i].ema_cli,
-                  dih_cli: decrypt(cartera[i].dih_cli),
-                  din_cli: decrypt(cartera[i].din_cli),
-                  tel_cli: decrypt(cartera[i].tel_cli)
-                };
-                dcartera.push(cliente);
+              if (cartera.length) {
+                var dcartera=[];
+                for (var i = 0; i < cartera.length; i++) {
+                  var cliente= {
+                    id_cli: cartera[i].id_cli,
+                    nom_cli: decrypt(cartera[i].nom_cli),
+                    ema_cli: cartera[i].ema_cli,
+                    dih_cli: decrypt(cartera[i].dih_cli),
+                    din_cli: decrypt(cartera[i].din_cli),
+                    tel_cli: decrypt(cartera[i].tel_cli)
+                  };
+                  dcartera.push(cliente);
+                }
+                res.render('a-cartera', {
+                  user: req.user,
+                  clientes: dcartera
+               });
               }
-              res.render('a-cartera', {
-                user: req.user,
-                clientes: dcartera
-             });
+              else {
+                res.render('a-cartera', {
+                  user: req.user,
+                  msg: 'No tienes una cartera actual'
+               });
+              }
            });
           };
 
@@ -137,6 +142,7 @@ function decrypt(text){
                });
             }
             console.log(cliente);
+            
             var dcliente= {
               id_cli: cliente[0].id_cli,
               nom_cli: decrypt(cliente[0].nom_cli),
@@ -145,7 +151,7 @@ function decrypt(text){
               din_cli: decrypt(cliente[0].din_cli),
               tel_cli: decrypt(cliente[0].tel_cli)
             };
-            connection.query('select * from historialpagos natural join prestamo where id_cli= ? and fec_pag= ?',[id, f], (err, est) => {
+            connection.query('select * from historialpagos natural join prestamo where id_cli= ? and fec_pag= ? and id_pre= ?',[id, f, cliente[0].id_pre], (err, est) => {
               if (err) {
                 console.log(err);
                 res.render('error', {
@@ -155,6 +161,7 @@ function decrypt(text){
                  });
               }
               console.log(est);
+              console.log(req.baseUrl);
               if (est.length) {
                 res.render('a-cliente', {
                   user: req.user,
@@ -220,6 +227,8 @@ function decrypt(text){
                     }
                   }
                 }
+                console.log(dcartera);
+                console.log(dprestamos);
                 res.render('a-cobros', {
                   user: req.user,
                   clientes: dcartera,

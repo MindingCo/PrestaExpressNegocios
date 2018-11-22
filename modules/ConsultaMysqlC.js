@@ -37,34 +37,42 @@ controller.asesor = (req, res) => {
             error: err
           });
        }
-       var asesor= {
-         id_ase: ase[0].id_ase,
-         nom_ase: decrypt(ase[0].nom_ase),
-         ema_ase: ase[0].ema_ase,
-         tel_ase: decrypt(ase[0].tel_ase),
-         nom_zon: ase[0].nom_zon
-       }
-       connection.query('Select * from jerarquia natural join gerente where id_ase = ?',[asesor.id_ase], (err, ger) => {
-         if (err){
-           console.log(err);
-           res.render('error', {
+       if(ase.length){
+         var asesor= {
+           id_ase: ase[0].id_ase,
+           nom_ase: decrypt(ase[0].nom_ase),
+           ema_ase: ase[0].ema_ase,
+           tel_ase: decrypt(ase[0].tel_ase),
+           nom_zon: ase[0].nom_zon
+         }
+         connection.query('Select * from jerarquia natural join gerente where id_ase = ?',[asesor.id_ase], (err, ger) => {
+           if (err){
+             console.log(err);
+             res.render('error', {
+                user: req.user,
+                message:"Ha ocurrido un error.",
+                error: err
+              });
+           }
+           var gerente= {
+             id_ger: ger[0].id_ger,
+             nom_ger: decrypt(ger[0].nom_ger),
+             ema_ger: ger[0].ema_ger,
+             tel_ger: decrypt(ger[0].tel_ger)
+           }
+           res.render('asesor', {
               user: req.user,
-              message:"Ha ocurrido un error.",
-              error: err
-            });
-         }
-         var gerente= {
-           id_ger: ger[0].id_ger,
-           nom_ger: decrypt(ger[0].nom_ger),
-           ema_ger: ger[0].ema_ger,
-           tel_ger: decrypt(ger[0].tel_ger)
-         }
+              asesor: asesor,
+              gerente: gerente
+           });
+         });
+       }
+       else {
          res.render('asesor', {
             user: req.user,
-            asesor: asesor,
-            gerente: gerente
+            msg: 'No tienes asesor en este momento'
          });
-       });
+       }
     });
 };
 

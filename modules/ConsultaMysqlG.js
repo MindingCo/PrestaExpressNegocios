@@ -82,7 +82,7 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
   controller.consultarasesor = (req, res) => {
             const { id }  = req.params;
               console.log(id);
-              connection.query('select id_cli,nom_cli,ema_cli,din_cli,dih_cli,tel_cli,nom_ase,ema_ase,tel_ase,nom_zon from prestamo natural join cliente natural join asesor natural join zona where id_ase = ? and mof_pre != 0',[id], (err, asesorycartera) => {
+              connection.query('select * from asesor natural join zona where id_ase= ?',[id], (err, asesor) => {
                 if (err) {
                   console.log(err);
                   res.render('error', {
@@ -91,38 +91,57 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
                      error: err
                    });
                 }
-                console.log(asesorycartera);
                 var asesor= {
-                  nom_ase: decrypt(asesorycartera[0].nom_ase),
-                  ema_ase: asesorycartera[0].ema_ase,
-                  tel_ase: decrypt(asesorycartera[0].tel_ase),
-                  nom_zona: asesorycartera[0].nom_zon
+                  nom_ase: decrypt(asesor[0].nom_ase),
+                  ema_ase: asesor[0].ema_ase,
+                  tel_ase: decrypt(asesor[0].tel_ase),
+                  nom_zona: asesor[0].nom_zon
                 }
-                var dcartera=[];
-                for (var i = 0; i < asesorycartera.length; i++) {
-                  var cliente= {
-                    id_cli: asesorycartera[i].id_cli,
-                    nom_cli: decrypt(asesorycartera[i].nom_cli),
-                    ema_cli: asesorycartera[i].ema_cli,
-                    din_cli: decrypt(asesorycartera[i].din_cli),
-                    dih_cli: decrypt(asesorycartera[i].dih_cli),
-                    tel_cli: decrypt(asesorycartera[i].tel_cli)
-                  };
-                  dcartera.push(cliente);
-                  console.log(cliente);
-                }
-                res.render('asesorycartera', {
-                  user: req.user,
-                  asesor: asesor,
-                  clientes: dcartera
-               });
+                connection.query('select id_cli,nom_cli,ema_cli,din_cli,dih_cli,tel_cli from prestamo natural join cliente natural join asesor natural join zona where id_ase = ? and mof_pre != 0',[id], (err, asesorycartera)=>{
+                  if (err) {
+                    console.log(err);
+                    res.render('error', {
+                       user: req.user,
+                       message:"Ha ocurrido un error.",
+                       error: err
+                     });
+                  }
+                  if(asesorycartera.length){
+                    console.log(asesorycartera);
+                    var dcartera=[];
+                    for (var i = 0; i < asesorycartera.length; i++) {
+                      var cliente= {
+                        id_cli: asesorycartera[i].id_cli,
+                        nom_cli: decrypt(asesorycartera[i].nom_cli),
+                        ema_cli: asesorycartera[i].ema_cli,
+                        din_cli: decrypt(asesorycartera[i].din_cli),
+                        dih_cli: decrypt(asesorycartera[i].dih_cli),
+                        tel_cli: decrypt(asesorycartera[i].tel_cli)
+                      };
+                      dcartera.push(cliente);
+                      console.log(cliente);
+                    }
+                    res.render('asesorycartera', {
+                      user: req.user,
+                      asesor: asesor,
+                      clientes: dcartera
+                   });
+                  }
+                  else {
+                    res.render('asesorycartera', {
+                      user: req.user,
+                      asesor: asesor,
+                      msg: 'Este asesor aún no tiene cartera'
+                   });
+                  }
+                });
               });
             };
 
     controller.consultarcliente = (req, res) => {
             const { id }  = req.params;
             console.log(id);
-            connection.query('select cliente.*, fec_pag, mon_pag,com_pag from cliente natural join historialpagos where id_cli= ?',[id], (err, cliente) => {
+            connection.query('select * from cliente where id_cli = ?',[id], (err, cliente) => {
               if (err) {
                 console.log(err);
                 res.render('error', {
@@ -131,6 +150,7 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
                    error: err
                  });
               }
+
               else {
                 var dcliente= {
                   id_cli: cliente[0].id_cli,
@@ -140,11 +160,49 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
                   dih_cli: decrypt(cliente[0].dih_cli),
                   tel_cli: decrypt(cliente[0].tel_cli)
                 }
-                console.log(cliente);
-                res.render('g-cliente', {
-                  user: req.user,
-                  cliente: dcliente,
-                  pagos: cliente
+                connection.query('select * from prestamo where id_cli= ? and mof_pre != 0',[id],(err, result)=>{
+                  if (result.length) {
+                    var dpres= {
+                      id_pre: result[0].id_pre,
+                      fec_pre: result[0].fec_pre,
+                      moi_pre: decrypt(result[0].moi_pre),
+                      mof_pre: result[0].mof_pre,
+                      mod_pre: decrypt(result[0].mod_pre)
+                    }
+                    connection.query('select * from historialpagos natural join prestamo where id_pre= ?', [result[0].id_pre], (err, hp)=>{
+                      if (err) {
+                        console.log(err);
+                        res.render('error', {
+                           user: req.user,
+                           message:"Ha ocurrido un error.",
+                           error: err
+                         });
+                      }
+                      if (hp.length) {
+                        res.render('g-cliente', {
+                          user: req.user,
+                          cliente: dcliente,
+                          prestamo: dpres,
+                          pagos: hp
+                        });
+                      }
+                      else {
+                        res.render('g-cliente', {
+                          user: req.user,
+                          cliente: dcliente,
+                          prestamo: dpres,
+                          msg: 'Este cliente aún no tiene pagos'
+                        });
+                      }
+                    });
+                  }
+                  else {
+                    res.render('g-cliente', {
+                      user: req.user,
+                      cliente: dcliente,
+                      msg: 'Este no tiene préstamo activo'
+                    });
+                  }
                 });
               }
             });
