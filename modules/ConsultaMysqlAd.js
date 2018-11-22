@@ -557,4 +557,93 @@ controller.agregarusu = (req, res) => {
       });
     }
 
+    controller.capital = (req, res) =>{
+      var dt = new Date();
+      var month = dt.getMonth()+1;
+      var day = dt.getDate();
+      var year = dt.getFullYear();
+      var f= year + '-' + month + '-' + day;
+      var entrante=0;
+      var saliente=0;
+      connection.query('SELECT * from historialpagos where fec_pag = ?',[f],(err, result)=>{
+        if (err) {
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
+        }
+        if (result.length) {
+          for (var i = 0; i < result.length; i++) {
+            entrante= entrante + parseInt(result[i].mon_pag);
+          }
+          console.log(entrante);
+          connection.query('select * from prestamo where fec_pre = ?',[f],(err, rows)=>{
+            if (err) {
+              console.log(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
+            }
+            if (rows.length) {
+              for (var i = 0; i < rows.length; i++) {
+                var mon = decrypt(rows[i].moi_pre);
+                saliente = saliente + parseInt(mon);
+              }
+              console.log('ent ' +entrante);
+              console.log('sal ' +saliente);
+              res.render('', {
+                 user: req.user,
+                 entrante: entrante,
+                 saliente: saliente
+              });
+            }
+            else {
+              console.log(entrante);
+              res.render('', {
+                 user: req.user,
+                 entrante: entrante,
+                 saliente: 0,
+              });
+            }
+          });
+        }
+        else {
+          connection.query('select * from prestamo where fec_pre = ?',[f],(err, rows)=>{
+            if (err) {
+              console.log(err);
+              res.render('error', {
+                 user: req.user,
+                 message:"Ha ocurrido un error.",
+                 error: err
+               });
+            }
+            if (rows.length) {
+              for (var i = 0; i < rows.length; i++) {
+                var mon = decrypt(rows[i].moi_pre);
+                saliente = saliente + parseInt(mon);
+              }
+              console.log(saliente);
+              res.render('', {
+                 user: req.user,
+                 entrante: 0,
+                 saliente: saliente
+              });
+            }
+            else {
+              res.render('', {
+                 user: req.user,
+                 entrante: 0,
+                 saliente: 0,
+              });
+            }
+          });
+        }
+      });
+    }
+
+
 module.exports = controller;
