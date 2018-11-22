@@ -19,9 +19,10 @@ var flash    = require('connect-flash');
 
 require('./config/passport')(passport);
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+
 
 app.use(morgan('dev'));
 

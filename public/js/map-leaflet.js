@@ -1,14 +1,13 @@
-$(window).on("load", function() {
-  
-  var map = L.map('#map').setView([51.505, -0.09], 3);
+window.onload = function () {
+  var map = L.map('mapita').setView([51.505, -0.09], 3);
 
   const tileURL = 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png'
   const tileURL2 = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png';
 
   const tile = L.tileLayer(tileURL2);
 
-  // Socket IO
-  var sockets = io('http://'+location.hostname+':8081', {forceNew: true})
+  // Socket Io
+  const socket2 = io('http://'+location.hostname+':8081', {forceNew: true});
 
   // Marker
   const marker = L.marker([50.5, 30.5]); // kiev, ukraine
@@ -22,11 +21,11 @@ $(window).on("load", function() {
     const newMarker = L.marker(coords);
     newMarker.bindPopup('You are Here!');
     map.addLayer(newMarker);
-    sockets.emit('userCoordinates', e.latlng);
+    socket2.emit('userCoordinates', e.latlng);
   });
 
   // socket new User connected
-  sockets.on('newUserCoordinates', (coords) => {
+  socket2.on('newUserCoordinates', (coords) => {
     console.log(coords);
     const userIcon = L.icon({
       iconUrl: '/img/icon2.png',
@@ -40,10 +39,4 @@ $(window).on("load", function() {
   });
 
   map.addLayer(tile);
-
-
-
-
-
-  alert("Window is loaded");
-});
+}
