@@ -49,15 +49,6 @@ module.exports = function(app, passport)
 
     // routes cliente
 
-    app.get('/cliente/chat', autorizacionc, (req, res) =>
-    {
-      res.render('chat',
-      {
-        title: 'Chat',
-        user : req.user
-      });
-    });
-
     app.get('/cliente/asesor', autorizacionc, consc.asesor);
 
     // routes Asesor
@@ -68,15 +59,6 @@ module.exports = function(app, passport)
     app.get('/asesor/cliente/:id', autorizacionas,consas.consultarcliente);
 
     app.post('/asesor/pago/:id', autorizacionas,consas.pago);
-
-    app.get('/asesor/chat', autorizacionas, (req, res) =>
-    {
-      res.render('chat',
-      {
-        title: 'Chat',
-        user : req.user
-      });
-    });
 
     //routes gerente
     app.get('/gerente/agenda', autorizaciong, consg.agenda);
