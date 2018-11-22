@@ -520,5 +520,41 @@ controller.agregarusu = (req, res) => {
           });
     };
 
+    controller.clientes= (req, res) => {
+      connection.query('select * from cliente',(err, rows)=>{
+        if (err) {
+          console.log(err);
+          res.render('error', {
+             user: req.user,
+             message:"Ha ocurrido un error.",
+             error: err
+           });
+        }
+        if (rows.length) {
+          var dclientes=[];
+          for (var i = 0; i < rows.length; i++) {
+            var cliente= {
+              id_cli: rows[i].id_cli,
+              nom_cli: decrypt(rows[i].nom_cli),
+              ema_cli: rows[i].ema_cli,
+              din_cli: decrypt(rows[i].din_cli),
+              dih_cli: decrypt(rows[i].dih_cli),
+              tel_cli: decrypt(rows[i].tel_cli)
+            };
+            dclientes.push(cliente);
+          }
+          res.render('', {
+             user: req.user,
+             clientes: dclientes
+           });
+        }
+        else {
+          res.render('', {
+             user: req.user,
+             msg: 'No hay clientes registrados'
+           });
+        }
+      });
+    }
 
 module.exports = controller;
