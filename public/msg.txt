@@ -1,0 +1,11 @@
+ConsultaMysqlAd 554
+ConsultaMysqlAd 390
+ConsultaMysqlAs 120
+ConsultaMysqlC 73
+ConsultaMysqlG 242
+ConsultaMysqlG 134
+ConsultaMysqlG 194
+ConsultaMysqlG 203
+ConsultaMysqlU 174
+ConsultaMysqlU 254
+ConsultaMysqlU 301

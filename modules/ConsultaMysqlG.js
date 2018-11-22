@@ -208,4 +208,129 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
             });
       };
 
+      controller.clientes=  (req, res) => {
+        connection.query('select * from cliente',(err, rows)=>{
+          if (err) {
+            console.log(err);
+            res.render('error', {
+               user: req.user,
+               message:"Ha ocurrido un error.",
+               error: err
+             });
+          }
+          if (rows.length) {
+            var dclientes=[];
+            for (var i = 0; i < rows.length; i++) {
+              var cliente= {
+                id_cli: rows[i].id_cli,
+                nom_cli: decrypt(rows[i].nom_cli),
+                ema_cli: rows[i].ema_cli,
+                din_cli: decrypt(rows[i].din_cli),
+                dih_cli: decrypt(rows[i].dih_cli),
+                tel_cli: decrypt(rows[i].tel_cli)
+              };
+              dclientes.push(cliente);
+            }
+            res.render('', {
+               user: req.user,
+               clientes: dclientes
+             });
+          }
+          else {
+            res.render('', {
+               user: req.user,
+               msg: 'No hay clientes registrados'
+             });
+          }
+        });
+      }
+
+      controller.capital = (req, res) =>{
+        var dt = new Date();
+        var month = dt.getMonth()+1;
+        var day = dt.getDate();
+        var year = dt.getFullYear();
+        var f= year + '-' + month + '-' + day;
+        var entrante=0;
+        var saliente=0;
+        connection.query('SELECT * from historialpagos where fec_pag = ?',[f],(err, result)=>{
+          if (err) {
+            console.log(err);
+            res.render('error', {
+               user: req.user,
+               message:"Ha ocurrido un error.",
+               error: err
+             });
+          }
+          if (result.length) {
+            for (var i = 0; i < result.length; i++) {
+              entrante= entrante + parseInt(result[i].mon_pag);
+            }
+            console.log(entrante);
+            connection.query('select * from prestamo where fec_pre = ?',[f],(err, rows)=>{
+              if (err) {
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
+              }
+              if (rows.length) {
+                for (var i = 0; i < rows.length; i++) {
+                  var mon = decrypt(rows[i].moi_pre);
+                  saliente = saliente + parseInt(mon);
+                }
+                console.log('ent ' +entrante);
+                console.log('sal ' +saliente);
+                res.render('', {
+                   user: req.user,
+                   entrante: entrante,
+                   saliente: saliente
+                });
+              }
+              else {
+                console.log(entrante);
+                res.render('', {
+                   user: req.user,
+                   entrante: entrante,
+                   saliente: 0,
+                });
+              }
+            });
+          }
+          else {
+            connection.query('select * from prestamo where fec_pre = ?',[f],(err, rows)=>{
+              if (err) {
+                console.log(err);
+                res.render('error', {
+                   user: req.user,
+                   message:"Ha ocurrido un error.",
+                   error: err
+                 });
+              }
+              if (rows.length) {
+                for (var i = 0; i < rows.length; i++) {
+                  var mon = decrypt(rows[i].moi_pre);
+                  saliente = saliente + parseInt(mon);
+                }
+                console.log(saliente);
+                res.render('', {
+                   user: req.user,
+                   entrante: 0,
+                   saliente: saliente
+                });
+              }
+              else {
+                res.render('', {
+                   user: req.user,
+                   entrante: 0,
+                   saliente: 0,
+                });
+              }
+            });
+          }
+        });
+      }
+
 module.exports = controller;

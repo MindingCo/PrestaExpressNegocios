@@ -282,15 +282,15 @@ img.responsive-img, video.responsive-video { max-width: 100%; height: auto; }
 .border-l{border-left:1px solid #ccc!important}.border-r{border-right:1px solid #ccc!important}
 
 /*    aling               */
-.va-middle { vertical-align:  middle !important; }
-.va-bottom { vertical-align:  bottom !important; }
-.va-top { vertical-align:  top !important; }
+.va-middle { vertical-align:  middle; }
+.va-bottom { vertical-align:  bottom; }
+.va-top { vertical-align:  top; }
 .ha-center { text-align: center !important; }
 .ha-right { text-align: right !important; }
 .ha-left { text-align: left !important; }
 
 /*    display             */
-.inline { display: inline-block !important; margin-left: 5px; }
+.inline { display: inline-block; margin-left: 5px; }
 .left { float: left !important; }
 .right { float: right !important; }
 .no-float { float: none !important; }
@@ -339,16 +339,6 @@ span.display-hover{display:inline-block}
     height: 24px;
     display: inline-block;
     line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-}
-.icon-big {
-    height: 40px;
-    display: inline-block;
     text-transform: none;
     letter-spacing: normal;
     word-wrap: normal;
@@ -655,10 +645,9 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     .col { float: left;   box-sizing: border-box; padding: 0 0.75rem; min-height: 1px; }
     .col[class*="push-"], .col[class*="pull-"] { position: relative; }
 
-    /*    width    */
+    /    width    */
     .col.twelfth { width: 8.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.sixth { width: 16.6666666667%;   margin-left: auto; left: auto; right: auto; }
-    .col.fifth { width: 20%;   margin-left: auto; left: auto; right: auto; }
     .col.quarter { width: 25%;   margin-left: auto; left: auto; right: auto; }
     .col.third { width: 33.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.five_twelfths { width: 41.6666666667%;   margin-left: auto; left: auto; right: auto; }
@@ -677,9 +666,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     .col.offset-sixth { margin-left: 16.6666666667%; }
     .col.pull-sixth { right: 16.6666666667%; }
     .col.push-sixth { left: 16.6666666667%; }
-    .col.offset-fifth { margin-left: 20%; }
-    .col.pull-fifth { right: 20%; }
-    .col.push-fifth { left: 20%; }
     .col.offset-quarter { margin-left: 25%; }
     .col.pull-quarter { right: 25%; }
     .col.push-quarter { left: 25%; }
@@ -737,7 +723,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     /*    width    */
     .col.m-twelfth { width: 8.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.m-sixth { width: 16.6666666667%;   margin-left: auto; left: auto; right: auto; }
-    .col.m-fifth { width: 20%;   margin-left: auto; left: auto; right: auto; }
     .col.m-quarter { width: 25%;   margin-left: auto; left: auto; right: auto; }
     .col.m-third { width: 33.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.m-five_twelfths { width: 41.6666666667%;   margin-left: auto; left: auto; right: auto; }
@@ -756,9 +741,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     .col.offset-sixth { margin-left: 16.6666666667%; }
     .col.pull-sixth { right: 16.6666666667%; }
     .col.push-sixth { left: 16.6666666667%; }
-    .col.offset-m-fifth { margin-left: 20%; }
-    .col.pull-m-fifth { right: 20%; }
-    .col.push-m-fifth { left: 20%; }
     .col.offset-m-quarter { margin-left: 25%; }
     .col.pull-m-quarter { right: 25%; }
     .col.push-m-quarter { left: 25%; }
@@ -810,7 +792,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     /    width    */
     .col.l-twelfth { width: 8.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.-sixth { width: 16.6666666667%;   margin-left: auto; left: auto; right: auto; }
-    .col.l-fifth { width: 20%;   margin-left: auto; left: auto; right: auto; }
     .col.l-quarter { width: 25%;   margin-left: auto; left: auto; right: auto; }
     .col.l-third { width: 33.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.l-five_twelfths { width: 41.6666666667%;   margin-left: auto; left: auto; right: auto; }
@@ -829,9 +810,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     .col.offset-sixth { margin-left: 16.6666666667%; }
     .col.pull-sixth { right: 16.6666666667%; }
     .col.push-sixth { left: 16.6666666667%; }
-    .col.offset-l-fifth { margin-left: 20%; }
-    .col.pull-l-fifth { right: 20%; }
-    .col.push-l-fifth { left: 20%; }
     .col.offset-l-quarter { margin-left: 25%; }
     .col.pull-l-quarter { right: 25%; }
     .col.push-l-quarter { left: 25%; }
@@ -873,7 +851,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     /    width    */
     .col.xl-twelfth { width: 8.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.xl-sixth { width: 16.6666666667%;   margin-left: auto; left: auto; right: auto; }
-    .col.xl-fifth { width: 20%;   margin-left: auto; left: auto; right: auto; }
     .col.xl-quarter { width: 25%;   margin-left: auto; left: auto; right: auto; }
     .col.xl-third { width: 33.3333333333%;   margin-left: auto; left: auto; right: auto; }
     .col.xl-five_twelfths { width: 41.6666666667%;   margin-left: auto; left: auto; right: auto; }
@@ -892,9 +869,6 @@ p.collections-content { font-size: 0.9rem; padding: 0 !important; margin: 0 !imp
     .col.offset-x-sixth { margin-left: 16.6666666667%; }
     .col.pull-x-sixth { right: 16.6666666667%; }
     .col.push-x-sixth { left: 16.6666666667%; }
-    .col.offset-xl-fifth { margin-left: 20%; }
-    .col.pull-xl-fifth { right: 20%; }
-    .col.push-xl-fifth { left: 20%; }
     .col.offset-xl-quarter { margin-left: 25%; }
     .col.pull-xl-quarter { right: 25%; }
     .col.push-xl-quarter { left: 25%; }
