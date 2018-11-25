@@ -1,41 +1,68 @@
 extends layouth
-
 append jscss
-    
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    style(type="text/css").
+        div > input {
+            margin-left: 42px !important;
+        }
+        #logout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        #save-changes {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 append content
-    .col.full.m-half.h-full.h-m-half.pb-5
-        h4 Cambiar Contraseña
-        .divider
-        form.col.full.container(method='post', action='/sesion')
-            br
-            .row
-                .input-field.valign-wrapper.display-container.col.l-threequarter.xl-threequarter
-                    input#antigua.validate.col.xl-fivesixth(name='contraactual', type='password', data-length="10", required)
+    .row.h-full
+        .w.s-full.m-full.l-half.xl-half.h-s-half.h-m-full.h-l-full.h-xl-full    
+            b
+                h3 Cambiar Contraseña
+            if (error)
+                h4.red-text= error
+            if (message)
+                h4.green-text= message
+            .divider
+            form#modify.w.full.container(method='post', action='/sesion')
+                div.row.input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
+                    i.material-icons.prefix vpn_key
+                    input#antigua.validate.w.xl-fivesixth(name='contraactual', type='password', pattern=".{6,16}", required)
                     label(for='antigua') Contraseña antigua
-                    img.right(src='/img/icons/icons8_Eye_32px.png')
-            br
-            .row
-                .input-field.valign-wrapper.display-container.col.l-threequarter.xl-threequarter
-                    input#nueva.validate.col.xl-fivesixth(name='newcontra', type='password', data-length="10", required)
+                    span.helper-text.red-text
+                div.row.input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
+                    i.material-icons.prefix vpn_key
+                    input#nueva.validate.w.xl-fivesixth(name='newcontra', type='password', pattern=".{6,16}", required)
                     label(for='nueva') Contraseña nueva
-                    img.right(src='/img/icons/icons8_Eye_32px.png')
-            br
-            .row
-                .input-field.valign-wrapper.display-container.col.l-threequarter.xl-threequarter
-                    input#confirmacion.validate.col.xl-fivesixth(name='connewcontra', type='password', data-length="10", required)
+                    span.helper-text.red-text
+                div.row.input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
+                    i.material-icons.prefix vpn_key
+                    input#confirmacion.validate.w.xl-fivesixth(name='connewcontra', type='password', pattern=".{6,16}", required)
                     label(for='confirmacion') Confirmar contraseña nueva
-                    img.right(src='/img/icons/icons8_Eye_32px.png')
-            br
-            .input-field.left.inline.text-white.red
-                span.helper-text= message
-            .col.l-threequarter.xl-threequarter
-                input#submit.btn.hoverable.right(type='submit', value='Guardar cambios', disabled)
-    .col.full.m-half.h-full.h-m-half.display-container
+                    span.helper-text.red-text
+                div.row
+                    button#save-changes.btn.waves-effect.hoverable(type='submit')
+                        i.material-icons check
+                        span Guardar cambios
+        .w.s-full.m-full.l-half.xl-half.display-container.h-s-half.h-m-half.h-l-full.h-xl-full
+            .display-bottommiddle
+                a(href='/logout')
+                    button.btn.hoverable#logout
+                        i.material-icons power_settings_new
+                        span Cerrar sesion
+    footer
         .left-align
-            a(href='/reporte-problema') 
+            a(href='/reporte-problema')
                 .btn Informar de un problema
         .center-align
-            a(href='/terminosycondiciones') Leer terminos y condiciones
-        .display-middle
-            a(href='/logout')
-                .btn.hoverable Cerrar sesion
+            a(href='/terminosycondiciones')
+                .btn Leer términos y condiciones
+    script(type="text/javascript", src="/js/materialize.min.js")
+    script(type="text/javascript", src="/js/sesion_modify_validation.js")

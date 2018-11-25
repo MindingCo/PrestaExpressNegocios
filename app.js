@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
 	console.log(socket.id);
     socket.broadcast.emit('new user', {message : "Ha entrado un usuario al chat"})
     socket.on('new_message', (message) => {
-				console.log(message);
+        console.log(message);
         io.emit('new_message', message);
     })
 })
