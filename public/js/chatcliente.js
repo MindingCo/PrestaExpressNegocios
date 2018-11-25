@@ -2,7 +2,7 @@
 $(document).ready(function()
 {
 
-    var socket = io('http://localhost:8081', {forceNew: true})
+    var socket = io('http://31.220.53.147:8081', {forceNew: true})
     function mandarMsj()
     {
         socket.emit('new_message', $('#message-text').val());
@@ -23,9 +23,9 @@ $(document).ready(function()
     })
 
     socket.on('new_message', (mensaje) =>{
-
       $('#chat').append('<li>' + mensaje + '</li>')
     });
+
 
 
 })
