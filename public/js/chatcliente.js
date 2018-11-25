@@ -23,19 +23,7 @@ $(document).ready(function()
     })
 
     socket.on('new_message', (mensaje) =>{
-<<<<<<< HEAD
-      $('#chat').append('<li>' + mensaje + '</li>')
-    });
-
-
-=======
-      $('#chat').append('<li class="yo"> <div class="msg"> <p> '+ mensaje +' <p> </div> </li>')
-    });
-
-
-    socket.on('user_says', function(userSays){
-      $('#chat').append('<li class="green">' + userSays + '</li>')
-    })
->>>>>>> e6a37983d12a852b54b9561f8488d6e8c0315b5d
+          $('#chat').append('<li class="yo"> <div class="msg"> <p> '+ mensaje +' <p> </div> </li>')
+        });
 
 })
