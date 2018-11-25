@@ -23,11 +23,7 @@ $(document).ready(function()
     })
 
     socket.on('new_message', (mensaje) =>{
-      $('#chat').append('<li>' + mensaje + '</li>')
-    });
-
-    socket.on('user_says', function(userSays){
-      $('#chat').append('<li>' + userSays + '</li>')
-    })
+          $('#chat').append('<li class="yo"> <div class="msg"> <p> '+ mensaje +' <p> </div> </li>')
+        });
 
 })
