@@ -1,29 +1,42 @@
-
-$(document).ready(function()
-{
-
-    var socket = io('http://31.220.53.147:8081', {forceNew: true})
-    function mandarMsj()
-    {
-        socket.emit('new_message', $('#message-text').val());
-        $('#message-text').val(null)
-        return false
+$(document).ready(function() {
+    const socket = io('http://31.220.53.147:8081', {forceNew: true});
+    const $msg_text = $('#message-text');
+    function mandarMsj() {
+        socket.emit('new_message', $msg_text.val());
+        $msg_text.val(null);
+        return false;
     }
-    $("#message-text").keypress(function(e)
-    {
-        if(e.which == 13)
+    $msg_text.keypress(e => {
+        if ((e.keyCode || e.which) === 13)
             mandarMsj()
-    })
+    });
 
-    $('#enviar').click(function(){ mandarMsj() })
+    $('#enviar').click(mandarMsj);
+
+    socket.on('new_user', newUser =>{
+      console.log(NewUser);
+    });
 
 
-    socket.on('new_user', (newUser) =>{
-      console.log("NewUser")
-    })
+    // CHAT VALIDACIÓN SENCILLA
+    const createMessageNode = mensaje => {
+        const li = document.createElement("li");
+        li.className = "yo";
 
-    socket.on('new_message', (mensaje) =>{
-          $('#chat').append('<li class="yo"> <div class="msg"> <p> '+ mensaje +' <p> </div> </li>')
-        });
+        const div = document.createElement("div");
+        div.className = "msg";
 
-})
+        const p = document.createElement("p");
+        p.textContent = mensaje;
+
+        div.appendChild(p);
+        li.appendChild(div);
+        return li;
+    };
+
+    socket.on('new_message', mensaje =>{
+        const chat = document.querySelector("#chat");
+        const msg_node = createMessageNode(mensaje);
+        chat.appendChild(msg_node);
+    });
+});
