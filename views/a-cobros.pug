@@ -3,32 +3,20 @@ extends layouth
 append jscss
     
 append content
-    section.margin.beautyCard.floating.white
-        .container.margin-t
-            p.margin0.marginy 
-                img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
-                b.deep-purple-text.text-darken-2 Cobros de hoy
-        .divider
-        .section.row
-            .data.inline.w.third
-                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Nombre
-            .data.inline.w.third
-                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Pago diario
-            .data.inline.w.third
-                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Monto faltante
-        - var n = 0
-        for cliente in clientes
-            form.cobroshoy(name= cliente.id_cli, method='post', action=`/asesor/pago/+${cliente.id_cli}`, actived-second_part="false")
-                .section.row.first_part-form
-                    .data.inline.w.third
-                        h5.va-middle.ha-middle
-                            b.light-blue-text.text-darken-3= cliente.nom_cli
-                    .data.inline.w.third.row
-                        .w.sixth &nbsp;
-                        h5.va-middle.ha-middle.w.twothird
-                            b.light-blue-text.text-darken-3.blocked= prestamos[n].mod_pre
-                    .data.inline.w.third.row
-                        .w.sixth &nbsp;
-                        h5.va-middle.ha-middle.w.twothird
-                            b.light-blue-text.text-darken-3.blocked= prestamos[n].mof_pre
-                
+    //-     Historial de pagos
+    .col.full
+        ul.collection.z-depth-1
+            li.collection-item.avatar.pt-3.pb-3
+                img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
+                h6.collection-header.bold Cobros
+                p Cobros realizados
+            - var n = 0
+            for cliente in clientes
+                form(name= cliente.id_cli, method='post', action=`/asesor/pago/+${cliente.id_cli}`, actived-second_part="false")
+                    li.collection-item
+                        .row.mb-0
+                            .col.five_twelfths
+                                p.collections-title= cliente.nom_cli
+                                p.collections-content= `Falta: $${prestamos[n].mof_pre}`
+                            .col.seven_twelfths
+                                h5.grey-text.text-darken-4=  `Pago: $${ prestamos[n].mod_pre}`

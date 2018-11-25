@@ -139,7 +139,7 @@ controller.home = (req, res) => {
     }
 
     if (req.user.id_tus === 2) {
-      connection.query('select cliente.* from cliente natural join prestamo where id_ase= ? and mof_pre != 0 limit 10',[req.user.id_ase], (err, clientes) => {
+      connection.query('select cliente.* from cliente natural join prestamo where id_ase= ? and mof_pre != 0 limit 5',[req.user.id_ase], (err, clientes) => {
         console.log(req.user);
         if (err) {
           console.log(err);

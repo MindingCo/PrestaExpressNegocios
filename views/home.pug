@@ -56,35 +56,56 @@ append content
                             .col.seven_twelfths
                                 span.task-cat.blocked.grey-text.text-darken-4= pago.com_pag
     else if user.id_tus == 2
-        //-    Seccion de cliente (max 10)
-        section.margin.beautyCard.floating.white
-            .container.margin-t
-                p.margin0.marginy 
-                    img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
-                    b.deep-purple-text.text-darken-2 Pagos
-            .divider
-            .section.row
-                .data.inline.w.third
-                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Cliente
-                .data.inline.w.third
-                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de negocio
-                .data.inline.w.third
-                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Telefono
-            - var n = 0
-            while n < (clientes.length < 10 ? clientes.length : 10)
-                .section.row
-                    .data.inline.w.third.row
-                        .w.sixth &nbsp;
-                        h4.va-middle.ha-middle.w.twothird
-                            b.light-blue-text.text-darken-3= clientes[n].nom_cli
-                    .data.inline.w.third.row
-                        .w.sixth &nbsp;
-                        h5.va-middle.ha-middle.w.twothird
-                            b.light-blue-text.text-darken-3.blocked= clientes[n].din_cli
-                    .data.inline.w.third.row
-                        .w.third &nbsp;
-                        h5.va-middle.ha-middle.w.third
-                            b.light-blue-text.text-darken-3= clientes[n++].tel_cli
+        .col.full
+            .card.p-1
+                | Mapa section :3
+        a(href="/asesor/cartera")
+            for cli in clientes
+                .col.full.m-half
+                    .card
+                        .card-image
+                            img.activator(src="/img/header-asesor.jpg", alt="user bg")
+                        .card-content.light-blue.lighten-4
+                            img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
+                            span.card-title.activator.grey-text.text-darken-4= cli.nom_cli
+                            .pt-2
+                                img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+                                p.inline Cliente
+                            .pt-2
+                                img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
+                                p.inline= cli.tel_cli
+                            .pt-2
+                                img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+                                p.inline= `Direccion Negocio: ${cli.din_cli}`
+        //- //-    Seccion de cliente (max 10)
+        //- section.margin.beautyCard.floating.white
+        //-     .container.margin-t
+        //-         p.margin0.marginy 
+        //-             img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
+        //-             b.deep-purple-text.text-darken-2 Pagos
+        //-     .divider
+        //-     .section.row
+        //-         .data.inline.w.third
+        //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Cliente
+        //-         .data.inline.w.third
+        //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de negocio
+        //-         .data.inline.w.third
+        //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Telefono
+        //-     - var n = 0
+        //-     while n < (clientes.length < 10 ? clientes.length : 10)
+        //-         .section.row
+        //-             .data.inline.w.third.row
+        //-                 .w.sixth &nbsp;
+        //-                 h4.va-middle.ha-middle.w.twothird
+        //-                     b.light-blue-text.text-darken-3= clientes[n].nom_cli
+        //-             .data.inline.w.third.row
+        //-                 .w.sixth &nbsp;
+        //-                 h5.va-middle.ha-middle.w.twothird
+        //-                     b.light-blue-text.text-darken-3.blocked= clientes[n].din_cli
+        //-             .data.inline.w.third.row
+        //-                 .w.third &nbsp;
+        //-                 h5.va-middle.ha-middle.w.third
+        //-                     b.light-blue-text.text-darken-3= clientes[n++].tel_cli
         
     else if user.id_tus == 3
       blockquote
