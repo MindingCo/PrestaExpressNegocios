@@ -1,73 +1,19 @@
-//-    asidebar
-aside.hide-m-down.w.fifth.h-full.floating-r
-    .grey-text.h-full.w.full.lighten-4.white
-        div.display-container
-            img(src="/img/banner-header.jpg", style="width:100%;", alt="Avatar")
-            .display-bottomleft.container.white-text(style="width:100%")
-                h4.truncate= user.nom_cli
-        .container
-            p.truncate(title=user.id_pre)
-                img.nav-icon.margin-r.va-middle(src="/img/icons/icons8_Credit_Card_50px.png", alt="")
-                span= user.id_pre
-            hr
-            a(href="/inicio")
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Inicio")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="")
-                        span Inicio
-            a(href="/cliente/asesor")
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Tu Asesor")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_User_50px.png", alt="")
-                        span Tu Asesor
-            p.large.chat-animation
-                b.indigo-text.text-darken-4.truncate(title= "Chat")
-                    img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Chat_50px.png", alt="")
-                    span Chat
-            a(href='/sesion')
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Sesión")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="")
-                        span Sesión
-//-    navbar
-.hide-l-up.w.full.bottom.container.row.plum_plate
-    .w.quarter
-        a(href="/inicio")
-            p.indigo-text.truncate.ha-middle(title= "Inicio")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="") 
-                span.hide-s Inicio
-    .w.quarter
-        a(href="/cliente/asesor")
-            p.indigo-text.truncate.ha-middle(title= "Tu Asesor")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_User_50px.png", alt="") 
-                span.hide-s  Tu Asesor
-    .w.quarter.chat-animation
-        p.indigo-text.truncate.ha-middle(title= "Chat")
-            img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Chat_50px.png", alt="") 
-            span.hide-s Chat
-    .w.quarter
-        a(href='/sesion')
-            p.indigo-text.truncate.ha-middle(title= "Sesión")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="") 
-                span.hide-s Sesión
-
-//- .option.w-25
-//-     a(href="/inicio")
-//-         div
-//-             img.icon(src="/img/icons/icons8_Home_50px_2.png")
-//-             span.visible-s Inicio
-//- .option.w-25
-//-     a(href="/cliente/asesor")
-//-         div
-//-             img.icon(src="/img/icons/icons8_User_50px.png")
-//-             span.visible-s Tu Asesor
-//- .option.w-25
-//-     a(href="/cliente/chat")
-//-         div
-//-             img.icon(src="/img/icons/icons8_Chat_50px.png")
-//-             span.visible-s Chat
-//- .option.w-25
-//-     a(href='/sesion')
-//-         div
-//-             img.icon(src="/img/icons/icons8_Access_50px.png")
-//-             span.visible-s Sesión
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/Inicio")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="")
+            h3.hide_s.inline.p-0 Inicio
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/cliente/asesor")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_User_50px.png", alt="")
+            h3.hide_s.inline.p-0 Tu Asesor
+.col.quarter.display-container.h-full.chat-animation
+    .white-text.truncate.ha-middle.display-middle(title="Inicio")
+        img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Chat_50px.png", alt="")
+        h3.hide_s.inline.p-0 Chat
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/sesion")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="")
+            h3.hide_s.inline.p-0 Sesión

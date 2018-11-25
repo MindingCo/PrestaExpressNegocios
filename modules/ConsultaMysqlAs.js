@@ -132,50 +132,65 @@ function decrypt(text){
           console.log(f);
           const { id }  = req.params;
           console.log(id);
-          connection.query('select * from cliente natural join prestamo where id_cli= ? and mof_pre != 0',[id], (err, cliente) => {
+          connection.query('select * from cliente where id_cli= ?',[id],(err, rows) =>{
             if (err) {
-              console.log(err);
-              res.render('error', {
-                 user: req.user,
-                 message:"Ha ocurrido un error.",
-                 error: err
-               });
-            }
-            console.log(cliente);
-            
-            var dcliente= {
-              id_cli: cliente[0].id_cli,
-              nom_cli: decrypt(cliente[0].nom_cli),
-              ema_cli: cliente[0].ema_cli,
-              dih_cli: decrypt(cliente[0].dih_cli),
-              din_cli: decrypt(cliente[0].din_cli),
-              tel_cli: decrypt(cliente[0].tel_cli)
-            };
-            connection.query('select * from historialpagos natural join prestamo where id_cli= ? and fec_pag= ? and id_pre= ?',[id, f, cliente[0].id_pre], (err, est) => {
-              if (err) {
                 console.log(err);
                 res.render('error', {
                    user: req.user,
                    message:"Ha ocurrido un error.",
                    error: err
                  });
-              }
-              console.log(est);
-              console.log(req.baseUrl);
-              if (est.length) {
-                res.render('a-cliente', {
-                  user: req.user,
-                  cliente: dcliente,
-                  message: "El cobro de hoy ya se ha registrado"
+            }
+            if (!rows.length) {
+                res.send('Usuario inexistente');
+            }
+            else {
+              connection.query('select * from cliente natural join prestamo where id_cli= ? and mof_pre != 0',[id], (err, cliente) => {
+                if (err) {
+                  console.log(err);
+                  res.render('error', {
+                     user: req.user,
+                     message:"Ha ocurrido un error.",
+                     error: err
+                   });
+                }
+                console.log(cliente);
+
+                var dcliente= {
+                  id_cli: cliente[0].id_cli,
+                  nom_cli: decrypt(cliente[0].nom_cli),
+                  ema_cli: cliente[0].ema_cli,
+                  dih_cli: decrypt(cliente[0].dih_cli),
+                  din_cli: decrypt(cliente[0].din_cli),
+                  tel_cli: decrypt(cliente[0].tel_cli)
+                };
+                connection.query('select * from historialpagos natural join prestamo where id_cli= ? and fec_pag= ? and id_pre= ?',[id, f, cliente[0].id_pre], (err, est) => {
+                  if (err) {
+                    console.log(err);
+                    res.render('error', {
+                       user: req.user,
+                       message:"Ha ocurrido un error.",
+                       error: err
+                     });
+                  }
+                  console.log(est);
+                  console.log(req.baseUrl);
+                  if (est.length) {
+                    res.render('a-cliente', {
+                      user: req.user,
+                      cliente: dcliente,
+                      message: "El cobro de hoy ya se ha registrado"
+                    });
+                  }
+                  else {
+                    res.render('a-cliente', {
+                      user: req.user,
+                      cliente: dcliente
+                    });
+                  }
                 });
-              }
-              else {
-                res.render('a-cliente', {
-                  user: req.user,
-                  cliente: dcliente
-                });
-              }
-            });
+              });
+            }
           });
       }
 

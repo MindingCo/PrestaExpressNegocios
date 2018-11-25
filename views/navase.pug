@@ -1,70 +1,20 @@
-//-    asidebar
-aside.hide-m-down.w.fifth.h-full
-    .grey-text.h-full.w.full.plum_plate.lighten-4
-        div.display-container
-            img(src="/img/banner-header.jpg", style="width:100%;", alt="Avatar")
-            .display-bottomleft.container.white-text(style="width:100%")
-                h4.truncate= user.nom_usu
-        .container
-            a(href="/inicio")
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Inicio")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Home_50px.png", alt="") 
-                        span Inicio
-            a(href="/asesor/cartera")
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Cartera")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Team_50px.png", alt="")
-                        span Cartera
-            a(href="/asesor/cobros")
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Cobros")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Handshake_50px.png", alt="")
-                        span Cobros
-            a(href='/sesion')
-                p.large
-                    b.indigo-text.text-darken-4.truncate(title= "Sesión")
-                        img.nav-icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Access_50px.png", alt="")
-                        span Sesión
-//-    navbar
-.hide-l-up.w.full.bottom.container.row.plum_plate
-    .w.quarter
-        a(href="/inicio")
-            p.white-text.truncate.ha-middle(title= "Inicio")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png", alt="")
-                span.hide-s Inicio
-    .w.quarter
-        a(href="/asesor/cartera")
-            p.white-text.truncate.ha-middle(title= "Cartera")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Team_50px.png", alt="")
-                span.hide-s  Cartera
-    .w.quarter
-        a(href="/asesor/cobros")
-            p.white-text.truncate.ha-middle(title= "Cobros")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Handshake_50px.png", alt="")
-                span.hide-s Cobros
-    .w.quarter
-        a(href='/sesion')
-            p.white-text.truncate.ha-middle(title= "Sesión")
-                img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="")
-                span.hide-s Sesión
-//- .option.w-25
-//-     a(href="/inicio")
-//-         div
-//-             img.icon(src="/img/icons/icons8_Home_50px_2.png")
-//-             span.visible-s Inicio
-//- .option.w-25
-//-     a(href="/asesor/cartera")
-//-         div
-//-             img.icon(src="/img/icons/icons8_Team_50px.png")
-//-             span.visible-s Cartera
-//- .option.w-25
-//-     a(href="/asesor/cobros")
-//-         div
-//-             img.icon(src="/img/icons/icons8_Handshake_50px.png")
-//-             span.visible-s Cobros
-//- .option.w-25
-//-     a(href='/sesion')
-//-         div
-//-             img.icon(src="/img/icons/icons8_Access_50px.png")
-//-             span.visible-s Sesión
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/Inicio")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Home_50px.png" alt="")
+            h3.hide_s.inline.p-0 Inicio
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/asesor/cartera")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Team_50px.png", alt="")
+            h3.hide_s.inline.p-0 Cartera
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/asesor/cobros")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Handshake_50px.png", alt="")
+            h3.hide_s.inline.p-0 Cobros
+.col.quarter.display-container.h-full
+    a.col.full.h-full(href="/sesion")
+        .white-text.truncate.ha-middle.display-middle(title="Inicio")
+            img.nav-icon.va-middle.margin-r(src="/img/icons/white/icons8_Access_50px.png", alt="")
+            h3.hide_s.inline.p-0 Sesión

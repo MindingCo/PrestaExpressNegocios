@@ -62,7 +62,7 @@ module.exports = (passport) =>
                             }
                             var usuario = {
                               id_cli: rows1[0].id_cli,
-                              nom_cli: decrypt(nom),
+                              nom_usu: decrypt(nom),
                               ema_cli: rows1[0].ema_cli,
                               din_cli: decrypt(rows1[0].din_cli),
                               dih_cli: decrypt(rows1[0].dih_cli),
@@ -87,7 +87,7 @@ module.exports = (passport) =>
                         else {
                           var asesor = {
                             id_ase: rows1[0].id_ase,
-                            nom_ase: decrypt(nom),
+                            nom_usu: decrypt(nom),
                             ema_ase: rows1[0].ema_ase,
                             tel_ase: decrypt(rows1[0].tel_ase),
                             id_tus: rows1[0].id_tus,
@@ -108,7 +108,7 @@ module.exports = (passport) =>
                       else {
                         var gerente = {
                           id_ger: rows1[0].id_ger,
-                          nom_ger: decrypt(nom),
+                          nom_usu: decrypt(nom),
                           ema_ger: rows1[0].ema_ger,
                           tel_ger: decrypt(rows1[0].tel_ger),
                           id_tus: rows1[0].id_tus,
@@ -121,6 +121,7 @@ module.exports = (passport) =>
                 default:
                         var admin= {
                             id_usu: rows[0].id_usu,
+                            nom_usu: '',
                             id_tus: rows[0].id_tus,
                             use_usu: rows[0].use_usu
                         };
