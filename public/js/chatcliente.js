@@ -26,9 +26,4 @@ $(document).ready(function()
       $('#chat').append('<li class="yo"> <div class="msg"> <p> '+ mensaje +' <p> </div> </li>')
     });
 
-
-    socket.on('user_says', function(userSays){
-      $('#chat').append('<li class="green">' + userSays + '</li>')
-    })
-
 })

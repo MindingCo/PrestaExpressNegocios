@@ -425,6 +425,10 @@ span.display-hover{display:inline-block}
 }
 .chat ol { padding-inline-start: 0; }
 
+.chattext {
+    height: 90%;
+}
+
 .chat {
     list-style: none;
     background: none;

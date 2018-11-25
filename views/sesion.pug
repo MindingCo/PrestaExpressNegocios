@@ -3,42 +3,39 @@ extends layouth
 append jscss
     
 append content
-    .row.h-full
-        .w.s-full.m-full.l-half.xl-half.h-s-half.h-m-full.h-l-full.h-xl-full    
-            b
-                h3 Cambiar Contraseña
-            .divider
-            form.w.full.container(method='post', action='/sesion')
-                br
-                .row
-                    .input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
-                        input#antigua.validate.w.xl-fivesixth(name='contraactual', type='password', data-length="10", required)
-                        label(for='antigua') Contraseña antigua
-                        img.right(src='/img/icons/icons8_Eye_32px.png')
-                br
-                .row
-                    .input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
-                        input#nueva.validate.w.xl-fivesixth(name='newcontra', type='password', data-length="10", required)
-                        label(for='nueva') Contraseña nueva
-                        img.right(src='/img/icons/icons8_Eye_32px.png')
-                br
-                .row
-                    .input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
-                        input#confirmacion.validate.w.xl-fivesixth(name='connewcontra', type='password', data-length="10", required)
-                        label(for='confirmacion') Confirmar contraseña nueva
-                        img.right(src='/img/icons/icons8_Eye_32px.png')
-                br
-                .input-field.left.inline.text-white.red
-                    span.helper-text= message
-                .w.l-threequarter.xl-threequarter
-                    input#submit.btn.hoverable.right(type='submit', value='Guardar cambios', disabled)
-        .w.s-full.m-full.l-half.xl-half.display-container.h-s-half.h-m-half.h-l-full.h-xl-full
-            .left-align
-                a(href='/reporte-problema') 
-                    .btn Informar de un problema
-            .center-align
-                a(href='/terminosycondiciones') Leer terminos y condiciones
-            .display-bottommiddle
-                a(href='/logout')
-                    .btn.hoverable Cerrar sesion
-    script(type = "text/javascript", src = "/js/materialize.min.js")
+    .col.full.m-half.h-full.h-m-half.pb-5
+        h4 Cambiar Contraseña
+        .divider
+        form.col.full.container(method='post', action='/sesion')
+            br
+            .row
+                .input-field.valign-wrapper.display-container.col.l-threequarter.xl-threequarter
+                    input#antigua.validate.col.xl-fivesixth(name='contraactual', type='password', data-length="10", required)
+                    label(for='antigua') Contraseña antigua
+                    img.right(src='/img/icons/icons8_Eye_32px.png')
+            br
+            .row
+                .input-field.valign-wrapper.display-container.col.l-threequarter.xl-threequarter
+                    input#nueva.validate.col.xl-fivesixth(name='newcontra', type='password', data-length="10", required)
+                    label(for='nueva') Contraseña nueva
+                    img.right(src='/img/icons/icons8_Eye_32px.png')
+            br
+            .row
+                .input-field.valign-wrapper.display-container.col.l-threequarter.xl-threequarter
+                    input#confirmacion.validate.col.xl-fivesixth(name='connewcontra', type='password', data-length="10", required)
+                    label(for='confirmacion') Confirmar contraseña nueva
+                    img.right(src='/img/icons/icons8_Eye_32px.png')
+            br
+            .input-field.left.inline.text-white.red
+                span.helper-text= message
+            .col.l-threequarter.xl-threequarter
+                input#submit.btn.hoverable.right(type='submit', value='Guardar cambios', disabled)
+    .col.full.m-half.h-full.h-m-half.display-container
+        .left-align
+            a(href='/reporte-problema') 
+                .btn Informar de un problema
+        .center-align
+            a(href='/terminosycondiciones') Leer terminos y condiciones
+        .display-middle
+            a(href='/logout')
+                .btn.hoverable Cerrar sesion
