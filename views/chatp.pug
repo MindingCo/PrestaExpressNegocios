@@ -6,11 +6,23 @@
     script(src="/js/jquery.min.js")
     script(src="/js/jquery-3.3.1.min.js")
     //-    chat
-    .chat.h-full.col.five_sixths.m-half.l-third.red.floating
-        h1 Chatea con un gerente
-        ul(id="chat")
-        div
-            input#message-text(type='text' , placeholder='Mensaje', required)
-            input#enviar(type='button', value='Enviar')
+    .chat.h-full.col.five_sixths.m-half.l-third.blue-grey.lighten-5.floating.display-container
+        ol#chat.scroller
+            li.yo
+                .msg
+                    p Puff...
+                    p Aún estoy haciendo la antologia...
+                    p Mejor otro día
+                    span.remitente Saúl
+            li.other
+                .msg
+                    p Qué antologia?
+                    span.remitente Angel
+        input#message-text.textarea.display-bottomright(type="text", name="msgR", placeholder="Escribe tu mensaje!", required)
+            
+        //- ul(id="chat")
+        //- div
+        //-     input#message-text(type='text' , placeholder='Mensaje', required)
+        //-     input#enviar(type='button', value='Enviar')
     //-    catch animation
     .catch-chat.h-full.col.sixth.m-half.l-twothird
