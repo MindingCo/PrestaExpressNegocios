@@ -305,42 +305,59 @@ controller.home = (req, res) => {
     }
 };
 
-controller.mcontraseña = (req, res) => {
-    var cona= req.body.contraactual;
-    var conn= req.body.newcontra;
-    var cconn=req.body.connewcontra;
+const validatePassword = (password, msg_field) => {
+    if (!password.length)
+        return `Escriba la ${msg_field}`;
+    if (password.length < 7)
+        return `La ${msg_field} debe ser mayor a 6 caracteres`;
+    if (password.length > 16)
+        return `La ${msg_field} debe ser menor a 17 caracteres`;
+    return false;
+};
 
-    if (conn!=cconn) {
-      res.render('sesion', {
-         user: req.user,
-         message: "La nueva contraseña no coincide en ambos campos"
-       });
+controller.mcontraseña = (req, res) => {
+    const contra_actual = req.body.contraactual;
+    const contra_nueva = req.body.newcontra;
+    const confirm_contra_nueva = req.body.connewcontra;
+
+    let invalid = validatePassword(contra_actual, "contraseña actual");
+    if (invalid)
+        return res.render("sesion", {user: req.user, error: invalid});
+    invalid = validatePassword(contra_nueva, "contraseña nueva");
+    if (invalid)
+        return res.render("sesion", {user: req.user, error: invalid});
+
+    if (contra_nueva !== confirm_contra_nueva) {
+        return res.render('sesion', {
+            user: req.user,
+            error: "La nueva contraseña no coincide en ambos campos"
+        });
     }
     else {
-      var nombre= req.user.use_usu;
-      connection.query('SELECT * FROM usuario where use_usu= ?',[nombre],(err, usu) => {
+      const nombre = req.user.use_usu; //mejor hacer esta consulta con ids
+      connection.query('SELECT * FROM usuario where use_usu= ?', [nombre], (err, usu) => {
           if (err) {
             console.log(err);
-            res.render('error', {
+            return res.render('error', {
                user: req.user,
                message:"Ha ocurrido un error.",
                error: err
              });
           }
           console.log(usu);
-          if (!bcrypt.compareSync(cona, usu[0].con_usu)) {
+          if (!bcrypt.compareSync(contra_actual, usu[0].con_usu)) {
            console.log('contra incorrecta');
-           res.render('sesion', {
+           return res.render('sesion', {
               user: req.user,
-              message:  "Contraseña actual incorrecta"
+              error:  "Contraseña actual incorrecta"
             });
           }
           else {
-            var con_usu= bcrypt.hashSync(conn, null, null);
+            var con_usu= bcrypt.hashSync(contra_nueva, null, null);
             connection.query('UPDATE usuario set con_usu= ? where id_usu= ?',[con_usu, usu[0].id_usu],(err, ase) => {
              if (err) {
                console.log(err);
-               res.render('error', {
+               return res.render('error', {
                   user: req.user,
                   message:"Ha ocurrido un error.",
                   error: err
