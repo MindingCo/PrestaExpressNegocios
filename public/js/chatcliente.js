@@ -2,7 +2,9 @@ $(document).ready(function() {
     const socket = io('http://31.220.53.147:8081', {forceNew: true});
     const $msg_text = $('#message-text');
     function mandarMsj() {
-        socket.emit('new_message', $msg_text.val());
+        const msg = $msg_text.val();
+
+        socket.emit('new_message', msg);
         $msg_text.val(null);
         return false;
     }

@@ -1,34 +1,72 @@
 extends layouth
 
 append jscss
-    
+    //link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    style(type="text/css").
+        .card-content {
+            background-color: transparent;
+        }
+        .card-reveal {
+            width: auto !important;
+            height: auto !important;
+        }
+        .payment {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button.register-payment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card button{
+            width: 100%;
+        }
+        .nav {
+            padding: 1%;
+        }
+        .nav input:focus {
+            border-bottom: none !important;
+            box-shadow: none !important
+        }
+        input[type="search"]::-webkit-search-cancel-button {
+            display: none;
+        }
 append content
     section.margin.beautyCard.floating.white
-        .container.margin-t
-            p.margin0.marginy 
-                img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
-                b.deep-purple-text.text-darken-2 Cobros de hoy
-        .divider
-        .section.row
-            .data.inline.w.third
-                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Nombre
-            .data.inline.w.third
-                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Pago diario
-            .data.inline.w.third
-                h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Monto faltante
-        - var n = 0
-        for cliente in clientes
-            form.cobroshoy(name= cliente.id_cli, method='post', action=`/asesor/pago/+${cliente.id_cli}`, actived-second_part="false")
-                .section.row.first_part-form
-                    .data.inline.w.third
-                        h5.va-middle.ha-middle
-                            b.light-blue-text.text-darken-3= cliente.nom_cli
-                    .data.inline.w.third.row
-                        .w.sixth &nbsp;
-                        h5.va-middle.ha-middle.w.twothird
-                            b.light-blue-text.text-darken-3.blocked= prestamos[n].mod_pre
-                    .data.inline.w.third.row
-                        .w.sixth &nbsp;
-                        h5.va-middle.ha-middle.w.twothird
-                            b.light-blue-text.text-darken-3.blocked= prestamos[n].mof_pre
-                
+        // tienen un desmadre de css, no copien y peguen de otros frameworks, o lo usan todo y luego lo personalizan o no lo usan y hacen todo
+        div.nav
+            div.nav-wrapper
+                form#search
+                    div.input-field
+                        input#search-input(type="search", placeholder="Busca un cliente")
+                        label.label-icon(for="search")
+                            i.material-icons search
+                        i.material-icons close
+        each cliente, i in clientes
+            div.col.s12
+                div.card
+                    div.card-content
+                        span.card-title= cliente.nom_cli
+                        p= cliente.din_cli
+                        p= cliente.tel_cli
+                        p.payment Pago diario:
+                            span.flow-text= `$${prestamos[i].mod_pre}`
+                        p.payment Pago faltante:
+                            span.flow-text= `$${prestamos[i].mof_pre}`
+                        button.btn.activator Registrar pago
+                    div.card-reveal
+                        span.card-title Registrar pago
+                            i.material-icons.right close
+                        form.register-payment
+                            div.input-field
+                                input.incomplete-payment-amount#incomplete-payment-amount(type="number", value=`${prestamos[i].mod_pre}`)
+                                label(for="incomplete-payment-amount") Monto que pagó ($)
+                                span.helper-text.red-text
+                            button.register-payment.btn(type="submit")
+                                i.material-icons check
+                                span Registrar pago
+    script(type="text/javascript", src="/js/cobros.js")

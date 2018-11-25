@@ -194,91 +194,90 @@ function decrypt(text){
           });
       }
 
-      controller.cobros = (req,res) => {
-          var dt = new Date();
-          var month = dt.getMonth()+1;
-          var day = dt.getDate();
-          var year = dt.getFullYear();
-          var f= year + '-' + month + '-' + day;
-          connection.query('SELECT * from cliente natural join prestamo where id_ase = ? and mof_pre != 0',[req.user.id_ase],(err, result) => {
+controller.cobros = (req,res) => {
+    const dt = new Date();
+    const month = dt.getMonth()+1;
+    const day = dt.getDate();
+    const year = dt.getFullYear();
+    const f= year + '-' + month + '-' + day;
+    connection.query('SELECT * from cliente natural join prestamo where id_ase = ? and mof_pre != 0',[req.user.id_ase],(err, result) => {
+        if (err) {
+            console.error(err);
+            return res.render('error', {
+                user: req.user,
+                message:"Ha ocurrido un error.",
+                error: err
+            });
+        }
+        connection.query('SELECT * from prestamo natural join historialpagos where id_ase= ? and mof_pre != 0 and fec_pag= ?',[req.user.id_ase, f], (err, result1) => {
             if (err) {
-              console.log(err);
-              res.render('error', {
-                 user: req.user,
-                 message:"Ha ocurrido un error.",
-                 error: err
-               });
-            }
-            connection.query('SELECT * from prestamo natural join historialpagos where id_ase= ? and mof_pre != 0 and fec_pag= ?',[req.user.id_ase, f], (err, result1) => {
-              if (err) {
-                console.log(err);
+                console.error(err);
                 res.render('error', {
-                   user: req.user,
-                   message:"Ha ocurrido un error.",
-                   error: err
-                 });
-              }
-              var dcartera=[];
-              var dprestamos=[];
-              if (result1.length) {
-                for (var j = 0; j < result1.length; j++) {
-                  for (var i = 0; i < result.length; i++) {
-                    if (result[i].id_cli != result1[j].id_cli) {
-                      var cliente= {
+                    user: req.user,
+                    message:"Ha ocurrido un error.",
+                    error: err
+                });
+            }
+            const dcartera = [];
+            const dprestamos = [];
+            if (result1.length) {
+                for (let j = 0; j < result1.length; j++) {
+                    for (let i = 0; i < result.length; i++) {
+                        if (result[i].id_cli !== result1[j].id_cli) {
+                            const cliente = {
+                                id_cli: result[i].id_cli,
+                                nom_cli: decrypt(result[i].nom_cli),
+                                din_cli: decrypt(result[i].din_cli),
+                                tel_cli: decrypt(result[i].tel_cli)
+                            };
+                            dcartera.push(cliente);
+                            const prestamo = {
+                                id_pre: result[0].id_pre,
+                                fec_pre: result[0].fec_pre,
+                                moi_pre: decrypt(result[0].moi_pre),
+                                mof_pre: result[0].mof_pre,
+                                mod_pre: decrypt(result[0].mod_pre)
+                            };
+                            dprestamos.push(prestamo);
+                        }
+                    }
+                }
+                console.log(dcartera);
+                console.log(dprestamos);
+                res.render('a-cobros', {
+                    user: req.user,
+                    clientes: dcartera,
+                    prestamos: dprestamos
+                });
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    let cliente = {
                         id_cli: result[i].id_cli,
                         nom_cli: decrypt(result[i].nom_cli),
                         din_cli: decrypt(result[i].din_cli),
                         tel_cli: decrypt(result[i].tel_cli)
-                      };
-                      dcartera.push(cliente);
-                      var prestamo= {
+                    };
+                    dcartera.push(cliente);
+                    let prestamo = {
                         id_pre: result[0].id_pre,
                         fec_pre: result[0].fec_pre,
                         moi_pre: decrypt(result[0].moi_pre),
                         mof_pre: result[0].mof_pre,
                         mod_pre: decrypt(result[0].mod_pre)
-                      };
-                      dprestamos.push(prestamo);
-                    }
-                  }
-                }
-                console.log(dcartera);
-                console.log(dprestamos);
-                res.render('a-cobros', {
-                  user: req.user,
-                  clientes: dcartera,
-                  prestamos: dprestamos
-                });
-              }
-              else {
-                for (var i = 0; i < result.length; i++) {
-                    var cliente= {
-                      id_cli: result[i].id_cli,
-                      nom_cli: decrypt(result[i].nom_cli),
-                      din_cli: decrypt(result[i].din_cli),
-                      tel_cli: decrypt(result[i].tel_cli)
-                    };
-                    dcartera.push(cliente);
-                    var prestamo= {
-                      id_pre: result[0].id_pre,
-                      fec_pre: result[0].fec_pre,
-                      moi_pre: decrypt(result[0].moi_pre),
-                      mof_pre: result[0].mof_pre,
-                      mod_pre: decrypt(result[0].mod_pre)
                     };
                     dprestamos.push(prestamo);
                 }
                 console.log(dcartera);
                 console.log(dprestamos);
                 res.render('a-cobros', {
-                  user: req.user,
-                  clientes: dcartera,
-                  prestamos: dprestamos
+                    user: req.user,
+                    clientes: dcartera,
+                    prestamos: dprestamos
                 });
-              }
-            });
-          });
-      }
+            }
+        });
+    });
+};
 
 
 module.exports = controller;

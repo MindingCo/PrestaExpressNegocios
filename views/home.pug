@@ -21,19 +21,19 @@ append content
                         .row.flight-state-wrapper
                             .col.five_twelfths.ha-center
                                 .flight-state
-                                    p.ultra-small Monsto diario
+                                    p.ultra-small Monto diario
                                     h4.margin= `$${prestamo.mod_pre}`
                             .col.sixth.display-container
                                 img.icon.flight-icon.display-topmiddle(src="/img/icons/white/icons8_Money_50px.png", alt="")
                             .col.five_twelfths.ha-center
                                 .flight-state
-                                    p.ultra-small Monsto faltante
+                                    p.ultra-small Monto faltante
                                     h4.margin= `$${prestamo.mof_pre}`
                         .row
                             .col.half.ha-center
                                 .flight-info
                                   p.small
-                                      span.grey-text.text-lighten-4 Prestamo inicial :
+                                      span.grey-text.text-lighten-4 Préstamo inicial :
                                   p.small.mt-2= `$${prestamo.moi_pre}`
                             .col.half.ha-center.flight-state-two
                                 .flight-info
@@ -46,7 +46,7 @@ append content
                 li.collection-item.avatar.pt-3.pb-3
                     img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
                     h6.collection-header.bold Pagos
-                    p Pagos realizados por este prestamo
+                    p Pagos realizados por este préstamo
                 for pago in pagos
                     li.collection-item
                         .row.mb-0
@@ -67,9 +67,9 @@ append content
                 .data.inline.w.third
                     h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Cliente
                 .data.inline.w.third
-                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de negocio
+                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Dirección de negocio
                 .data.inline.w.third
-                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Telefono
+                    h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Teléfono
             - var n = 0
             while n < (clientes.length < 10 ? clientes.length : 10)
                 .section.row
@@ -122,4 +122,4 @@ append content
         p= user.nom_usu
         p= user.id_tus
     else 
-        p necesitas iniciar sesion
+        p Necesitas iniciar sesión
