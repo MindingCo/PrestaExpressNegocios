@@ -10,8 +10,8 @@ window.onload = function () {
   var socket2 = io('http://31.220.53.147:8081', {forceNew: true})
 
   // Marker
-  const marker = L.marker([50.5, 30.5]); // kiev, ukraine
-  marker.bindPopup('Hello There!');
+  const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
+  marker.bindPopup('Usted se encuentra aqui!');
   map.addLayer(marker);
 
   // Geolocation
