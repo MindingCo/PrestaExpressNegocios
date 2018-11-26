@@ -308,7 +308,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarAsesor`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300),IN telefono varchar(100), IN zona int)
 BEGIN
-        INSERT INTO Asesor VALUES
+        INSERT INTO asesor VALUES
         (0,nombre,email,teléfono,zona);  
         INSERT INTO usuario VALUES
         (0,2,nombre,password,user);  
@@ -352,7 +352,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarGerente`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300),IN telefono varchar(100))
 BEGIN
-        INSERT INTO Gerente VALUES
+        INSERT INTO gerente VALUES
         (0,nombre, telefono, email);  
         INSERT INTO usuario VALUES
         (0,3,nombre,password,user);  
