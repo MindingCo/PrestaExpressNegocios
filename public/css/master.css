@@ -1590,7 +1590,7 @@ aside, nav { z-index: 3;}
     overflow-y: auto;
     left: 0;
     top: 100%;
-    height: 100%;
+    height: 90%;
     z-index: 3;
     display: none;
 }
