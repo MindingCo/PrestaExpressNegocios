@@ -96,7 +96,7 @@ module.exports = function(app, passport)
     });
 
     //routes Administrador
-    app.get('/admin/registrar', autorizacionad,(req, res, next) =>
+    app.get('/registrar', autorizacionad,(req, res, next) =>
     {
         res.render('agregarusu',
         {
