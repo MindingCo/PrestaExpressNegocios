@@ -110,12 +110,33 @@ controller.agregarusu = (req, res) => {
                       connection.query('call registrarAsesor(?,?,?,?,?,?)',[usu.username, con_usu,nombre,usu.email,tel,parseInt(usu.zona)],(err, rows) => {
                          console.log(id);
                          console.log(rows);
-                         if (err) console.log(err);
+                         if (err) {
+                           console.log(err);
+                           res.render('error', {
+                              user: req.user,
+                              message:"Ha ocurrido un error.",
+                              error: err
+                            });
+                         }
                          console.log('Call bien');
                          connection.query('select id_ase from asesor where nom_ase= ?',[nombre],(err, ase) => {
-                           if (err) console.log(err);
+                           if (err) {
+                             console.log(err);
+                             res.render('error', {
+                                user: req.user,
+                                message:"Ha ocurrido un error.",
+                                error: err
+                              });
+                           }
                            connection.query('INSERT INTO jerarquia values (0,?,?)',[id[0].id_ger, ase[0].id_ase],(err, algo) => {
-                             if (err) console.log(err);
+                             if (err) {
+                               console.log(err);
+                               res.render('error', {
+                                  user: req.user,
+                                  message:"Ha ocurrido un error.",
+                                  error: err
+                                });
+                             }
                              res.render('agregarusu', {
                                 user: req.user,
                                 message:"Se ha agregado el asesor "+ usu.nombre +" a la base."
