@@ -4,7 +4,7 @@ append content
     .content-sesion
         .w-m-5.h-s-half
             h3 Agregar usuario   
-            form(method='post', action='agregarusuario')
+            form(method='post', action='/admin/agregarusuario')
                 .camp    
                     p.w-6.befor-ipt Nombre de usuario
                     .ipt.w-6
@@ -55,7 +55,7 @@ append content
                     .ipt.w-6
                         input.w-85(type='text',name='tipo', required)
                 
-                input.btn(type='submit', value='Agregar contra')
+                input.btn(type='submit', value='Registrar')
         div
           p Aquí abajo va el mensaje 
           p= message  

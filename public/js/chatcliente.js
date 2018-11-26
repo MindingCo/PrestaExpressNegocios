@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const socket = io('http://31.220.53.147:8081', {forceNew: true});
+    const socket = io('http://25.11.221.196:8081', {forceNew: true});
     const $msg_text = $('#message-text');
     function mandarMsj() {
         const msg = $msg_text.val();

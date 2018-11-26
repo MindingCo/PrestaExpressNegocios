@@ -7,7 +7,7 @@ window.onload = function() {
   const tile = L.tileLayer(tileURL2);
 
   // Socket Io
-  var socket2 = io('http://31.220.53.147:8081', {forceNew: true})
+  var socket2 = io('http://25.11.221.196:8081', {forceNew: true})
 
   // Marker
   const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
@@ -19,10 +19,12 @@ window.onload = function() {
   map.on('locationfound', (e) => {
     const coords = [e.latlng.lat, e.latlng.lng];
     const newMarker = L.marker(coords);
-    newMarker.bindPopup('Usted se encuentra aqui!!');
+    var nom= document.getElementById("zzz").innerHTML;
+    newMarker.bindPopup(nom);
     map.addLayer(newMarker);
     socket2.emit('userCoordinates', e.latlng);
   });
+  //Obtener ID asesor
 
   // socket new User connected
   socket2.on('newUserCoordinates', (coords) => {
@@ -34,7 +36,7 @@ window.onload = function() {
     const newUserMarker = L.marker([coords.lat, coords.lng], {
       icon: userIcon
     });
-    newUserMarker.bindPopup('New User!');
+    newUserMarker.bindPopup("otro");
     map.addLayer(newUserMarker);
   });
 

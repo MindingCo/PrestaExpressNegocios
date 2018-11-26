@@ -58,25 +58,9 @@ append content
     else if user.id_tus == 2
         .col.full
             .card.p-1
-                | Mapa section :3
-        a(href="/asesor/cartera")
-            for cli in clientes
-                .col.full.m-half
-                    .card
-                        .card-image
-                            img.activator(src="/img/header-asesor.jpg", alt="user bg")
-                        .card-content.light-blue.lighten-4
-                            img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
-                            span.card-title.activator.grey-text.text-darken-4= cli.nom_cli
-                            .pt-2
-                                img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-                                p.inline Cliente
-                            .pt-2
-                                img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
-                                p.inline= cli.tel_cli
-                            .pt-2
-                                img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                                p.inline= `Direccion Negocio: ${cli.din_cli}`
+              p#zzz= user.nom_usu
+                #mapita(style="width: 90vw; height: 90vh; z-index: 0")
+        
         //- //-    Seccion de cliente (max 10)
         //- section.margin.beautyCard.floating.white
         //-     .container.margin-t
