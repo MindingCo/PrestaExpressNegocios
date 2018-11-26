@@ -47,9 +47,7 @@ app.use(flash());
 require('./routes/index.js')(app, passport);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+app.use((req, res) => res.sendFile("not_found.html", {root: path.join(__dirname, "public")}));
 
 
 // error handler

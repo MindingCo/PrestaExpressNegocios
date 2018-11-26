@@ -27,10 +27,8 @@ let keyto = crypto.createHash('sha256').update(String(key)).digest('base64').sub
   }
 
 controller.home = (req, res) => {
-    console.log(req.user.id_cli);
     if (req.user.id_tus === 1) {
       connection.query('SELECT * FROM historialpagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? AND mof_pre != 0',[req.user.id_cli], (err, pagos) => {
-        console.log(pagos);
         if (err) {
           console.log(err);
           res.render('error', {
@@ -53,9 +51,7 @@ controller.home = (req, res) => {
             ema_ase: pagos[0].ema_ase,
             tel_ase: decrypt(pagos[0].tel_ase),
             nom_zon: pagos[0].nom_zon
-          }
-          console.log(prestamo);
-          console.log(asesor);
+          };
           res.render('home', {
                user: req.user,
                pagos: pagos,

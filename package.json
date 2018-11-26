@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "export NODE_ENV=production&&node ./bin/www",
     "begin": "nodemon start"
   },
   "dependencies": {
