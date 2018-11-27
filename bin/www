@@ -6,7 +6,20 @@
 
 var app = require('../app');
 var debug = require('debug')('prestaexpressnegocios:server');
-var http = require('http');
+// Requerimientos para servidor https
+const https = require('https');
+const fs = require('fs');
+var https_options = {
+	key: fs.readFileSync('./ssl/pen.key'),
+	cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt'),
+	ca: [
+		fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
+		fs.readFileSync('./ssl/prestaexpressnegocios_me.p7b')
+	]
+}
+
+// End de procedimientos
+// var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -19,7 +32,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
