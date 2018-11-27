@@ -99,8 +99,6 @@ append content
         .col.s4
         .col.s4  
           input.right-align(placeholder='Filtrar asesor')
-      //- Multiproceso: Muchos procesadoress con un proceso cada uno
-      //- Multitarea: Varios procesos en un procesador
       br
       .divider
       .section
@@ -123,8 +121,22 @@ append content
       a(href="/admin/registrar")
         p Ir a agregar
     else if user.id_tus == 4
-        p hola Administrador
-        p= user.nom_usu
-        p= user.id_tus
+        h3 Bienvenido Administrador
+        -var parseDate = function parseDate(date) { let dias = ["Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab.","Dom."]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
+        .col-md-4
+          h4.text-center Ingresos por dia 
+          canvas#myChart(style="width: 70%; height: 100%")
+          script(src="/js/canva.js")
+        for info in prestamos
+          li.collection-item
+              .row.mb-0
+                  .col.five_twelfths  
+                    p.collections-content= info.id_pre
+                    p.collections-content= info.moi_pre
+                    p.collections-content= info.mof_pre
+                    p.collections-content= info.mod_pre
+                    p.collections-content= parseDate(info.fec_pre)     
+            
+            
     else 
         p Necesitas iniciar sesión
