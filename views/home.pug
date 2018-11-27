@@ -58,9 +58,8 @@ append content
     else if user.id_tus == 2
         .col.full
             .card.p-1
-              p#zzz= user.nom_usu
                 #mapita(style="width: 90vw; height: 90vh; z-index: 0")
-        
+                p#zzz(style="visibility: hidden")= user.nom_usu  
         //- //-    Seccion de cliente (max 10)
         //- section.margin.beautyCard.floating.white
         //-     .container.margin-t
@@ -126,17 +125,23 @@ append content
         .col-md-4
           h4.text-center Ingresos por dia 
           canvas#myChart(style="width: 70%; height: 100%")
-          script(src="/js/canva.js")
+        
         for info in prestamos
           li.collection-item
               .row.mb-0
                   .col.five_twelfths  
-                    p.collections-content= info.id_pre
-                    p.collections-content= info.moi_pre
-                    p.collections-content= info.mof_pre
-                    p.collections-content= info.mod_pre
-                    p.collections-content= parseDate(info.fec_pre)     
-            
+                    //- p.collections-content= info.id_pre
+                    //- p.collections-content= info.moi_pre
+                    //- p.collections-content= info.mof_pre
+                    //- p.collections-content= info.mod_pre
+                    //- p.collections-content= parseDate(info.fec_pre)   
+                    - var values = [info.mod_pre];
+                    ul
+                      each val in values
+                        li#valu(style="visibility: hidden")= val
+                      else
+                        li There are no values
+        script(src="/js/canva.js")    
             
     else 
         p Necesitas iniciar sesión
