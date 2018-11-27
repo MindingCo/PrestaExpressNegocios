@@ -57,7 +57,7 @@ append content
                             span.flow-text= `$${prestamos[i].mod_pre}`
                         p.payment Pago faltante:
                             span.flow-text= `$${prestamos[i].mof_pre}`
-                        button.btn.activator Registrar pago
+                        a(href='/asesor/cliente/'+cliente.id_cli) Cobrar
                     div.card-reveal
                         span.card-title Registrar pago
                             i.material-icons.right close

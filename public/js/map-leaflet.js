@@ -1,5 +1,5 @@
 window.onload = function() {
-  var map = L.map('mapita').setView([51.505, -0.09], 3);
+  var map = L.map('mapita').setView([19.45, -99.17], 14);
 
   const tileURL = 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const tileURL2 = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png';
