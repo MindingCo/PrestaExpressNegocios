@@ -67,7 +67,7 @@ CREATE TABLE `cliente` (
   `dih_cli` varchar(300) NOT NULL,
   `tel_cli` varchar(100) NOT NULL,
   PRIMARY KEY (`id_cli`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (11,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','juan@we.de','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(12,'b1159824c41760377058b091e9649146','bb@bb.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(13,'2a5fbe9652bbfd1839b721c082f9007f','mm@mm.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a');
+INSERT INTO `cliente` VALUES (11,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','juan@we.de','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(12,'b1159824c41760377058b091e9649146','bb@bb.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(13,'2a5fbe9652bbfd1839b721c082f9007f','mm@mm.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(14,'91c1a28fbe8bc257f23c19ebf50a91b0','ff@ff.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `historialpagos` (
   PRIMARY KEY (`id_pag`),
   KEY `id_pre` (`id_pre`),
   CONSTRAINT `historialpagos_ibfk_1` FOREIGN KEY (`id_pre`) REFERENCES `prestamo` (`id_pre`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `historialpagos` (
 
 LOCK TABLES `historialpagos` WRITE;
 /*!40000 ALTER TABLE `historialpagos` DISABLE KEYS */;
-INSERT INTO `historialpagos` VALUES (20,8,'2018-11-09','200','Todo bien brother'),(21,8,'2018-11-10','200','Nada, todo bien we'),(25,8,'2018-11-22','200','Todo bien, no se puso al pedo el perro este.');
+INSERT INTO `historialpagos` VALUES (20,8,'2018-11-09','200','Todo bien brother'),(21,8,'2018-11-10','200','Nada, todo bien we'),(25,8,'2018-11-22','200','Todo bien, no se puso al pedo el perro este.'),(26,12,'2018-11-27','300','Todo bien'),(27,9,'2018-11-27','200','Todo bien');
 /*!40000 ALTER TABLE `historialpagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +193,7 @@ CREATE TABLE `prestamo` (
 
 LOCK TABLES `prestamo` WRITE;
 /*!40000 ALTER TABLE `prestamo` DISABLE KEYS */;
-INSERT INTO `prestamo` VALUES (8,11,20,'2018-11-08','74421c48eaf488a12f59cf24ee65267a','0','bf017403bfe504bf66f84010f967ced6'),(9,12,21,'2018-11-22','7d42b5023edb5332b9207bfae57b7fe0','4000','670d56029ad0372137f004caec943a35'),(11,11,20,'2018-11-22','242597cbaa6275b4fe5d4070ccaeb289','3649','88ae15119fcbff18fec61ea63b225734'),(12,13,20,'2018-11-22','b3f78c41b1cbd0438c86c3eb6b34d1eb','3000','8b590d3607920ef08b8067f844cd9b60');
+INSERT INTO `prestamo` VALUES (8,11,20,'2018-11-08','74421c48eaf488a12f59cf24ee65267a','0','bf017403bfe504bf66f84010f967ced6'),(9,12,21,'2018-11-22','7d42b5023edb5332b9207bfae57b7fe0','3800','670d56029ad0372137f004caec943a35'),(11,11,20,'2018-11-22','242597cbaa6275b4fe5d4070ccaeb289','3649','88ae15119fcbff18fec61ea63b225734'),(12,13,20,'2018-11-22','b3f78c41b1cbd0438c86c3eb6b34d1eb','0','8b590d3607920ef08b8067f844cd9b60');
 /*!40000 ALTER TABLE `prestamo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id_usu`),
   KEY `id_tus` (`id_tus`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_tus`) REFERENCES `tipousuario` (`id_tus`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,7 +246,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (37,1,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','$2a$10$NtSiO27PyWnGGLe9JOYruuaKDSl/8BgJXaV2jF1oXZ0bmMgf4DaQu','priegod'),(38,2,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','asepr'),(39,3,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','gpr'),(40,2,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','kk'),(41,3,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','poce'),(42,3,'0dfa8f83330ba395e7423dc9d7d83eb5','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','pp'),(43,4,'','$2a$10$3SlNjioisRcaWEqJYFBDduYo/EntFrcaaa68CSNyyqX4dh3ZvKbXu','admin'),(44,1,'b1159824c41760377058b091e9649146','$2a$10$vmWGZN3Wa6ny/EGQvFHisubiDM7uUWdocXyMTLOeCr4cF4/kluETS','bb'),(45,1,'2a5fbe9652bbfd1839b721c082f9007f','$2a$10$lYHvuR8xXL8g9cYLoNB0vupkQjRZwUYMXwB1rMtQo4/792r1ORGpO','mm');
+INSERT INTO `usuario` VALUES (37,1,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','$2a$10$NtSiO27PyWnGGLe9JOYruuaKDSl/8BgJXaV2jF1oXZ0bmMgf4DaQu','priegod'),(38,2,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','asepr'),(39,3,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','gpr'),(40,2,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','kk'),(41,3,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','poce'),(42,3,'0dfa8f83330ba395e7423dc9d7d83eb5','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','pp'),(43,4,'','$2a$10$3SlNjioisRcaWEqJYFBDduYo/EntFrcaaa68CSNyyqX4dh3ZvKbXu','admin'),(44,1,'b1159824c41760377058b091e9649146','$2a$10$vmWGZN3Wa6ny/EGQvFHisubiDM7uUWdocXyMTLOeCr4cF4/kluETS','bb'),(45,1,'2a5fbe9652bbfd1839b721c082f9007f','$2a$10$lYHvuR8xXL8g9cYLoNB0vupkQjRZwUYMXwB1rMtQo4/792r1ORGpO','mm'),(46,1,'91c1a28fbe8bc257f23c19ebf50a91b0','$2a$10$UVcJ.NWv7wBTY8/5pAAIhOXbfeZeCvzCBd4sHNqiKcynZH5vvnFEW','ff');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,4 +372,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-25 23:59:34
+-- Dump completed on 2018-11-27 10:33:26

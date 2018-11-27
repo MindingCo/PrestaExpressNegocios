@@ -235,7 +235,7 @@ controller.agregarusu = (req, res) => {
                   }
                   res.render('agregarprestamo', {
                     user: req.user,
-                    message: 'El prestamo del cliente ' +cliente[0].nom_cli+ ' registrado con éxito'
+                    message: 'El prestamo del cliente ' +req.body.cliente+ ' registrado con éxito'
                  });
                 });
               }

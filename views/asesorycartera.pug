@@ -3,18 +3,21 @@ extends layouth
 append jscss
     
 append content    
+    -var c= clientes
     blockquote
       h2= user.nom_usu
     .row
         .col.s4
         .col.s4
         .col.s4  
-          input.right-align(placeholder='Filtrar cliente')
+          input.right-align#in(placeholder='Filtrar cliente' onkeyup="filtrar()")
+          
+            
       
     br
     .divider
     .section
-        table.responsive-table
+        table.responsive-table#tabla
           thead 
             tr  
               th Nombre del cliente
