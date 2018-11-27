@@ -1,10 +1,11 @@
 
 module.exports = {
     'connection': {
-        'host': 'localhost',
+        'host': '192.168.20.209',
         'user': 'PEN',
-        'password': 'PENmysql'
+            'password': 'PENmysql'
     },
 	'database': 'pen',
   'users_table':'usuario'
 };
+
