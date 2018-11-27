@@ -5,9 +5,12 @@ append jscss
     //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
 append content    
     if user.id_tus == 1
-        -var parseDate = function parseDate(date) { let dias = ["Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab.","Dom."]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
-        -var LasteDate = function LasteDate(diario, faltante) { let hoy = new Date(); let diasfaltantes = Math.round(faltante/diario); diasfaltantes += Math.floor(diasfaltantes/7); hoy.setDate(hoy.getDate() + diasfaltantes); if (hoy.getDay() == 6) hoy.setDate(hoy.getDate()+1); return hoy; }
+      -var parseDate = function parseDate(date) { let dias = ["Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab.","Dom."]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
+      -var LasteDate = function LasteDate(diario, faltante) { let hoy = new Date(); let diasfaltantes = Math.round(faltante/diario); diasfaltantes += Math.floor(diasfaltantes/7); hoy.setDate(hoy.getDate() + diasfaltantes); if (hoy.getDay() == 6) hoy.setDate(hoy.getDate()+1); return hoy; }
         //-     Datos del Prestamo
+      if msg
+          p= msg
+      if !msg  
         .col.full.xl-half
             .card
                 li.card-header.deep-orange.accent-2

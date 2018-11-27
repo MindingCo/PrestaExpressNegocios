@@ -61,7 +61,7 @@ controller.home = (req, res) => {
           });
         }
         else {
-          connection.query('SELECT * FROM HistorialPagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? order by id_pre DESC limit 1',[req.user.id_cli], (err, pagos1) => {
+          connection.query('SELECT * FROM historialpagos natural join prestamo natural join asesor natural join zona WHERE id_cli = ? order by id_pre DESC limit 1',[req.user.id_cli], (err, pagos1) => {
             console.log(pagos1);
             if (err) {
               console.log(err);
@@ -106,28 +106,36 @@ controller.home = (req, res) => {
                    });
                 }
                 var pags=[];
-                var prestamo= {
-                  id_pre: pres[0].id_pre,
-                  fec_pre: pres[0].fec_pre,
-                  moi_pre: decrypt(pres[0].moi_pre),
-                  mof_pre: pres[0].mof_pre,
-                  mod_pre: decrypt(pres[0].mod_pre)
-                };
-                var asesor= {
-                  id_ase: pres[0].id_ase,
-                  nom_ase: decrypt(pres[0].nom_ase),
-                  ema_ase: pres[0].ema_ase,
-                  tel_ase: decrypt(pres[0].tel_ase),
-                  nom_zon: pres[0].nom_zon
+                if (pres.length) {
+                  var prestamo= {
+                    id_pre: pres[0].id_pre,
+                    fec_pre: pres[0].fec_pre,
+                    moi_pre: decrypt(pres[0].moi_pre),
+                    mof_pre: pres[0].mof_pre,
+                    mod_pre: decrypt(pres[0].mod_pre)
+                  };
+                  var asesor= {
+                    id_ase: pres[0].id_ase,
+                    nom_ase: decrypt(pres[0].nom_ase),
+                    ema_ase: pres[0].ema_ase,
+                    tel_ase: decrypt(pres[0].tel_ase),
+                    nom_zon: pres[0].nom_zon
+                  }
+                  console.log(prestamo);
+                  console.log(asesor);
+                  res.render('home', {
+                       user: req.user,
+                       pagos: pags,
+                       prestamo: prestamo,
+                       asesor: asesor
+                  });
                 }
-                console.log(prestamo);
-                console.log(asesor);
-                res.render('home', {
-                     user: req.user,
-                     pagos: pags,
-                     prestamo: prestamo,
-                     asesor: asesor
-                });
+                else {
+                  res.render('home', {
+                       user: req.user,
+                       msg: "No hay préstamos acerca de este cliente"
+                  });
+                }
               });
             }
          });

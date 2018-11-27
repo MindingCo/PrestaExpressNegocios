@@ -30,6 +30,7 @@ module.exports = (passport) =>
 {
     passport.serializeUser((user, done) =>
     {
+        console.log("deserializeUser "+user.id_usu);
         done(null, user.id_usu);
     });
     passport.deserializeUser((id, done) =>
@@ -42,7 +43,7 @@ module.exports = (passport) =>
             }
             var tipo=rows[0].id_tus;
             var nom= rows[0].nom_usu;
-
+            console.log(id +"\n" + rows);
             switch (tipo)
             {
                 case 1:
@@ -60,19 +61,38 @@ module.exports = (passport) =>
                                 console.log(err);
                                 return done(err);
                             }
-                            var usuario = {
-                              id_cli: rows1[0].id_cli,
-                              nom_usu: decrypt(nom),
-                              ema_cli: rows1[0].ema_cli,
-                              din_cli: decrypt(rows1[0].din_cli),
-                              dih_cli: decrypt(rows1[0].dih_cli),
-                              tel_cli: decrypt(rows1[0].tel_cli),
-                              id_tus: rows1[0].id_tus,
-                              id_pre: idpre[0].id_pre,
-                              use_usu: rows1[0].use_usu
-                            };
-                            console.log(usuario);
-                            done(err, usuario);
+                            if (idpre.length) {
+                              var usuario = {
+                                id_cli: rows1[0].id_cli,
+                                nom_usu: decrypt(nom),
+                                ema_cli: rows1[0].ema_cli,
+                                din_cli: decrypt(rows1[0].din_cli),
+                                dih_cli: decrypt(rows1[0].dih_cli),
+                                tel_cli: decrypt(rows1[0].tel_cli),
+                                id_tus: rows1[0].id_tus,
+                                id_pre: idpre[0].id_pre,
+                                use_usu: rows1[0].use_usu
+                              };
+                              console.log(rows1[0].id_cli);
+                              console.log(usuario);
+                              done(err, usuario);
+                            }
+                            else {
+                              var usuario = {
+                                id_cli: rows1[0].id_cli,
+                                nom_usu: decrypt(nom),
+                                ema_cli: rows1[0].ema_cli,
+                                din_cli: decrypt(rows1[0].din_cli),
+                                dih_cli: decrypt(rows1[0].dih_cli),
+                                tel_cli: decrypt(rows1[0].tel_cli),
+                                id_tus: rows1[0].id_tus,
+                                id_pre: 0,
+                                use_usu: rows1[0].use_usu
+                              };
+                              console.log(rows1[0].id_cli,);
+                              console.log(usuario);
+                              done(err, usuario);
+                            }
                           });
                         }
                       });

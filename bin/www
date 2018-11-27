@@ -6,6 +6,19 @@
 
 var app = require('../app');
 var debug = require('debug')('prestaexpressnegocios:server');
+// Requerimientos para servidor https
+// const https = require('https');
+// const fs = require('fs');
+// var https_options = {
+// 	key: fs.readFileSync('./ssl/pen.key'),
+// 	cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt'),
+// 	ca: [
+// 		fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
+// 		fs.readFileSync('./ssl/prestaexpressnegocios_me.p7b')
+// 	]
+// }
+
+// End de procedimientos
 var http = require('http');
 
 /**
