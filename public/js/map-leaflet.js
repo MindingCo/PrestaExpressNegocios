@@ -7,7 +7,7 @@ window.onload = function() {
   const tile = L.tileLayer(tileURL2);
 
   // Socket Io
-  var socket2 = io('http://25.11.221.196:8081', {forceNew: true})
+  var socket2 = io('http://31.220.53.147:8081', {forceNew: true})
 
   // Marker
   const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
