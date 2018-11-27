@@ -2,8 +2,8 @@
 module.exports = {
     'connection': {
         'host': 'localhost',
-        'user': 'root',
-        'password': 'cotibola'
+        'user': 'PEN',
+        'password': 'PENmysql'
     },
 	'database': 'pen',
   'users_table':'usuario'
