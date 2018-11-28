@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "set NODE_ENV=production&&node ./bin/www",
+    "start": "set NODE_ENV=production && node ./bin/www",
     "begin": "nodemon start"
   },
   "dependencies": {
