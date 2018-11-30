@@ -4,41 +4,7 @@ html(lang="es")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Error
-        style(media="screen")
-            @import url('https://fonts.googleapis.com/css?family=Patua+One');
-            *
-            {
-                font-family: 'Patua One';
-                text-align: center;
-            }
-            html, body
-            {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            h1, h2, h3, h4, h5, h6
-            {
-                font-weight: 100;
-                margin: 0;
-            }
-            .divider
-            {
-                height: 4px;
-                width: 250px;
-                background-color: #EEEEEE;
-                border-radius: 10px;
-                box-shadow: 0px 3px 10px 0px rgb(154, 24, 28);
-            }
-            .shadow-text
-            {
-                text-shadow: 0px 3px 10px rgb(154, 24, 28);
-            }
-            .inline
-            {
-                vertical-align: middle;
-                display: inline-block;
-            }
+        link(rel='stylesheet', href='/css/error.css')
     body(style="height: 100%; background-color: #F06061; color: #EEEEEE; align-content: center; font-size: 200%;")
         a(href="/inicio", style="text-decoration: none; color: inherit;")
             div(style="height: 60%; overflow-y: overlay; position: relative; width: 100%;")
@@ -48,7 +14,7 @@ html(lang="es")
                         .divider.inline(style="max-width: 30%;")
                         .shadow-text.inline X
                         .divider.inline(style="max-width: 30%;")
-                    h1= message
+                    //- h1= message
                     h3= error.status
 
-                    h6(style="height: 40%; overflow-y: overlay; text-align: justify; padding: 0 20px;")= error.stack
+        span(style="height: 40%; overflow-y: overlay; padding: 0 20px; text-align: initial; !important")= message
