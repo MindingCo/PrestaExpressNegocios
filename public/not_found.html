@@ -1,167 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
-        <meta charset="utf-8">
-        <title>404 - Not found</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Error Page
+        </title>
         <style media="screen">
-            *{
+            @import url('https://fonts.googleapis.com/css?family=Patua+One');
+            *
+            {
+                font-family: 'Patua One';
+                text-align: center;
+            }
+            html, body
+            {
+                height: 100%;
                 margin: 0;
                 padding: 0;
             }
-            html{
-                height: 100%;
+            h1, h2, h3, h4, h5, h6
+            {
+                font-weight: 100;
+                margin: 0;
             }
-            body{
-                background-color: #f5f5f5;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                align-items: center;
+            .divider
+            {
+                height: 4px;
+                width: 250px;
+                background-color: #EEEEEE;
+                border-radius: 10px;
+                box-shadow: 0px 3px 10px 0px rgb(154, 24, 28);
             }
-            svg{
-                width: 100vw;
-                height: 20vh;
-                display: block;
-                position: relative;
-                overflow: hidden;
-                margin: auto;
-                background: transparent;
+            .shadow-text
+            {
+                text-shadow: 0px 3px 10px rgb(154, 24, 28);
             }
-            .landing-page{
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
-                height: 40vh;
-            }
-            .pen{
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
-                height: 20vh;
-            }
-            p{
-                margin: auto;
-                color: #424242;
-                font-size: 11vh;
-                font-family: sans-serif, helvetica, verdana, monospace;
-            }
-            a{
-                text-decoration: none;
-                color: white;
-                font-size: 10vh;
-                font-family: sans-serif, helvetica, verdana, monospace;
+            .inline
+            {
+                vertical-align: middle;
+                display: inline-block;
             }
         </style>
     </head>
-    <body>
-        <div class="pen">
-            <p>PEN</p>
-        </div>
-        <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100vw 20vh">
-            <style type="text/css">
-
-            <![CDATA[
-
-                text {
-                    filter: url(#filter);
-                    fill: black;
-                    font-family: sans-serif, helvetica, verdana, monospace;
-                    font-size: 15vh;
-                    -webkit-font-smoothing: antialiased;
-                    -moz-osx-font-smoothing: grayscale;
-                        }
-            ]]>
-            </style>
-                <defs>
-                    <filter id="filter">
-                        <feFlood flood-color="#f5f5f5" result="black" />
-                        <feFlood flood-color="red" result="flood1" />
-                        <feFlood flood-color="limegreen" result="flood2" />
-                        <feOffset in="SourceGraphic" dx="3" dy="0" result="off1a"/>
-                        <feOffset in="SourceGraphic" dx="2" dy="0" result="off1b"/>
-                        <feOffset in="SourceGraphic" dx="-3" dy="0" result="off2a"/>
-                        <feOffset in="SourceGraphic" dx="-2" dy="0" result="off2b"/>
-                        <feComposite in="flood1" in2="off1a" operator="in"  result="comp1" />
-                        <feComposite in="flood2" in2="off2a" operator="in" result="comp2" />
-
-                        <feMerge x="0" width="100%" result="merge1">
-                            <feMergeNode in = "black" />
-                            <feMergeNode in = "comp1" />
-                            <feMergeNode in = "off1b" />
-
-                            <animate
-                                attributeName="y"
-                                id = "y"
-                                dur ="4s"
-
-                                values = '104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px; 105px; 20px; 6ßpx; 40px; 104px; 40px; 70px; 10px; 30px; 104px; 102px'
-
-                                keyTimes = '0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1'
-
-                                repeatCount = "indefinite" />
-
-                            <animate attributeName="height"
-                                id = "h"
-                                dur ="4s"
-
-                                values = '10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px; 50px; 40px; 0px; 0px; 0px; 40px; 30px; 10px; 0px; 50px'
-
-                                keyTimes = '0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1'
-
-                                repeatCount = "indefinite" />
-                        </feMerge>
-
-
-                        <feMerge x="0" width="100%" y="60px" height="65px" result="merge2">
-                            <feMergeNode in = "black" />
-                            <feMergeNode in = "comp2" />
-                            <feMergeNode in = "off2b" />
-
-                            <animate attributeName="y"
-                                id = "y"
-                                dur ="4s"
-                                values = '103px; 104px; 69px; 53px; 42px; 104px; 78px; 89px; 96px; 100px; 67px; 50px; 96px; 66px; 88px; 42px; 13px; 100px; 100px; 104px;'
-
-                                keyTimes = '0; 0.055; 0.100; 0.125; 0.159; 0.182; 0.202; 0.236; 0.268; 0.326; 0.357; 0.400; 0.408; 0.461; 0.493; 0.513; 0.548; 0.577; 0.613; 1'
-
-                                repeatCount = "indefinite" />
-
-                            <animate attributeName="height"
-                                id = "h"
-                                dur = "4s"
-
-                                values = '0px; 0px; 0px; 16px; 16px; 12px; 12px; 0px; 0px; 5px; 10px; 22px; 33px; 11px; 0px; 0px; 10px'
-
-                                keyTimes = '0; 0.055; 0.100; 0.125; 0.159; 0.182; 0.202; 0.236; 0.268; 0.326; 0.357; 0.400; 0.408; 0.461; 0.493; 0.513;  1'
-
-                                repeatCount = "indefinite" />
-                        </feMerge>
-
-                        <feMerge>
-                            <feMergeNode in="SourceGraphic" />
-
-                            <feMergeNode in="merge1" />
-                        <feMergeNode in="merge2" />
-
-                        </feMerge>
-                    </filter>
-
-                </defs>
-
-                <g>
-                    <text y="10vh" x="50vw" text-anchor="middle" alignment-baseline="middle">404 Página no encontrada</text>
-                </g>
-            </svg>
-            <div class="landing-page">
-                <img src="../img/cartera-vacía.jpg">
-                <br>
-                <br>
+    <body style="height: 100%; background-color: #F06061; color: #EEEEEE; align-content: center; font-size: 200%;">
+        <a href="/inicio" style="text-decoration: none; color: inherit;">
+            <div style="height: 60%; overflow-y: overlay; position: relative;">
+                <div style="transform: translate(-50%, -50%); position: absolute; top:50%; left:50%; width: 100%;">
+                    <h1 style="margin-top: 20px;">
+                        ERROR
+                    </h1>
+                    <div style="margin: 20px 0">
+                        <div class="divider inline" style="max-width: 30%;"></div>
+                        <div class="shadow-text inline">X</div>
+                        <div class="divider inline" style="max-width: 30%;"></div>
+                    </div>
+                    <h1>
+                        404
+                    </h1>
+                    <h3>
+                        Pagina No Encontrada
+                    </h3>
+                </div>
             </div>
-            <div class="landing-page">
-            	<br>
-            	<br>
-                <a href="/">Página Principal</a>
-            </div>
+        </a>
+        <h6 style="height: 40%; overflow-y: overlay; text-align: justify; padding: 0 20px;">
+
+        </h6>
     </body>
 </html>
