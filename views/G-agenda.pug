@@ -9,12 +9,12 @@ append content
           .col.s4
           .col.s4
           .col.s4  
-            input.right-align(placeholder='Filtrar asesor')
+            input.right-align(placeholder='Filtrar asesor' id='in' onkeyup='filtrartablas()')
         
         br
         .divider
         .section
-          table.responsive-table
+          table.responsive-table#tabla
             thead 
               tr  
                 th Id Asesor

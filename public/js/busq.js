@@ -1,4 +1,4 @@
-function filtrar()
+function filtrartablas()
 		{
 			var tb = document.getElementById('tabla');
 			var tab = document.getElementById('in').value.toLowerCase();
@@ -31,3 +31,25 @@ function filtrar()
 				}
 			}
 		}
+
+function filtrarlist() {
+  var b= document.getElementById('search-input').value.toLowerCase();
+  var l = document.getElementsByTagName('li');
+  if (b == '') {
+      for (var i = 0; i < l.length; i++) {
+          document.getElementById('ele'+i).style.display = 'block';
+      }
+  }
+  for (var i = 0; i < l.length; i++) {
+      var txt = document.getElementById(i).innerHTML.toLowerCase();
+			var comparar = txt;
+					// Buscamos el texto en el contenido de la celda
+		  if (b.length == 0 || (comparar.indexOf(b) > -1))
+      {
+        document.getElementById('ele'+i).style.display = '';
+      }
+      else {
+        document.getElementById('ele'+i).style.display = 'none';
+      }
+  }
+}

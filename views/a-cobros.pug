@@ -42,31 +42,33 @@ append content
             div.nav-wrapper
                 form#search
                     div.input-field
-                        input#search-input(type="search", placeholder="Busca un cliente")
+                        input#search-input(type="search", placeholder="Busca un cliente" onkeyup='filtrarlist()')
                         label.label-icon(for="search")
                             i.material-icons search
                         i.material-icons close
-        each cliente, i in clientes
-            div.col.s12
-                div.card
-                    div.card-content
-                        span.card-title= cliente.nom_cli
-                        p= cliente.din_cli
-                        p= cliente.tel_cli
-                        p.payment Pago diario:
-                            span.flow-text= `$${prestamos[i].mod_pre}`
-                        p.payment Pago faltante:
-                            span.flow-text= `$${prestamos[i].mof_pre}`
-                        a(href='/asesor/cliente/'+cliente.id_cli) Cobrar
-                    div.card-reveal
-                        span.card-title Registrar pago
-                            i.material-icons.right close
-                        form.register-payment
-                            div.input-field
-                                input.incomplete-payment-amount#incomplete-payment-amount(type="number", value=`${prestamos[i].mod_pre}`)
-                                label(for="incomplete-payment-amount") Monto que pagó ($)
-                                span.helper-text.red-text
-                            button.register-payment.btn(type="submit")
-                                i.material-icons check
-                                span Registrar pago
-    script(type="text/javascript", src="/js/cobros.js")
+        ul
+          each cliente, i in clientes
+            li(id="ele"+i)
+              div.col.s12
+                  div.card
+                      div.card-content
+                          span.card-title(id=''+i)= cliente.nom_cli
+                          p= cliente.din_cli
+                          p= cliente.tel_cli
+                          p.payment Pago diario:
+                              span.flow-text= `$${prestamos[i].mod_pre}`
+                          p.payment Pago faltante:
+                              span.flow-text= `$${prestamos[i].mof_pre}`
+                          a(href='/asesor/cliente/'+cliente.id_cli) Cobrar
+                      div.card-reveal
+                          span.card-title Registrar pago
+                              i.material-icons.right close
+                          form.register-payment
+                              div.input-field
+                                  input.incomplete-payment-amount#incomplete-payment-amount(type="number", value=`${prestamos[i].mod_pre}`)
+                                  label(for="incomplete-payment-amount") Monto que pagó ($)
+                                  span.helper-text.red-text
+                              button.register-payment.btn(type="submit")
+                                  i.material-icons check
+                                  span Registrar pago
+    //-script(type="text/javascript", src="/js/cobros.js")
