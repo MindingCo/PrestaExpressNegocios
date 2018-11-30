@@ -162,7 +162,8 @@ function decrypt(text){
                   ema_cli: cliente[0].ema_cli,
                   dih_cli: decrypt(cliente[0].dih_cli),
                   din_cli: decrypt(cliente[0].din_cli),
-                  tel_cli: decrypt(cliente[0].tel_cli)
+                  tel_cli: decrypt(cliente[0].tel_cli),
+                  mod_pre: decrypt(cliente[0].mod_pre)
                 };
                 connection.query('select * from historialpagos natural join prestamo where id_cli= ? and fec_pag= ? and id_pre= ?',[id, f, cliente[0].id_pre], (err, est) => {
                   if (err) {
@@ -259,11 +260,11 @@ controller.cobros = (req,res) => {
                     };
                     dcartera.push(cliente);
                     let prestamo = {
-                        id_pre: result[0].id_pre,
-                        fec_pre: result[0].fec_pre,
-                        moi_pre: decrypt(result[0].moi_pre),
-                        mof_pre: result[0].mof_pre,
-                        mod_pre: decrypt(result[0].mod_pre)
+                        id_pre: result[i].id_pre,
+                        fec_pre: result[i].fec_pre,
+                        moi_pre: decrypt(result[i].moi_pre),
+                        mof_pre: result[i].mof_pre,
+                        mod_pre: decrypt(result[i].mod_pre)
                     };
                     dprestamos.push(prestamo);
                 }
