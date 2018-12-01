@@ -53,7 +53,7 @@ function decrypt(text){
             console.log(req.baseUrl);
          }
           else {
-           if (0 > mof) {
+           if (0 > mof || parseInt(req.body.montorecibido) < 0) {
              res.redirect('/asesor/cliente/'+id);
              console.log(req.baseUrl);
            }
