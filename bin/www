@@ -11,12 +11,9 @@ var https = require('https');
 const fs = require('fs');
 const conf_https =
 {
-    cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt'),
-	key: fs.readFileSync('./ssl/pen.key'),
-	ca:
-    [
-		fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle')
-	]
+    ca: fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
+    key: fs.readFileSync('./ssl/pen.key'),
+    cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt')
     // passphrase: 'PENmysql'
 }
 
@@ -27,8 +24,10 @@ const conf_https =
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8080');
+const port = normalizePort(process.env.PORT || '443');
+const hostname = 'prestaexpressnegocios.me'
 app.set('port', port);
+app.set('hostname', hostname);
 
 /**
  * Create HTTP server.
@@ -40,11 +39,11 @@ var server = https.createServer(conf_https, app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, hostname);
 server.on('error', onError);
 server.on('listening', onListening);
 
-console.log(`Ejecutando en:\n localhost:${port}`);
+console.log(`Ejecutando en:\n https://${hostname}:${port}`);
 
 /**
  * Normalize a port into a number, string, or false.
