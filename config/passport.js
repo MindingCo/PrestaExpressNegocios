@@ -5,8 +5,10 @@ var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
+var valid = require('../modules/valid.js');
 
 connection.query('USE ' + dbconfig.database);
+
 
 let iv = 'asdpiadsjfasdfxw';
 let key = 'cdsadskjldsdskjd';
@@ -41,13 +43,14 @@ module.exports = (passport) =>
               return done(err);
               console.log(err);
             }
+            console.log(rows[0].id_tus);
             var tipo=rows[0].id_tus;
             var nom= rows[0].nom_usu;
             console.log(id +"\n" + rows);
             switch (tipo)
             {
                 case 1:
-                    connection.query("select cliente.*,use_usu, id_tus from cliente inner join usuario on nom_cli = ? and nom_usu= ?",[nom, nom], (err, rows1) =>
+                    connection.query("select cliente.*,use_usu, id_usu from cliente inner join usuario on nom_cli = ? and nom_usu= ?",[nom, nom], (err, rows1) =>
                     {
                         if (err) {
                           return done(err);
@@ -63,13 +66,14 @@ module.exports = (passport) =>
                             }
                             if (idpre.length) {
                               var usuario = {
+                                id_usu: rows1[0].id_usu,
                                 id_cli: rows1[0].id_cli,
                                 nom_usu: decrypt(nom),
                                 ema_cli: rows1[0].ema_cli,
                                 din_cli: decrypt(rows1[0].din_cli),
                                 dih_cli: decrypt(rows1[0].dih_cli),
                                 tel_cli: decrypt(rows1[0].tel_cli),
-                                id_tus: rows1[0].id_tus,
+                                id_tus: tipo,
                                 id_pre: idpre[0].id_pre,
                                 use_usu: rows1[0].use_usu
                               };
@@ -79,13 +83,14 @@ module.exports = (passport) =>
                             }
                             else {
                               var usuario = {
+                                id_usu: rows1[0].id_usu,
                                 id_cli: rows1[0].id_cli,
                                 nom_usu: decrypt(nom),
                                 ema_cli: rows1[0].ema_cli,
                                 din_cli: decrypt(rows1[0].din_cli),
                                 dih_cli: decrypt(rows1[0].dih_cli),
                                 tel_cli: decrypt(rows1[0].tel_cli),
-                                id_tus: rows1[0].id_tus,
+                                id_tus: tipo,
                                 id_pre: 0,
                                 use_usu: rows1[0].use_usu
                               };
@@ -98,7 +103,7 @@ module.exports = (passport) =>
                       });
                   break
                 case 2:
-                    connection.query("SELECT asesor.*,use_usu, id_tus FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT asesor.*,use_usu, id_tus, id_usu FROM asesor inner join usuario on nom_ase = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                         if (err) {
                           console.log(err);
@@ -106,6 +111,7 @@ module.exports = (passport) =>
                         }
                         else {
                           var asesor = {
+                            id_usu: rows1[0].id_usu,
                             id_ase: rows1[0].id_ase,
                             nom_usu: decrypt(nom),
                             ema_ase: rows1[0].ema_ase,
@@ -119,7 +125,7 @@ module.exports = (passport) =>
                     });
                     break
                 case 3:
-                    connection.query("SELECT gerente.*, use_usu,id_tus FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
+                    connection.query("SELECT gerente.*, use_usu,id_tus, id_usu FROM gerente inner join usuario on nom_ger = ? and nom_usu = ?",[nom, nom], (err, rows1) =>
                     {
                       if (err) {
                         console.log(err);
@@ -127,6 +133,7 @@ module.exports = (passport) =>
                       }
                       else {
                         var gerente = {
+                          id_usu: rows1[0].id_usu,
                           id_ger: rows1[0].id_ger,
                           nom_usu: decrypt(nom),
                           ema_ger: rows1[0].ema_ger,
@@ -201,7 +208,9 @@ module.exports = (passport) =>
         },
         (req, username, password, done) =>
         {
-
+            var est= valid.login(username, password);
+            if (est)
+              return done(null, false, req.flash('loginMessage', est));
             connection.query("SELECT * FROM usuario WHERE use_usu = ?",[username], (err, rows) =>
             {
                 if (err)

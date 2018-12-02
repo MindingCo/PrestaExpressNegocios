@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 var mysql = require('mysql');
 var dbconfig = require('../config/database');
 var connection = mysql.createConnection(dbconfig.connection);
+var valid = require('./valid');
 connection.query('USE ' + dbconfig.database);
 
 
@@ -310,25 +311,15 @@ controller.home = (req, res) => {
     }
 };
 
-const validatePassword = (password, msg_field) => {
-    if (!password.length)
-        return `Escriba la ${msg_field}`;
-    if (password.length < 7)
-        return `La ${msg_field} debe ser mayor a 6 caracteres`;
-    if (password.length > 16)
-        return `La ${msg_field} debe ser menor a 17 caracteres`;
-    return false;
-};
-
 controller.mcontraseña = (req, res) => {
     const contra_actual = req.body.contraactual;
     const contra_nueva = req.body.newcontra;
     const confirm_contra_nueva = req.body.connewcontra;
 
-    let invalid = validatePassword(contra_actual, "contraseña actual");
+    let invalid = valid.contra(contra_actual, "contraseña actual");
     if (invalid)
         return res.render("sesion", {user: req.user, error: invalid});
-    invalid = validatePassword(contra_nueva, "contraseña nueva");
+    invalid = valid.contra(contra_nueva, "contraseña nueva");
     if (invalid)
         return res.render("sesion", {user: req.user, error: invalid});
 
@@ -339,8 +330,7 @@ controller.mcontraseña = (req, res) => {
         });
     }
     else {
-      const nombre = req.user.use_usu; //mejor hacer esta consulta con ids
-      connection.query('SELECT * FROM usuario where use_usu= ?', [nombre], (err, usu) => {
+      connection.query('SELECT * FROM usuario where id_usu= ?', [req.body.id_usu], (err, usu) => {
           if (err) {
             console.log(err);
             return res.render('error', {

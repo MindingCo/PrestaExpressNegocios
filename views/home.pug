@@ -94,6 +94,9 @@ append content
         //-                     b.light-blue-text.text-darken-3= clientes[n++].tel_cli
         
     else if user.id_tus == 3
+      if msg
+        p= msg
+      if !msg
         div.nav
           div.nav-wrapper
               form
@@ -121,35 +124,38 @@ append content
         a(href="/admin/registrar")
             p Ir a agregar
     else if user.id_tus == 4
-        -var parseDate = function parseDate(date) { let dias = ["Lu", "Ma.", "Mi.", "Ju.", "Vie", "Sa.","Do."]; let meses = ["En.", "Feb.", "Mzo.", "Abr.", "My", "Jun.", "Jul.", "Ag.", "Sep.", "Oct.", "Nov.", "Dic."]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
-        .col.full
-            .card
-                li.card-header.deep-orange.accent-2
-                    .card-title
-                        img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
-                        h4.flight-card-title.inline Ingresos por dia
-                .white-text.p-1
-                            canvas#myChart(style="width: 100%; height: 200%")
-        //- .col-md-4
-        //-   h4.text-center Ingresos por dia 
-        //-   canvas#myChart(style="width: 70%; height: 100%")
-        
-        for info in prestamos
-          li.collection-item
-              .row.mb-0
-                  .col.five_twelfths  
-                    //- p.collections-content= info.id_pre
-                    //- p.collections-content= info.moi_pre
-                    //- p.collections-content= info.mof_pre
-                    //- p.collections-content= info.mod_pre
-                    //- p.collections-content= parseDate(info.fec_pre)   
-                    - var values = [info.mod_pre];
-                    ul
-                      each val in values
-                        li#valu(style="visibility: hidden")= val
-                      else
-                        li There are no values
-        script(src="/js/canva.js")    
+        if msg
+            p= msg
+        if !msg
+            -var parseDate = function parseDate(date) { let dias = ["Lu", "Ma.", "Mi.", "Ju.", "Vie", "Sa.","Do."]; let meses = ["En.", "Feb.", "Mzo.", "Abr.", "My", "Jun.", "Jul.", "Ag.", "Sep.", "Oct.", "Nov.", "Dic."]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
+            .col.full
+                .card
+                    li.card-header.deep-orange.accent-2
+                        .card-title
+                            img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
+                            h4.flight-card-title.inline Ingresos por dia
+                    .white-text.p-1
+                                canvas#myChart(style="width: 100%; height: 200%")
+            //- .col-md-4
+            //-   h4.text-center Ingresos por dia 
+            //-   canvas#myChart(style="width: 70%; height: 100%")
+            
+            for info in prestamos
+              li.collection-item
+                  .row.mb-0
+                      .col.five_twelfths  
+                        //- p.collections-content= info.id_pre
+                        //- p.collections-content= info.moi_pre
+                        //- p.collections-content= info.mof_pre
+                        //- p.collections-content= info.mod_pre
+                        //- p.collections-content= parseDate(info.fec_pre)   
+                        - var values = [info.mod_pre];
+                        ul
+                          each val in values
+                            li#valu(style="visibility: hidden")= val
+                          else
+                            li There are no values
+            script(src="/js/canva.js")    
             
     else 
         p Necesitas iniciar sesión

@@ -39,7 +39,7 @@ CREATE TABLE `asesor` (
   PRIMARY KEY (`id_ase`),
   KEY `id_zon` (`id_zon`),
   CONSTRAINT `asesor_ibfk_1` FOREIGN KEY (`id_zon`) REFERENCES `zona` (`id_zon`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `asesor` (
 
 LOCK TABLES `asesor` WRITE;
 /*!40000 ALTER TABLE `asesor` DISABLE KEYS */;
-INSERT INTO `asesor` VALUES (20,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','ase@pr.com','fcea9e70ac2a5455a1786222e60fa77a',1),(21,'d54c9d2239c53367f6f7b42300eacaa6','kk@kk','fcea9e70ac2a5455a1786222e60fa77a',2);
+INSERT INTO `asesor` VALUES (20,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','ase@pr.com','fcea9e70ac2a5455a1786222e60fa77a',1),(21,'d54c9d2239c53367f6f7b42300eacaa6','kk@kk','fcea9e70ac2a5455a1786222e60fa77a',2),(22,'f3cc619ac0a4963cc3cdd2ea4f27984ee62b4bde26729ca82dfe8e45df583868','robert@gamil.com','85cd9ceac35cb1c30df44c505701dcfd',3);
 /*!40000 ALTER TABLE `asesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `cliente` (
   `dih_cli` varchar(300) NOT NULL,
   `tel_cli` varchar(100) NOT NULL,
   PRIMARY KEY (`id_cli`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (11,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','juan@we.de','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(12,'b1159824c41760377058b091e9649146','bb@bb.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(13,'2a5fbe9652bbfd1839b721c082f9007f','mm@mm.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(14,'91c1a28fbe8bc257f23c19ebf50a91b0','ff@ff.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a');
+INSERT INTO `cliente` VALUES (11,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','juan@we.de','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(12,'b1159824c41760377058b091e9649146','bb@bb.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(13,'2a5fbe9652bbfd1839b721c082f9007f','mm@mm.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(14,'91c1a28fbe8bc257f23c19ebf50a91b0','ff@ff.com','539d81cb849772ecb9f4a0b5ab0723c0','be51a71fe3390e64c275725aa2a073ba','fcea9e70ac2a5455a1786222e60fa77a'),(15,'98394ecd14f625e083840256a85a706e8b66514270a04ce068fe6917bc4bca44','gerar@gmail.com','0aed49cbbe4bb2859579c19472861e19','3d4a2579c2bf1f8857356203c41d3733','2411ddce554a07c792dfb0c6822900c7'),(16,'9e08003be7d7399982b5ba2c37ec0cf2917c3dc0c0fece42598e36ccf9bc1b1b','ram@gmail.com','b7a2ff815e0cca4928e510d833dc8778','11c678c5196c7494d3f50f5e47194a18','cbb71789b9bac4991d5fa453ac877cad'),(18,'bf1cf67e3a0ffccdf873e059d0a83d420270fcd2e7ab45658e14c0eae021bc5e','ola@mail.com','e379b868c0e5a59cddbac716733468a8','4fa0c683ab696f874564c1b1565041db','6f3a679d0d6a550fc45fd61806d5c3b8');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `gerente` (
   `tel_ger` varchar(100) NOT NULL,
   `ema_ger` varchar(300) NOT NULL,
   PRIMARY KEY (`id_ger`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `gerente` (
 
 LOCK TABLES `gerente` WRITE;
 /*!40000 ALTER TABLE `gerente` DISABLE KEYS */;
-INSERT INTO `gerente` VALUES (5,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','fcea9e70ac2a5455a1786222e60fa77a','gr@pr.es'),(6,'d54c9d2239c53367f6f7b42300eacaa6','fcea9e70ac2a5455a1786222e60fa77a','kk@kk'),(7,'0dfa8f83330ba395e7423dc9d7d83eb5','fcea9e70ac2a5455a1786222e60fa77a','popo@popo');
+INSERT INTO `gerente` VALUES (5,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','fcea9e70ac2a5455a1786222e60fa77a','gr@pr.es'),(6,'d54c9d2239c53367f6f7b42300eacaa6','fcea9e70ac2a5455a1786222e60fa77a','kk@kk'),(7,'0dfa8f83330ba395e7423dc9d7d83eb5','fcea9e70ac2a5455a1786222e60fa77a','popo@popo'),(8,'423824b28fa1e36549123111cc73fa73557c5bcd97c842dc156985c795f2be11','b30656a8b4701df560cd326dd9387173','jesus@gmail.com');
 /*!40000 ALTER TABLE `gerente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `historialpagos` (
   PRIMARY KEY (`id_pag`),
   KEY `id_pre` (`id_pre`),
   CONSTRAINT `historialpagos_ibfk_1` FOREIGN KEY (`id_pre`) REFERENCES `prestamo` (`id_pre`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `historialpagos` (
 
 LOCK TABLES `historialpagos` WRITE;
 /*!40000 ALTER TABLE `historialpagos` DISABLE KEYS */;
-INSERT INTO `historialpagos` VALUES (20,8,'2018-11-09','200','Todo bien brother'),(21,8,'2018-11-10','200','Nada, todo bien we'),(25,8,'2018-11-22','200','Todo bien, no se puso al pedo el perro este.'),(26,12,'2018-11-27','300','Todo bien'),(27,9,'2018-11-27','200','Todo bien');
+INSERT INTO `historialpagos` VALUES (20,8,'2018-11-09','200','Todo bien brother'),(21,8,'2018-11-10','200','Nada, todo bien we'),(25,8,'2018-11-22','200','Todo bien, no se puso al pedo el perro este.'),(26,12,'2018-11-27','300','Todo bien'),(27,9,'2018-11-27','200','Todo bien'),(32,14,'2018-12-02','200','Todo bien');
 /*!40000 ALTER TABLE `historialpagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `jerarquia` (
   KEY `id_ase` (`id_ase`),
   CONSTRAINT `jerarquia_ibfk_1` FOREIGN KEY (`id_ger`) REFERENCES `gerente` (`id_ger`),
   CONSTRAINT `jerarquia_ibfk_2` FOREIGN KEY (`id_ase`) REFERENCES `asesor` (`id_ase`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `jerarquia` (
 
 LOCK TABLES `jerarquia` WRITE;
 /*!40000 ALTER TABLE `jerarquia` DISABLE KEYS */;
-INSERT INTO `jerarquia` VALUES (21,5,20),(22,5,21);
+INSERT INTO `jerarquia` VALUES (21,5,20),(22,5,21),(23,8,22);
 /*!40000 ALTER TABLE `jerarquia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +184,7 @@ CREATE TABLE `prestamo` (
   KEY `id_ase` (`id_ase`),
   CONSTRAINT `prestamo_ibfk_1` FOREIGN KEY (`id_cli`) REFERENCES `cliente` (`id_cli`),
   CONSTRAINT `prestamo_ibfk_2` FOREIGN KEY (`id_ase`) REFERENCES `asesor` (`id_ase`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +193,7 @@ CREATE TABLE `prestamo` (
 
 LOCK TABLES `prestamo` WRITE;
 /*!40000 ALTER TABLE `prestamo` DISABLE KEYS */;
-INSERT INTO `prestamo` VALUES (8,11,20,'2018-11-08','74421c48eaf488a12f59cf24ee65267a','0','bf017403bfe504bf66f84010f967ced6'),(9,12,21,'2018-11-22','7d42b5023edb5332b9207bfae57b7fe0','3800','670d56029ad0372137f004caec943a35'),(11,11,20,'2018-11-22','242597cbaa6275b4fe5d4070ccaeb289','3649','88ae15119fcbff18fec61ea63b225734'),(12,13,20,'2018-11-22','b3f78c41b1cbd0438c86c3eb6b34d1eb','0','8b590d3607920ef08b8067f844cd9b60');
+INSERT INTO `prestamo` VALUES (8,11,20,'2018-11-08','74421c48eaf488a12f59cf24ee65267a','0','bf017403bfe504bf66f84010f967ced6'),(9,12,21,'2018-11-22','7d42b5023edb5332b9207bfae57b7fe0','3800','670d56029ad0372137f004caec943a35'),(11,11,20,'2018-11-22','242597cbaa6275b4fe5d4070ccaeb289','3649','88ae15119fcbff18fec61ea63b225734'),(12,13,20,'2018-11-22','b3f78c41b1cbd0438c86c3eb6b34d1eb','0','8b590d3607920ef08b8067f844cd9b60'),(13,15,22,'2018-12-02','33d158ebadfa818d85084993fc71b8d2','0','8b590d3607920ef08b8067f844cd9b60'),(14,16,22,'2018-12-02','65e2743dea191f24d11883323466d42a','5600','bf017403bfe504bf66f84010f967ced6');
 /*!40000 ALTER TABLE `prestamo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id_usu`),
   KEY `id_tus` (`id_tus`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_tus`) REFERENCES `tipousuario` (`id_tus`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,7 +246,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (37,1,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','$2a$10$NtSiO27PyWnGGLe9JOYruuaKDSl/8BgJXaV2jF1oXZ0bmMgf4DaQu','priegod'),(38,2,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','asepr'),(39,3,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','gpr'),(40,2,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','kk'),(41,3,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','poce'),(42,3,'0dfa8f83330ba395e7423dc9d7d83eb5','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','pp'),(43,4,'','$2a$10$3SlNjioisRcaWEqJYFBDduYo/EntFrcaaa68CSNyyqX4dh3ZvKbXu','admin'),(44,1,'b1159824c41760377058b091e9649146','$2a$10$vmWGZN3Wa6ny/EGQvFHisubiDM7uUWdocXyMTLOeCr4cF4/kluETS','bb'),(45,1,'2a5fbe9652bbfd1839b721c082f9007f','$2a$10$lYHvuR8xXL8g9cYLoNB0vupkQjRZwUYMXwB1rMtQo4/792r1ORGpO','mm'),(46,1,'91c1a28fbe8bc257f23c19ebf50a91b0','$2a$10$UVcJ.NWv7wBTY8/5pAAIhOXbfeZeCvzCBd4sHNqiKcynZH5vvnFEW','ff');
+INSERT INTO `usuario` VALUES (37,1,'843d4650e6c2ac2767c627d3745e3f6adca7f45ad4eb6766d711987764dad929','$2a$10$NtSiO27PyWnGGLe9JOYruuaKDSl/8BgJXaV2jF1oXZ0bmMgf4DaQu','priegod'),(38,2,'4cb4aad18bc4206e50575f730523dd1bef5de715fc7d12d7024998073ac71205','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','asepr'),(39,3,'b6982b8bd220729e89b382b7fcaf7c74af340ca2642ddbcca68a4105d30f9acf','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','gpr'),(40,2,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','kk'),(41,3,'d54c9d2239c53367f6f7b42300eacaa6','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','poce'),(42,3,'0dfa8f83330ba395e7423dc9d7d83eb5','$2a$10$PYLCpToPyl6g9h0RoLPv7u4McTh5yQF3ETabacOMcSQMHFaLOhAsq','pp'),(43,4,'','$2a$10$aqvWPl.Q.7YKtef7eVfI3O2oCP/lhVbLINtRD/nOzWZSL0h6skAWS','admin'),(44,1,'b1159824c41760377058b091e9649146','$2a$10$vmWGZN3Wa6ny/EGQvFHisubiDM7uUWdocXyMTLOeCr4cF4/kluETS','bb'),(45,1,'2a5fbe9652bbfd1839b721c082f9007f','$2a$10$lYHvuR8xXL8g9cYLoNB0vupkQjRZwUYMXwB1rMtQo4/792r1ORGpO','mm'),(46,1,'91c1a28fbe8bc257f23c19ebf50a91b0','$2a$10$UVcJ.NWv7wBTY8/5pAAIhOXbfeZeCvzCBd4sHNqiKcynZH5vvnFEW','ff'),(47,1,'98394ecd14f625e083840256a85a706e8b66514270a04ce068fe6917bc4bca44','$2a$10$OdaJUfgLe218sJyJ3rV.muU7xPYpBCxgJJL5RAGVfoWUlh0j0D9YO','elkarin'),(48,3,'423824b28fa1e36549123111cc73fa73557c5bcd97c842dc156985c795f2be11','$2a$10$llOAXd3RL7plgVTwiWXIUuz5bEFOWcZZpBoMTcga9/ltTHPQYqdMq','user11'),(49,2,'f3cc619ac0a4963cc3cdd2ea4f27984ee62b4bde26729ca82dfe8e45df583868','$2a$10$LCD7wCndZ/MMAFdiVsAgVesdPNUD/URpirJFjKJp/mv.QIyvNCzx2','user12'),(50,1,'9e08003be7d7399982b5ba2c37ec0cf2917c3dc0c0fece42598e36ccf9bc1b1b','$2a$10$k6nlonY4TsZ4sCw6OMB7Ru1wAFjYAmsy417UIOgSUq3gXN2CliDfq','client1'),(51,1,'bf1cf67e3a0ffccdf873e059d0a83d420270fcd2e7ab45658e14c0eae021bc5e','$2a$10$xQUHIJK9TLHdhvPT.RKtxOkBpuyCq7FsTuh5pqYR/2w2lGO0WfOhS','elyamcha');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,4 +372,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-27 10:33:26
+-- Dump completed on 2018-12-02  3:29:55

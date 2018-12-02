@@ -3,6 +3,9 @@ extends layouth
 append jscss
 
 append content
+  if msg
+      p= msg
+  if !msg
     .col.full
         .card
             .card-image
