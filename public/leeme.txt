@@ -1,0 +1,2 @@
+Lo del pago si quieres hacerlo con ajax, en consultamysqlas Todo lo que sea redirect lo cambias a return res.json({est}); o return res.json({mensaje: '...');
+Igual el res.send lo cambias a lo anterior
