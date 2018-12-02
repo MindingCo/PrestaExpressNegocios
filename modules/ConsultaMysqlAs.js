@@ -53,7 +53,7 @@ function decrypt(text){
             console.log(req.baseUrl);
          }
           else {
-           if (0 > mof) {
+           if (0 > mof || parseInt(req.body.montorecibido) < 0) {
              res.redirect('/asesor/cliente/'+id);
              console.log(req.baseUrl);
            }
@@ -233,11 +233,11 @@ controller.cobros = (req,res) => {
                             };
                             dcartera.push(cliente);
                             const prestamo = {
-                                id_pre: result[0].id_pre,
-                                fec_pre: result[0].fec_pre,
-                                moi_pre: decrypt(result[0].moi_pre),
-                                mof_pre: result[0].mof_pre,
-                                mod_pre: decrypt(result[0].mod_pre)
+                                id_pre: result[i].id_pre,
+                                fec_pre: result[i].fec_pre,
+                                moi_pre: decrypt(result[i].moi_pre),
+                                mof_pre: result[i].mof_pre,
+                                mod_pre: decrypt(result[i].mod_pre)
                             };
                             dprestamos.push(prestamo);
                         }

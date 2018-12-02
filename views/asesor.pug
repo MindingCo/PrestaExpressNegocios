@@ -7,31 +7,32 @@ append content
         .card
             .card-image
                 img.activator(src="/img/header-asesor.jpg", alt="user bg")
-            .card-content.light-blue.lighten-4
+            .card-content.grad_color-bsc02
                 img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
                 span.card-title.activator.grey-text.text-darken-4= asesor.nom_ase
                 .pt-2
-                    img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-                    | Asesor
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+                    p.inline.pl-1 Asesor
                 .pt-2
                     img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
-                    p.inline= asesor.tel_ase
+                    p.inline.pl-1= asesor.tel_ase
                 .pt-2
                     img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                    p.inline= asesor.ema_ase
+                    p.inline.pl-1= asesor.ema_ase
             
-            .card-reveal
-                span.card-title.display-container.grey-text.text-darken-4= asesor.nom_ase
+            .card-reveal.display-container.col.full
+                span.card-title.grey-text.text-darken-4= asesor.nom_ase
+                img.display-topright.icon.card-title(src="/img/icons/icons8_Delete_50px.png", alt="", style="padding: 24px;")
                 p Informacion compleata del asesor
                 div
-                    img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-                    | Asesor
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+                    p.inline Asesor
                 div
                     img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
-                    p.inline= asesor.tel_ase
+                    p.inline.pl-1= asesor.tel_ase
                 div
                     img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                    p.inline= asesor.ema_ase
+                    p.inline.pl-1= asesor.ema_ase
                 div
                     img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                    p.inline= `Zona: ${asesor.nom_zon}`
+                    p.inline.pl-1= `Zona: ${asesor.nom_zon}`

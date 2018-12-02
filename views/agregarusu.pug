@@ -1,61 +1,103 @@
 extends layouth
 
 append content
-    .content-sesion
-        .w-m-5.h-s-half
-            h3 Agregar usuario   
-            form(method='post', action='/admin/agregarusuario')
-                .camp    
-                    p.w-6.befor-ipt Nombre de usuario
-                    .ipt.w-6
-                        input.w-85(type='text',name='username', required)
-                        img(src='/img/icons/icons8_Eye_32px.png')
-                .camp    
-                    p.w-6.befor-ipt Contraseña 
-                    .ipt.w-6
-                        input.w-85(type='password', name='password',required)
-                        img(src='/img/icons/icons8_Eye_32px.png')
-                .camp    
-                    p.w-6.befor-ipt Confirmar contraseña nueva
-                    .ipt.w-6
-                        input.w-85(type='password',name='repassword', required)
-                        img(src='/img/icons/icons8_Eye_32px.png')
-                .camp    
-                    p.w-6.befor-ipt Nombre
-                    .ipt.w-6
-                        input.w-85(type='text',name='nombre', required)
-                
-                .camp    
-                    p.w-6.befor-ipt Email
-                    .ipt.w-6
-                        input.w-85(type='text',name='email', required)
+    .col.full
+        .card
+            li.card-header.deep-orange.accent-2
+                .card-title
+                    img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
+                    h4.flight-card-title.inline Registra a un usuario
+            .white
+                .card-content.white
+                    .row
+                        form#Agregarusu(method='post', action='/admin/agregarusuario')
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input(type='text',name='username', placeholder='Usuario',  required)
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input(type='password', name='password', placeholder='Contraseña', required)
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input(type='password',name='repassword', placeholder='Confirmar contraseña',  required)
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input(type='text',name='nombre', placeholder='Nombre completo',  required)
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input(type='text',name='email', placeholder='Correo electronico',  required)
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input(type='text',name='tel', placeholder='Telefono',  required)
+                            .camp
+                                .input-field.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    select(name='tipo', form="Agregarusu", required)
+                                        option(disabled selected) Tipo de usuario
+                                        option(value="1") Cliente
+                                        option(value="2") Asesor
+                                        option(value="3") Gerente
+                                        option(value="4") Administrador
+                                        //- input(type='text',name='tipo', placeholder='Tipo Usuario',  required)
+                            div#extracamp
+                            .camp
+                                .ipt.col.full.m-three_quarters.l-two_thirds.xl-seven_twelfths
+                                    input.btn(type='submit', value='Registrar')
+                                    
                         
-                .camp    
-                    p.w-6.befor-ipt Telefono
-                    .ipt.w-6
-                        input.w-85(type='text',name='tel', required)
-                .camp    
-                    p.w-6.befor-ipt Dir casa
-                    .ipt.w-6
-                        input.w-85(type='text',name='dirc')      
-                .camp    
-                    p.w-6.befor-ipt Dir n
-                    .ipt.w-6
-                        input.w-85(type='text',name='dirn')
-                .camp    
-                    p.w-6.befor-ipt Superior
-                    .ipt.w-6
-                        input.w-85(type='text',name='supe', required)
-                .camp    
-                    p.w-6.befor-ipt Zona
-                    .ipt.w-6
-                        input.w-85(type='text',name='zona', required)
-                .camp    
-                    p.w-6.befor-ipt Tipo de usuario
-                    .ipt.w-6
-                        input.w-85(type='text',name='tipo', required)
-                
-                input.btn(type='submit', value='Registrar')
+        //- .w-m-5.h-s-half
+        //-     h3 Agregar usuario   
+        //-     form(method='post', action='/admin/agregarusuario')
+        //-         .camp    
+        //-             p.w-6.befor-ipt Nombre de usuario
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='username', required)
+        //-                 img(src='/img/icons/icons8_Eye_32px.png')
+        //-         .camp    
+        //-             p.w-6.befor-ipt Contraseña 
+        //-             .ipt.w-6
+        //-                 input.w-85(type='password', name='password',required)
+        //-                 img(src='/img/icons/icons8_Eye_32px.png')
+        //-         .camp    
+        //-             p.w-6.befor-ipt Confirmar contraseña nueva
+        //-             .ipt.w-6
+        //-                 input.w-85(type='password',name='repassword', required)
+        //-                 img(src='/img/icons/icons8_Eye_32px.png')
+        //-         .camp    
+        //-             p.w-6.befor-ipt Nombre
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='nombre', required)
+        //- 
+        //-         .camp    
+        //-             p.w-6.befor-ipt Email
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='email', required)
+        //- 
+        //-         .camp    
+        //-             p.w-6.befor-ipt Telefono
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='tel', required)
+        //-         .camp    
+        //-             p.w-6.befor-ipt Dir casa
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='dirc')      
+        //-         .camp    
+        //-             p.w-6.befor-ipt Dir n
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='dirn')
+        //-         .camp    
+        //-             p.w-6.befor-ipt Superior
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='supe', required)
+        //-         .camp    
+        //-             p.w-6.befor-ipt Zona
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='zona', required)
+        //-         .camp    
+        //-             p.w-6.befor-ipt Tipo de usuario
+        //-             .ipt.w-6
+        //-                 input.w-85(type='text',name='tipo', required)
+        //- 
+        //-         input.btn(type='submit', value='Registrar')
         div
           p Aquí abajo va el mensaje 
           p= message  
