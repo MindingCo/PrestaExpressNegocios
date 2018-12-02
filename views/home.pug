@@ -94,6 +94,9 @@ append content
         //-                     b.light-blue-text.text-darken-3= clientes[n++].tel_cli
         
     else if user.id_tus == 3
+      if msg
+        p= msg
+      if !msg
         div.nav
           div.nav-wrapper
               form
@@ -123,26 +126,29 @@ append content
     else if user.id_tus == 4
         h3 Bienvenido Administrador
         -var parseDate = function parseDate(date) { let dias = ["Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab.","Dom."]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
-        .col-md-4
-          h4.text-center Ingresos por dia 
-          canvas#myChart(style="width: 70%; height: 100%")
-        
-        for info in prestamos
-          li.collection-item
-              .row.mb-0
-                  .col.five_twelfths  
-                    //- p.collections-content= info.id_pre
-                    //- p.collections-content= info.moi_pre
-                    //- p.collections-content= info.mof_pre
-                    //- p.collections-content= info.mod_pre
-                    //- p.collections-content= parseDate(info.fec_pre)   
-                    - var values = [info.mod_pre];
-                    ul
-                      each val in values
-                        li#valu(style="visibility: hidden")= val
-                      else
-                        li There are no values
-        script(src="/js/canva.js")    
+        if msg
+            p= msg
+        if !msg
+            .col-md-4
+              h4.text-center Ingresos por dia 
+              canvas#myChart(style="width: 70%; height: 100%")
+            
+            for info in prestamos
+              li.collection-item
+                  .row.mb-0
+                      .col.five_twelfths  
+                        //- p.collections-content= info.id_pre
+                        //- p.collections-content= info.moi_pre
+                        //- p.collections-content= info.mof_pre
+                        //- p.collections-content= info.mod_pre
+                        //- p.collections-content= parseDate(info.fec_pre)   
+                        - var values = [info.mod_pre];
+                        ul
+                          each val in values
+                            li#valu(style="visibility: hidden")= val
+                          else
+                            li There are no values
+            script(src="/js/canva.js")    
             
     else 
         p Necesitas iniciar sesión

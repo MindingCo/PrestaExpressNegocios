@@ -46,7 +46,10 @@ append content
                         label.label-icon(for="search")
                             i.material-icons search
                         i.material-icons close
-        ul
+        if msg
+          p= msg
+        if !msg
+         ul
           each cliente, i in clientes
             li(id="ele"+i)
               div.col.s12
