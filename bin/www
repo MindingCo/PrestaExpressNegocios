@@ -25,9 +25,7 @@ const conf_https =
  */
 
 const port = normalizePort(process.env.PORT || '443');
-const hostname = 'prestaexpressnegocios.me'
 app.set('port', port);
-app.set('hostname', hostname);
 
 /**
  * Create HTTP server.
@@ -39,11 +37,11 @@ var server = https.createServer(conf_https, app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, hostname);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-console.log(`Ejecutando en:\n https://${hostname}:${port}`);
+console.log(`Ejecutando en:\n https://localhost:${port}`);
 
 /**
  * Normalize a port into a number, string, or false.
