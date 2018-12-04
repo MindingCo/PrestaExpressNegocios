@@ -308,10 +308,10 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarAsesor`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300),IN telefono varchar(100), IN zona int)
 BEGIN
-        INSERT INTO asesor VALUES
-        (0,nombre,email,teléfono,zona);  
-        INSERT INTO usuario VALUES
-        (0,2,nombre,password,user);  
+        INSERT INTO asesor (nom_ase, ema_ase, tel_ase, id_zon) VALUES
+        (nombre,email,teléfono,zona);  
+        INSERT INTO usuario (id_tus, nom_usu, con_usu, use_usu) VALUES
+        (2,nombre,password,user);  
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -330,10 +330,10 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarCliente`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300), IN dir_neg VARCHAR(300), IN dir_casa VARCHAR(300),IN telefono varchar(100))
 BEGIN
-        INSERT INTO cliente VALUES
-        (0,nombre,email,dir_neg,dir_casa,telefono);  
-        INSERT INTO usuario VALUES
-        (0,1,nombre,password,user);  
+        INSERT INTO cliente (nom_cli, ema_cli, din_cli, dih_cli, tel_cli) VALUES
+        (nombre,email,dir_neg,dir_casa,telefono);  
+        INSERT INTO usuario (id_tus, nom_usu, con_usu, use_usu) VALUES
+        (1,nombre,password,user);  
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -352,10 +352,10 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarGerente`(IN user varchar(100), IN password VARCHAR(500), IN nombre VARCHAR(200), IN email VARCHAR(300),IN telefono varchar(100))
 BEGIN
-        INSERT INTO gerente VALUES
-        (0,nombre, telefono, email);  
-        INSERT INTO usuario VALUES
-        (0,3,nombre,password,user);  
+        INSERT INTO gerente (nom_ger, tel_ger, ema_ger) VALUES
+        (nombre, telefono, email);  
+        INSERT INTO usuario (id_tus, nom_usu, con_usu, use_usu) VALUES
+        (3,nombre,password,user);  
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
