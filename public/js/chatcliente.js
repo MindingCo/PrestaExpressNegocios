@@ -52,12 +52,12 @@ $(document).ready(function() {
 
     socket.on('new_message', mensaje =>{
         const chat = document.querySelector("#chat");
-        const msg_node = createMessageOtro(mensaje);
-        chat.appendChild(msg_node);
-    });
-    socket.on('mi_message', mensaje =>{
-        const chat = document.querySelector("#chat");
         const msg_node = createMessageYo(mensaje);
         chat.appendChild(msg_node);
     });
+    // socket.on('mi_message', mensaje =>{
+    //     const chat = document.querySelector("#chat");
+    //     const msg_node = createMessageYo(mensaje);
+    //     chat.appendChild(msg_node);
+    // });
 });
