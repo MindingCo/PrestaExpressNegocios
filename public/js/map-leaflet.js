@@ -7,7 +7,7 @@ window.onload = function() {
   const tile = L.tileLayer(tileURL2);
 
   // Socket Io
-  var socket2 = io('https://prestaexpressnegocios.me:8081', {forceNew: true})
+  var socket2 = io('https://'+location.hostname+'', {forceNew: true})
 
   // Marker
   const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
@@ -19,8 +19,7 @@ window.onload = function() {
   map.on('locationfound', (e) => {
     const coords = [e.latlng.lat, e.latlng.lng];
     const newMarker = L.marker(coords);
-    var nom= document.getElementById("zzz").innerHTML;
-    newMarker.bindPopup(nom);
+    newMarker.bindPopup("nom");
     map.addLayer(newMarker);
     socket2.emit('userCoordinates', e.latlng);
   });
