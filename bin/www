@@ -36,7 +36,7 @@ var server = https.createServer(conf_https, app);
 var app2 = require('../app');
 const port2 = normalizePort(process.env.PORT || '666');
 app2.set('port', port2);
-https.createServer(conf_https, app2)
+https.createServer(conf_https, app2).listen(666)
 console.log(`Corriendo servidor 2 en ${port2}`);
 
 /**
