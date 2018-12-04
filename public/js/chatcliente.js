@@ -3,7 +3,7 @@ $(document).ready(function() {
     const $msg_text = $('#message-text');
     function mandarMsj() {
         const msg = $msg_text.val();
-        socket.emit('mi_message', msg);
+        socket.emit('new_message', msg);
         $msg_text.val(null);
         return false;
     }
