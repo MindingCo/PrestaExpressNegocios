@@ -1,7 +1,7 @@
 
 module.exports = {
     'connection': {
-        'host': 'localhost',
+        'host': '31.220.53.147',
         'user': 'PEN',
             'password': 'PENmysql'
     },
