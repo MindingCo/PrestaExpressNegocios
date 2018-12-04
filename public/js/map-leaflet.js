@@ -7,7 +7,7 @@ window.onload = function() {
   const tile = L.tileLayer(tileURL2);
 
   // Socket Io
-  var socket2 = io('/', {forceNew: true})
+  var socket2 = io('https://prestaexpressnegocios.me/', {forceNew: true})
 
   // Marker
   const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
