@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const socket = io('/', {forceNew: true});
+    const socket = io('https://prestaexpressnegocios.me', {forceNew: true});
     const $msg_text = $('#message-text');
     function mandarMsj() {
         const msg = $msg_text.val();
