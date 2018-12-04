@@ -32,6 +32,10 @@ app.set('port', port);
  */
 // var server = https.createServer(app);
 var server = https.createServer(conf_https, app);
+// Servidor 2 para ponchis >:v
+var app2 = require('../app');
+app2.set('port', 666);
+https.createServer(conf_https, app2)
 
 /**
  * Listen on provided port, on all network interfaces.
