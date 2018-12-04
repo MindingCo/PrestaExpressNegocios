@@ -48,8 +48,11 @@ $(document).ready(() =>
         if($(this).val() == 1)
             $('#extracamp').html('<div class="camp"> <div class="ipt col full m-three_quarters l-two_thirds xl-seven_twelfths"> <input type="text" name="dirc" placeholder="Direccion de casa" required /> </div> </div> <div class="camp"> <div class="ipt col full m-three_quarters l-two_thirds xl-seven_twelfths"> <input type="text" name="dirn" placeholder="Direccion de negocio" required /> </div> </div>')
         if($(this).val() == 2)
-            $('#extracamp').html('<div class="camp"> <div class="ipt col full m-three_quarters l-two_thirds xl-seven_twelfths"> <input type="text" name="supe" placeholder="Gerente correspondiente" required /> </div> </div> <div class="camp"> <div class="ipt col full m-three_quarters l-two_thirds xl-seven_twelfths"> <input type="text" name="zona" placeholder="Zona" required /> </div> </div>')
-        if($(this).val() == 3 || $(this).val() == 4)
+        {
+            $('#extracamp').html('<div class="camp"> <div class="ipt col full m-three_quarters l-two_thirds xl-seven_twelfths"> <input type="text" name="supe" placeholder="Gerente correspondiente" required /> </div> </div> <div class="camp"> <div class="ipt col full m-three_quarters l-two_thirds xl-seven_twelfths"> <select name="zona" form="Agregarusu" required > <option disabled selected> Zona </option> <option value="1"> Norte </option> <option value="2"> Sur </option> <option value="3"> Este </option> <option value="4"> Oeste </option> </select> </div> </div>')
+            $('select').formSelect();
+        }
+        if($(this).val() == 3)
             $('#extracamp').html('')
     });
 })
