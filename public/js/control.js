@@ -1,3 +1,5 @@
+if (document.location.hostname == '31.220.53.147')
+    document.location.replace('https://prestaexpressnegocios.me')
 $(document).ready(() =>
 {
     $('.input-field > img').click(function ()
