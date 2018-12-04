@@ -509,7 +509,7 @@ controller.mcontraseña = (req, res) => {
         });
     }
     else {
-      connection.query('SELECT * FROM usuario where id_usu= ?', [req.body.id_usu], (err, usu) => {
+      connection.query('SELECT * FROM usuario where id_usu= ?', [req.user.id_usu], (err, usu) => {
           if (err) {
             console.log(err);
             return res.render('error', {
@@ -518,7 +518,7 @@ controller.mcontraseña = (req, res) => {
                error: err
              });
           }
-          console.log(usu);
+          console.log(JSON.stringify(usu));
           if (!bcrypt.compareSync(contra_actual, usu[0].con_usu)) {
            console.log('contra incorrecta');
            return res.render('sesion', {
