@@ -9,9 +9,9 @@ append content
         h5 Prestamo
         .divider
         form.col.s12(method='post', action='/admin/agpre')
-            .card-panel.teal.lighten-2
-                p Aquí abajo va el mensaje 
-                p= message  
+            if(message != null)
+              .card-panel.teal.lighten-2
+                  p= message  
             .section
                 .row
                     .input-field.valign-wrapper
