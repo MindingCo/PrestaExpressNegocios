@@ -220,7 +220,7 @@ valids.asesor = asesor => {
     return "Ingresa solo números en el número telefónico";
   if (!isNaN(asesor.password))
     return `La contraseña no puede ser solo números`;
-  if (asesor.zona != "1" || asesor.zona != "2" || asesor.zona != "3" || asesor.zona != "4" || asesor.zona != 1 || asesor.zona != 2 || asesor.zona != 3 || asesor.zona != 4)
+  if (asesor.zona != "1" && asesor.zona != "2" && asesor.zona != "3" && asesor.zona != "4" && asesor.zona && 1 && asesor.zona != 2 && asesor.zona != 3 && asesor.zona != 4)
     return `Ingresa una zona válida`;
 
 
