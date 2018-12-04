@@ -202,10 +202,7 @@ function decrypt(text){
 
 controller.cobros = (req,res) => {
     const dt = new Date();
-    const month = dt.getMonth()+1;
-    const day = dt.getDate();
-    const year = dt.getFullYear();
-    const f= year + '-' + month + '-' + day;
+    const f= (dt.getFullYear()) + '-' + (dt.getMonth()+1) + '-' + (dt.getDate());
 
     var dcartera=[];
     var dprestamos= [];
@@ -228,6 +225,7 @@ controller.cobros = (req,res) => {
         }
         console.log('exp '+exp);
         var st= 'select * from cliente natural join prestamo where id_ase = ? and mof_pre != 0 and '+exp;
+        console.log('loging st: \n'+st);
         connection.query(st,[req.user.id_ase, exp],(err, result1) =>{
           if (err) {
                  console.error(err);

@@ -184,6 +184,7 @@ controller.home = (req, res) => {
     }
 
     if (req.user.id_tus === 3) {
+
       connection.query('SELECT id_ase,nom_ase,ema_ase,tel_ase,nom_zon from jerarquia natural join asesor natural join zona where id_ger = ?',[req.user.id_ger], (err, asesores) => {
         console.log(req.user);
         console.log(asesores);
@@ -206,61 +207,239 @@ controller.home = (req, res) => {
               };
               dasesores.push(ases);
             }
-            connection.query('Select * from cliente limit 50', (err, clientes) => {
-                if(err) {
-                  console.log(err);
-                  res.render('error', {
-                     user: req.user,
-                     message:"Ha ocurrido un error.",
-                     error: err
-                   });
+
+            const dt = new Date();
+            const f= (dt.getFullYear()) + '-' + (dt.getMonth()+1) + '-' + (dt.getDate());
+
+            var dcartera=[];
+            var dprestamos= [];
+            connection.query('Select * from prestamo natural join cliente natural join historialpagos natural join jerarquia where mof_pre != 0 and id_ger= ? and fec_pag = ?',[req.user.id_ger, f],(err, result) =>{
+              if (err) {
+                     console.error(err);
+                     return res.render('error', {
+                         user: req.user,
+                         message:"Ha ocurrido un error.",
+                         error: err
+                     });
+              }
+              if (result.length) {
+                var exp='';
+                for (var i = 0; i < result.length; i++) {
+                  exp= exp + 'id_pre != ' +result[i].id_pre;
+                  j= i+1;
+                  if(j < result.length)
+                    exp= exp+' and ';
                 }
-                console.log(clientes);
-                var dclientes=[];
-                for (var i = 0; i < clientes.length; i++) {
-                  var cli= {
-                    nom_cli: decrypt(clientes[i].nom_cli),
-                    din_cli: clientes[i].ema_cli,
-                    tel_cli: decrypt(clientes[i].tel_cli)
-                  };
-                  dclientes.push(cli);
-                }
-                console.log(dclientes);
-                console.log(dasesores);
-                res.render('home', {
-                  user: req.user,
-                  asesores: dasesores,
-                  clientes: dclientes
+                console.log('exp '+exp);
+                var st= 'select cliente.*, prestamo.*, nom_ase from cliente natural join prestamo natural join jerarquia natural join asesor where id_ger = ? and mof_pre!=0 and '+exp;
+                console.log('loging st: \n'+st);
+                connection.query(st,[req.user.id_ger, exp],(err, result1) =>{
+                  if (err) {
+                         console.error(err);
+                         return res.render('error', {
+                             user: req.user,
+                             message:"Ha ocurrido un error.",
+                             error: err
+                         });
+                  }
+                  console.log(result1);
+                  if (result1.length) {
+                    for (var i = 0; i < result1.length; i++){
+                      var cliente = {
+                          id_cli: result1[i].id_cli,
+                          nom_cli: decrypt(result1[i].nom_cli),
+                          din_cli: decrypt(result1[i].din_cli),
+                          tel_cli: decrypt(result1[i].tel_cli)
+                      }
+                      dcartera.push(cliente);
+                      var prestamo = {
+                          id_pre: result1[i].id_pre,
+                          fec_pre: result1[i].fec_pre,
+                          moi_pre: decrypt(result1[i].moi_pre),
+                          mof_pre: result1[i].mof_pre,
+                          mod_pre: decrypt(result1[i].mod_pre),
+                          nom_ase: decrypt(result[i].nom_ase)
+                      }
+                      dprestamos.push(prestamo);
+                    }
+                    res.render('home', {
+                        user: req.user,
+                        asesores: dasesores,
+                        clientes: dcartera,
+                        prestamos: dprestamos
+                    });
+                  }
+
+                  else {
+                    res.render('home', {
+                        user: req.user,
+                        asesores: dasesores
+                    });
+                  }
+                })
+              }
+              else {
+                connection.query('select cliente.*, prestamo.*, nom_ase from cliente natural join prestamo natural join jerarquia natural join asesor where id_ger = ? and mof_pre!=0',[req.user.id_ger],(err, result)=>{
+                  for (let i = 0; i < result.length; i++) {
+                      let cliente = {
+                          id_cli: result[i].id_cli,
+                          nom_cli: decrypt(result[i].nom_cli),
+                          din_cli: decrypt(result[i].din_cli),
+                          tel_cli: decrypt(result[i].tel_cli)
+                      };
+                      dcartera.push(cliente);
+                      let prestamo = {
+                          id_pre: result[i].id_pre,
+                          fec_pre: result[i].fec_pre,
+                          moi_pre: decrypt(result[i].moi_pre),
+                          mof_pre: result[i].mof_pre,
+                          mod_pre: decrypt(result[i].mod_pre),
+                          nom_ase: decrypt(result[i].nom_ase)
+                      };
+                      dprestamos.push(prestamo);
+                  }
+                  console.log(dcartera);
+                  console.log(dprestamos);
+                  res.render('home', {
+                      user: req.user,
+                      asesores: dasesores,
+                      clientes: dcartera,
+                      prestamos: dprestamos
+                  });
                 });
+              }
             });
+            // connection.query('select fec_pag, mon_pag, com_pag, nom_cli, din_cli, tel_cli, nom_ase from prestamo natural join cliente natural join asesor natural join jerarquia natural join historialpagos where id_ger = ?',[5], (err, clientes) => {
+            //     if(err) {
+            //       console.log(err);
+            //       res.render('error', {
+            //          user: req.user,
+            //          message:"Ha ocurrido un error.",
+            //          error: err
+            //        });
+            //     }
+            //     console.log(clientes);
+            //     var dclientes=[];
+            //     for (var i = 0; i < clientes.length; i++) {
+            //       var cli= {
+            //         fec_pag: clientes[i].fec_pag,
+            //         mon_pag: clientes[i].mon_pag,
+            //         com_pag: clientes[i].com_pag,
+            //         nom_cli: decrypt(clientes[i].nom_cli),
+            //         din_cli: clientes[i].din_cli,
+            //         tel_cli: decrypt(clientes[i].tel_cli),
+            //         nom_ase: decrypt(clientes[i].nom_ase)
+            //       };
+            //       dclientes.push(cli);
+            //     }
+            //     console.log(dclientes);
+            //     console.log(dasesores);
+            //     res.render('home', {
+            //       user: req.user,
+            //       asesores: dasesores,
+            //       clientes: dclientes
+            //     });
+            // });
           }
           else {
-            connection.query('Select * from cliente limit 50', (err, clientes) => {
-                if(err) {
-                  console.log(err);
-                  res.render('error', {
-                     user: req.user,
-                     message:"Ha ocurrido un error.",
-                     error: err
-                   });
+              const dt = new Date();
+              const f= (dt.getFullYear()) + '-' + (dt.getMonth()+1) + '-' + (dt.getDate());
+
+              var dcartera=[];
+              var dprestamos= [];
+              connection.query('Select * from prestamo natural join cliente natural join historialpagos natural join jerarquia where mof_pre != 0 and id_ger= ? and fec_pag = ?',[req.user.id_ger, f],(err, result) =>{
+                if (err) {
+                       console.error(err);
+                       return res.render('error', {
+                           user: req.user,
+                           message:"Ha ocurrido un error.",
+                           error: err
+                       });
                 }
-                console.log(clientes);
-                var dclientes=[];
-                for (var i = 0; i < clientes.length; i++) {
-                  var cli= {
-                    nom_cli: decrypt(clientes[i].nom_cli),
-                    din_cli: clientes[i].ema_cli,
-                    tel_cli: decrypt(clientes[i].tel_cli)
-                  };
-                  dclientes.push(cli);
+                if (result.length) {
+                  var exp='';
+                  for (var i = 0; i < result.length; i++) {
+                    exp= exp + 'id_pre != ' +result[i].id_pre;
+                    j= i+1;
+                    if(j < result.length)
+                      exp= exp+' and ';
+                  }
+                  console.log('exp '+exp);
+                  var st= 'select cliente.*, prestamo.*, nom_ase from cliente natural join prestamo natural join jerarquia natural join asesor where id_ger = ? and mof_pre!=0 and '+exp;
+                  console.log('loging st: \n'+st);
+                  connection.query(st,[req.user.id_ger, exp],(err, result1) =>{
+                    if (err) {
+                           console.error(err);
+                           return res.render('error', {
+                               user: req.user,
+                               message:"Ha ocurrido un error.",
+                               error: err
+                           });
+                    }
+                    console.log(result1);
+                    if (result1.length) {
+                      for (var i = 0; i < result1.length; i++){
+                        var cliente = {
+                            id_cli: result1[i].id_cli,
+                            nom_cli: decrypt(result1[i].nom_cli),
+                            din_cli: decrypt(result1[i].din_cli),
+                            tel_cli: decrypt(result1[i].tel_cli)
+                        }
+                        dcartera.push(cliente);
+                        var prestamo = {
+                            id_pre: result1[i].id_pre,
+                            fec_pre: result1[i].fec_pre,
+                            moi_pre: decrypt(result1[i].moi_pre),
+                            mof_pre: result1[i].mof_pre,
+                            mod_pre: decrypt(result1[i].mod_pre),
+                            nom_ase: decrypt(result[i].nom_ase)
+                        }
+                        dprestamos.push(prestamo);
+                      }
+                      res.render('home', {
+                          user: req.user,
+                          asesores: dasesores,
+                          clientes: dcartera,
+                          prestamos: dprestamos
+                      });
+                    }
+                    else {
+                      res.render('home', {
+                          user: req.user,
+                          asesores: dasesores
+                      });
+                    }
+                  })
                 }
-                console.log(dclientes);
-                res.render('home', {
-                  user: req.user,
-                  msg: 'No tienes asesores a cargo',
-                  clientes: dclientes
-                });
-            });
+                else {
+                  connection.query('select cliente.*, prestamo.*, nom_ase from cliente natural join prestamo natural join jerarquia natural join asesor where id_ger = ? and mof_pre!=0',[req.user.id_ger],(err, result)=>{
+                    for (let i = 0; i < result.length; i++) {
+                        let cliente = {
+                            id_cli: result[i].id_cli,
+                            nom_cli: decrypt(result[i].nom_cli),
+                            din_cli: decrypt(result[i].din_cli),
+                            tel_cli: decrypt(result[i].tel_cli)
+                        };
+                        dcartera.push(cliente);
+                        let prestamo = {
+                            id_pre: result[i].id_pre,
+                            fec_pre: result[i].fec_pre,
+                            moi_pre: decrypt(result[i].moi_pre),
+                            mof_pre: result[i].mof_pre,
+                            mod_pre: decrypt(result[i].mod_pre),
+                            nom_ase: decrypt(result[i].nom_ase)
+                        };
+                        dprestamos.push(prestamo);
+                    }
+                    console.log(dcartera);
+                    console.log(dprestamos);
+                    res.render('home', {
+                        user: req.user,
+                        msg: 'No hay nada nuevo hoy'
+                    });
+                  });
+                }
+              });
           }
         }
       });

@@ -119,10 +119,48 @@ append content
                             p.inline Asesor
                         .pt-2
                             img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                            p.inline= `Zona: ${asesor.nom_zon}`
-        br
-        a(href="/admin/registrar")
-            p Ir a agregar
+                            p.inline= `Zona: ${asesores[i].nom_zon}`
+        //-     Historial de pagos
+        .col.full.m-full
+            ul.collection.z-depth-1
+                li.collection-item.avatar.pt-3.pb-3
+                    img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
+                    h6.collection-header.bold Pagos pendientes
+                    p Todos los que faltan el dia de hoy
+                if !clientes
+                    li.collection-item
+                        .row.mb-0
+                            .col.full
+                                p.collections-title No hay pagos pendientes el dia de hoy :)
+                else if clientes
+                    for cli,i in clientes
+                        li.collection-item
+                            .row.mb-0
+                                .col.five_twelfths
+                                    p.collections-title= cli.nom_cli
+                                    p.collections-content= `$${prestamos[i].mod_pre}`
+                                .col.seven_twelfths
+                                    span.task-cat.blocked.grey-text.text-darken-4= `Asesor a cargo: ${prestamos[i].nom_ase}`
+        //- ul
+        //-   for cli,i in clientes
+        //-     li(id='ele'+i)
+        //-       .col.full.m-half
+        //-         .card
+        //-             .card-image
+        //-                 img.activator(src="/img/header-asesor.jpg", alt="user bg")
+        //-             .card-content.light-blue.lighten-4
+        //-                 img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
+        //-                 span.card-title.activator.grey-text.text-darken-4(id=''+i)= cli.nom_cli
+        //-                 .pt-2
+        //-                     img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+        //-                     p.inline Prestamin
+        //-                 .pt-2
+        //-                     img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+        //-                     p.inline= `asesor: ${prestamos[i].nom_ase}`
+        
+        //- br
+        //- a(href="/admin/registrar")
+        //-     p Ir a agregar
     else if user.id_tus == 4
         if msg
             p= msg
