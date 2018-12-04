@@ -10,7 +10,7 @@ var app = express();
 // var server = require('http').Server(app);
 var server = require('https').Server(app);
 
-var io = require('socket.io')(8081);
+var io = require('socket.io')(server);
 
 var indexRouter = require('./routes/index');
 var port = process.env.PORT || 443;

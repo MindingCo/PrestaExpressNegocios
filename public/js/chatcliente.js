@@ -1,9 +1,8 @@
 $(document).ready(function() {
-    const socket = io('http://'+location.hostname, {forceNew: true});
+    const socket = io('/', {forceNew: true});
     const $msg_text = $('#message-text');
     function mandarMsj() {
         const msg = $msg_text.val();
-
         socket.emit('new_message', msg);
         $msg_text.val(null);
         return false;
