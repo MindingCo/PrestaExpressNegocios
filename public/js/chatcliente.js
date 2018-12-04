@@ -20,24 +20,9 @@ $(document).ready(function() {
 
 
     // CHAT VALIDACIÓN SENCILLA
-    const createMessageYo = mensaje => {
+    const createMessageNode = mensaje => {
         const li = document.createElement("li");
         li.className = "yo";
-
-        const div = document.createElement("div");
-        div.className = "msg";
-
-        const p = document.createElement("p");
-        p.textContent = mensaje;
-
-        div.appendChild(p);
-        li.appendChild(div);
-        return li;
-    };
-    // CHAT VALIDACIÓN SENCILLA
-    const createMessageOtro = mensaje => {
-        const li = document.createElement("li");
-        li.className = "other";
 
         const div = document.createElement("div");
         div.className = "msg";
@@ -52,12 +37,7 @@ $(document).ready(function() {
 
     socket.on('new_message', mensaje =>{
         const chat = document.querySelector("#chat");
-        const msg_node = createMessageYo(mensaje);
+        const msg_node = createMessageNode(mensaje);
         chat.appendChild(msg_node);
     });
-    // socket.on('mi_message', mensaje =>{
-    //     const chat = document.querySelector("#chat");
-    //     const msg_node = createMessageYo(mensaje);
-    //     chat.appendChild(msg_node);
-    // });
 });
