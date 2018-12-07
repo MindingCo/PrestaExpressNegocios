@@ -1,96 +1,56 @@
-extends layouth
-append jscss
-    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
-    style(type="text/css").
-        div > input {
-            margin-left: 42px !important;
-        }
-        #logout {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        footer {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        #save-changes {
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-append content
-    .col.full.xl-half
-        .card
-            li.card-header.indigo.accent-2
-                .card-title
-                    img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
-                    h4.flight-card-title.inline Cambiar contraseña
-            .white
-                .card-content.white
-                    .row.flight-state-wrapper
-                        .col.full.m-two_thirds.l-seven_twelfths.ha-center
-                            form#modify.w.full.container(method='post', action='/sesion')
-                                div.row.input-field.valign-wrapper.display-container
-                                    i.material-icons.prefix vpn_key
-                                    input#antigua.validate(name='contraactual', type='password', pattern=".{6,16}", required)
-                                    label(for='antigua') Contraseña antigua
-                                    span.helper-text.red-text
-                                div.row.input-field.valign-wrapper.display-container
-                                    i.material-icons.prefix vpn_key
-                                    input#nueva.validate(name='newcontra', type='password', pattern=".{6,16}", required)
-                                    label(for='nueva') Contraseña nueva
-                                    span.helper-text.red-text
-                                div.row.input-field.valign-wrapper.display-container
-                                    i.material-icons.prefix vpn_key
-                                    input#confirmacion.validate(name='connewcontra', type='password', pattern=".{6,16}", required)
-                                    label(for='confirmacion') Confirmar contraseña nueva
-                                    span.helper-text.red-text
-                                div.row
-                                    button#save-changes.btn.waves-effect.hoverable(type='submit')
-                                        i.material-icons check
-                                        span Guardar cambios  
+style(type="text/css").
+    div > input {
+        margin-left: 42px !important;
+    }
+    #logout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    footer {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #save-changes {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+.col.full.xl-half
+    .card
+        li.card-header.indigo.accent-2
+            .card-title
+                img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
+                h4.flight-card-title.inline Cambiar contraseña
+        .white
+            .card-content.white
+                .row.flight-state-wrapper
+                    .col.full.m-two_thirds.l-seven_twelfths.ha-center
+                        form#modify.w.full.container(method='post', action='/sesion')
+                            div.row.input-field.valign-wrapper.display-container
+                                i.material-icons.prefix vpn_key
+                                input#antigua.validate(name='contraactual', type='password', pattern=".{6,16}", required)
+                                label(for='antigua') Contraseña antigua
+                                span.helper-text.red-text
+                            div.row.input-field.valign-wrapper.display-container
+                                i.material-icons.prefix vpn_key
+                                input#nueva.validate(name='newcontra', type='password', pattern=".{6,16}", required)
+                                label(for='nueva') Contraseña nueva
+                                span.helper-text.red-text
+                            div.row.input-field.valign-wrapper.display-container
+                                i.material-icons.prefix vpn_key
+                                input#confirmacion.validate(name='connewcontra', type='password', pattern=".{6,16}", required)
+                                label(for='confirmacion') Confirmar contraseña nueva
+                                span.helper-text.red-text
+                            div.row
+                                button#save-changes.btn.waves-effect.hoverable(type='submit')
+                                    i.material-icons check
+                                    span Guardar cambios  
     .center-align
         a(href='/logout')
             .btn Cerrar Sesion
-                            
-    //- .row.h-full
-    //-     .w.s-full.m-full.l-half.xl-half.h-s-half.h-m-full.h-l-full.h-xl-full    
-    //-         b
-    //-             h3 Cambiar Contraseña
-    //-         if (error)
-    //-             h4.red-text= error
-    //-         if (message)
-    //-             h4.green-text= message
-    //-         .divider
-    //-         form#modify.w.full.container(method='post', action='/sesion')
-    //-             div.row.input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
-    //-                 i.material-icons.prefix vpn_key
-    //-                 input#antigua.validate.w.xl-fivesixth(name='contraactual', type='password', pattern=".{6,16}", required)
-    //-                 label(for='antigua') Contraseña antigua
-    //-                 span.helper-text.red-text
-    //-             div.row.input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
-    //-                 i.material-icons.prefix vpn_key
-    //-                 input#nueva.validate.w.xl-fivesixth(name='newcontra', type='password', pattern=".{6,16}", required)
-    //-                 label(for='nueva') Contraseña nueva
-    //-                 span.helper-text.red-text
-    //-             div.row.input-field.valign-wrapper.display-container.w.l-threequarter.xl-threequarter
-    //-                 i.material-icons.prefix vpn_key
-    //-                 input#confirmacion.validate.w.xl-fivesixth(name='connewcontra', type='password', pattern=".{6,16}", required)
-    //-                 label(for='confirmacion') Confirmar contraseña nueva
-    //-                 span.helper-text.red-text
-    //-             div.row
-    //-                 button#save-changes.btn.waves-effect.hoverable(type='submit')
-    //-                     i.material-icons check
-    //-                     span Guardar cambios
-        .w.s-full.m-full.l-half.xl-half.display-container.h-s-half.h-m-half.h-l-full.h-xl-full
-            .display-bottommiddle
-                a(href='/logout')
-                    button.btn.hoverable#logout
-                        i.material-icons power_settings_new
-                        span Cerrar sesion
     footer.p-2
         .center-align
             a(href='/politicas.html')

@@ -23,12 +23,14 @@ module.exports = function(app, passport)
     });
     app.post('/iniciosesion', passport.authenticate('local-login',
     {
-        successRedirect : '/inicio',
+        successRedirect : '/home',
         failureRedirect : '/',
         failureFlash : true
     }));
 
-    app.get('/inicio', autorizacion, cons.home);
+    app.get('/home', autorizacion, cons.home);
+
+    app.get('/inicio', autorizacion, cons.inicio);
 
     app.get('/sesion', autorizacion, (req, res) =>
     {

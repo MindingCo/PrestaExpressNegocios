@@ -13,8 +13,9 @@ block content
                 input.log-in(type="password", name="password", placeholder="Contraseña", maxlength="20", required)
                 input.log-in.in-log(type="submit", name="logear", value="Iniciar Sesion")
                 
+            if message.length > 0
+                p(style='margin: 5% !important; background-color: #ff0c0cab; padding: 1% !important; border-radius: 5px;')= message
         .footer
-          p= message
             .terminos
                 a(href="politicas.html")
                     p Leer Términos y Condiciones

@@ -1,36 +1,31 @@
-extends layouth
-
-append jscss
-    
-append content    
-    -var c= clientes
-    blockquote
-      h2= user.nom_usu
-    .row
-        .col.s4
-        .col.s4
-        .col.s4  
-          input.right-align#in(placeholder='Filtrar cliente' onkeyup="filtrartablas()")
-          
-            
+-var c= clientes
+blockquote
+  h2= user.nom_usu
+.row
+    .col.s4
+    .col.s4
+    .col.s4  
+      input.right-align#in(placeholder='Filtrar cliente' onkeyup="filtrartablas()")
       
-    br
-    .divider
-    .section
-        table.responsive-table#tabla
-          thead 
-            tr  
-              th Nombre del cliente
-              th Dirección del negocio
-              th
-          tbody
-            each cliente in clientes
-              tr
-                td= cliente.nom_cli
-                td= cliente.din_cli
-                td 
-                  a.btn(href="/gerente/cliente/"+cliente.id_cli) Detalles del cliente 
-    .divider
-    .section
-        a(href="/agregarusuario")
-        p Ir a agregar
+        
+  
+br
+.divider
+.section
+    table.responsive-table#tabla
+      thead 
+        tr  
+          th Nombre del cliente
+          th Dirección del negocio
+          th
+      tbody
+        each cliente in clientes
+          tr
+            td= cliente.nom_cli
+            td= cliente.din_cli
+            td 
+              a.btn(href="/gerente/cliente/"+cliente.id_cli) Detalles del cliente 
+.divider
+.section
+    a(href="/agregarusuario")
+    p Ir a agregar

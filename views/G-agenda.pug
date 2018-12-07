@@ -1,49 +1,44 @@
-extends layouth
-
-append jscss
-    
-append content   
-    div.nav
-      div.nav-wrapper
-          form
-              div.input-field
-                  input#search-input(type="search", placeholder="Busca un cliente" onkeyup='filtrarlist()')
-                  label.label-icon(for="search")
-                      
-    ul
-      for asesor,i in asesores
-        li(id='ele'+i)
-          .col.full.m-half
-            .card
-                .card-image
-                    img.activator(src="/img/header-asesor.jpg", alt="user bg")
-                .card-content.light-blue.lighten-4
-                    img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
-                    span.card-title.activator.grey-text.text-darken-4(id=''+i)= asesor.nom_ase
-                    .pt-2
-                        img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-                        p.inline Asesor
-                    .pt-2
-                        img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
-                        p.inline= asesor.tel_ase
-                    .pt-2
-                        img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                        p.inline= asesor.ema_ase
-                
-                .card-reveal
-                    span.card-title.display-container.grey-text.text-darken-4= asesor.nom_ase
-                    div
-                        img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-                        p.inline Asesor
-                    div
-                        img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
-                        p.inline= asesor.tel_ase
-                    div
-                        img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                        p.inline= asesor.ema_ase
-                    div
-                        img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                        p.inline= asesor.nom_zon
-                    div
-                        img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                        p.inline= `ID: ${asesor.id_ase}`
+div.nav
+  div.nav-wrapper
+      form
+          div.input-field
+              input#search-input(type="search", placeholder="Busca un cliente" onkeyup='filtrarlist()')
+              label.label-icon(for="search")
+                  
+ul
+  for asesor,i in asesores
+    li(id='ele'+i)
+      .col.full.m-half
+        .card
+            .card-image
+                img.activator(src="/img/header-asesor.jpg", alt="user bg")
+            .card-content.light-blue.lighten-4
+                img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
+                span.card-title.activator.grey-text.text-darken-4(id=''+i)= asesor.nom_ase
+                .pt-2
+                    img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+                    p.inline Asesor
+                .pt-2
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
+                    p.inline= asesor.tel_ase
+                .pt-2
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+                    p.inline= asesor.ema_ase
+            
+            .card-reveal
+                span.card-title.display-container.grey-text.text-darken-4= asesor.nom_ase
+                div
+                    img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+                    p.inline Asesor
+                div
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Phone_50px.png", alt="")
+                    p.inline= asesor.tel_ase
+                div
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+                    p.inline= asesor.ema_ase
+                div
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+                    p.inline= asesor.nom_zon
+                div
+                    img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+                    p.inline= `ID: ${asesor.id_ase}`

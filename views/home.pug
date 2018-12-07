@@ -1,199 +1,193 @@
-extends layouth
-
-append jscss
-    //- link(rel='stylesheet', href='/css/cliente.css')
-    //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
-append content    
-    if user.id_tus == 1
-      -var parseDate = function parseDate(date) { let dias = ["Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab.","Dom."]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
-      -var LasteDate = function LasteDate(diario, faltante) { let hoy = new Date(); let diasfaltantes = Math.round(faltante/diario); diasfaltantes += Math.floor(diasfaltantes/7); hoy.setDate(hoy.getDate() + diasfaltantes); if (hoy.getDay() == 6) hoy.setDate(hoy.getDate()+1); return hoy; }
-        //-     Datos del Prestamo
-      if msg
-          p= msg
-      if !msg  
-        .col.full.xl-half
+if user.id_tus == 1
+  -var parseDate = function parseDate(date) { let dias = ["Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab.","Dom."]; let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
+  -var LasteDate = function LasteDate(diario, faltante) { let hoy = new Date(); let diasfaltantes = Math.round(faltante/diario); diasfaltantes += Math.floor(diasfaltantes/7); hoy.setDate(hoy.getDate() + diasfaltantes); if (hoy.getDay() == 6) hoy.setDate(hoy.getDate()+1); return hoy; }
+    //-     Datos del Prestamo
+  if msg
+      p= msg
+  if !msg  
+    .col.full.xl-half
+        .card
+            li.card-header.deep-orange.accent-2
+                .card-title
+                    img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
+                    h4.flight-card-title.inline= 'Préstamo '
+                    span.ultra-small.m-0.ml-2.inline.white-text= `#${prestamo.id_pre}`
+                    p.flight-card-date= parseDate(prestamo.fec_pre)
+            .card-content-bg.white-text
+                .card-content
+                    .row.flight-state-wrapper
+                        .col.five_twelfths.ha-center
+                            .flight-state
+                                p.ultra-small Monto diario
+                                h4.margin= `$${prestamo.mod_pre}`
+                        .col.sixth.display-container
+                            img.icon.flight-icon.display-topmiddle(src="/img/icons/white/icons8_Money_50px.png", alt="")
+                        .col.five_twelfths.ha-center
+                            .flight-state
+                                p.ultra-small Monto faltante
+                                h4.margin= `$${prestamo.mof_pre}`
+                    .row
+                        .col.half.ha-center
+                            .flight-info
+                              p.small
+                                  span.grey-text.text-lighten-4 Préstamo inicial :
+                              p.small.mt-2= `$${prestamo.moi_pre}`
+                        .col.half.ha-center.flight-state-two
+                            .flight-info
+                                p.small
+                                    span.grey-text.text-lighten-4 Acabas el :
+                                p.small.mt-2= parseDate(LasteDate(prestamo.mod_pre, prestamo.mof_pre))
+    //-     Historial de pagos
+    .col.full.m-full
+        ul.collection.z-depth-1
+            li.collection-item.avatar.pt-3.pb-3
+                img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
+                h6.collection-header.bold Pagos
+                p Pagos realizados por este préstamo
+            for pago in pagos
+                li.collection-item
+                    .row.mb-0
+                        .col.five_twelfths
+                            p.collections-title= parseDate(pago.fec_pag)
+                            p.collections-content= `$${pago.mon_pag}`
+                        .col.seven_twelfths
+                            span.task-cat.blocked.grey-text.text-darken-4= pago.com_pag
+else if user.id_tus == 2
+    .col.full
+        .card.p-1
+            #mapita(style="width: 90vw; height: 90vh; z-index: 0")
+            p#zzz(style="visibility: hidden")= user.nom_usu  
+    //- //-    Seccion de cliente (max 10)
+    //- section.margin.beautyCard.floating.white
+    //-     .container.margin-t
+    //-         p.margin0.marginy 
+    //-             img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
+    //-             b.deep-purple-text.text-darken-2 Pagos
+    //-     .divider
+    //-     .section.row
+    //-         .data.inline.w.third
+    //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Cliente
+    //-         .data.inline.w.third
+    //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de negocio
+    //-         .data.inline.w.third
+    //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Telefono
+    //-     - var n = 0
+    //-     while n < (clientes.length < 10 ? clientes.length : 10)
+    //-         .section.row
+    //-             .data.inline.w.third.row
+    //-                 .w.sixth &nbsp;
+    //-                 h4.va-middle.ha-middle.w.twothird
+    //-                     b.light-blue-text.text-darken-3= clientes[n].nom_cli
+    //-             .data.inline.w.third.row
+    //-                 .w.sixth &nbsp;
+    //-                 h5.va-middle.ha-middle.w.twothird
+    //-                     b.light-blue-text.text-darken-3.blocked= clientes[n].din_cli
+    //-             .data.inline.w.third.row
+    //-                 .w.third &nbsp;
+    //-                 h5.va-middle.ha-middle.w.third
+    //-                     b.light-blue-text.text-darken-3= clientes[n++].tel_cli
+    
+else if user.id_tus == 3
+  if msg
+    p= msg
+  if !msg
+    div.nav
+      div.nav-wrapper
+          form
+              div.input-field
+                  input#search-input(type="search", placeholder="Busca un cliente" onkeyup='filtrarlist()')
+                  label.label-icon(for="search")
+                      
+    ul
+      for asesor,i in asesores
+        li(id='ele'+i)
+          .col.full.m-half
+            .card
+                .card-image
+                    img.activator(src="/img/header-asesor.jpg", alt="user bg")
+                .card-content.light-blue.lighten-4
+                    img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
+                    span.card-title.activator.grey-text.text-darken-4(id=''+i)= asesor.nom_ase
+                    .pt-2
+                        img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+                        p.inline Asesor
+                    .pt-2
+                        img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+                        p.inline= `Zona: ${asesores[i].nom_zon}`
+    //-     Historial de pagos
+    .col.full.m-full
+        ul.collection.z-depth-1
+            li.collection-item.avatar.pt-3.pb-3
+                img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
+                h6.collection-header.bold Pagos pendientes
+                p Todos los que faltan el dia de hoy
+            if !clientes
+                li.collection-item
+                    .row.mb-0
+                        .col.full
+                            p.collections-title No hay pagos pendientes el dia de hoy :)
+            else if clientes
+                for cli,i in clientes
+                    li.collection-item
+                        .row.mb-0
+                            .col.five_twelfths
+                                p.collections-title= cli.nom_cli
+                                p.collections-content= `$${prestamos[i].mod_pre}`
+                            .col.seven_twelfths
+                                span.task-cat.blocked.grey-text.text-darken-4= `Asesor a cargo: ${prestamos[i].nom_ase}`
+    //- ul
+    //-   for cli,i in clientes
+    //-     li(id='ele'+i)
+    //-       .col.full.m-half
+    //-         .card
+    //-             .card-image
+    //-                 img.activator(src="/img/header-asesor.jpg", alt="user bg")
+    //-             .card-content.light-blue.lighten-4
+    //-                 img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
+    //-                 span.card-title.activator.grey-text.text-darken-4(id=''+i)= cli.nom_cli
+    //-                 .pt-2
+    //-                     img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
+    //-                     p.inline Prestamin
+    //-                 .pt-2
+    //-                     img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
+    //-                     p.inline= `asesor: ${prestamos[i].nom_ase}`
+    
+    //- br
+    //- a(href="/admin/registrar")
+    //-     p Ir a agregar
+else if user.id_tus == 4
+    if msg
+        p= msg
+    if !msg
+        -var parseDate = function parseDate(date) { let dias = ["Lu", "Ma.", "Mi.", "Ju.", "Vie", "Sa.","Do."]; let meses = ["En.", "Feb.", "Mzo.", "Abr.", "My", "Jun.", "Jul.", "Ag.", "Sep.", "Oct.", "Nov.", "Dic."]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
+        .col.full
             .card
                 li.card-header.deep-orange.accent-2
                     .card-title
                         img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
-                        h4.flight-card-title.inline= 'Préstamo '
-                        span.ultra-small.m-0.ml-2.inline.white-text= `#${prestamo.id_pre}`
-                        p.flight-card-date= parseDate(prestamo.fec_pre)
-                .card-content-bg.white-text
-                    .card-content
-                        .row.flight-state-wrapper
-                            .col.five_twelfths.ha-center
-                                .flight-state
-                                    p.ultra-small Monto diario
-                                    h4.margin= `$${prestamo.mod_pre}`
-                            .col.sixth.display-container
-                                img.icon.flight-icon.display-topmiddle(src="/img/icons/white/icons8_Money_50px.png", alt="")
-                            .col.five_twelfths.ha-center
-                                .flight-state
-                                    p.ultra-small Monto faltante
-                                    h4.margin= `$${prestamo.mof_pre}`
-                        .row
-                            .col.half.ha-center
-                                .flight-info
-                                  p.small
-                                      span.grey-text.text-lighten-4 Préstamo inicial :
-                                  p.small.mt-2= `$${prestamo.moi_pre}`
-                            .col.half.ha-center.flight-state-two
-                                .flight-info
-                                    p.small
-                                        span.grey-text.text-lighten-4 Acabas el :
-                                    p.small.mt-2= parseDate(LasteDate(prestamo.mod_pre, prestamo.mof_pre))
-        //-     Historial de pagos
-        .col.full.m-full
-            ul.collection.z-depth-1
-                li.collection-item.avatar.pt-3.pb-3
-                    img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
-                    h6.collection-header.bold Pagos
-                    p Pagos realizados por este préstamo
-                for pago in pagos
-                    li.collection-item
-                        .row.mb-0
-                            .col.five_twelfths
-                                p.collections-title= parseDate(pago.fec_pag)
-                                p.collections-content= `$${pago.mon_pag}`
-                            .col.seven_twelfths
-                                span.task-cat.blocked.grey-text.text-darken-4= pago.com_pag
-    else if user.id_tus == 2
-        .col.full
-            .card.p-1
-                #mapita(style="width: 90vw; height: 90vh; z-index: 0")
-                p#zzz(style="visibility: hidden")= user.nom_usu  
-        //- //-    Seccion de cliente (max 10)
-        //- section.margin.beautyCard.floating.white
-        //-     .container.margin-t
-        //-         p.margin0.marginy 
-        //-             img.icon.va-middle.margin-r(src="/img/icons/indigo/icons8_Stocks_50px.png", alt="")
-        //-             b.deep-purple-text.text-darken-2 Pagos
-        //-     .divider
-        //-     .section.row
-        //-         .data.inline.w.third
-        //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Cliente
-        //-         .data.inline.w.third
-        //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Direccion de negocio
-        //-         .data.inline.w.third
-        //-             h6.va-middle.sub_title.ha-middle.grey-text.text-darken-1 Telefono
-        //-     - var n = 0
-        //-     while n < (clientes.length < 10 ? clientes.length : 10)
-        //-         .section.row
-        //-             .data.inline.w.third.row
-        //-                 .w.sixth &nbsp;
-        //-                 h4.va-middle.ha-middle.w.twothird
-        //-                     b.light-blue-text.text-darken-3= clientes[n].nom_cli
-        //-             .data.inline.w.third.row
-        //-                 .w.sixth &nbsp;
-        //-                 h5.va-middle.ha-middle.w.twothird
-        //-                     b.light-blue-text.text-darken-3.blocked= clientes[n].din_cli
-        //-             .data.inline.w.third.row
-        //-                 .w.third &nbsp;
-        //-                 h5.va-middle.ha-middle.w.third
-        //-                     b.light-blue-text.text-darken-3= clientes[n++].tel_cli
+                        h4.flight-card-title.inline Ingresos por dia
+                .white-text.p-1
+                            canvas#myChart(style="width: 100%; height: 200%")
+        //- .col-md-4
+        //-   h4.text-center Ingresos por dia 
+        //-   canvas#myChart(style="width: 70%; height: 100%")
         
-    else if user.id_tus == 3
-      if msg
-        p= msg
-      if !msg
-        div.nav
-          div.nav-wrapper
-              form
-                  div.input-field
-                      input#search-input(type="search", placeholder="Busca un cliente" onkeyup='filtrarlist()')
-                      label.label-icon(for="search")
-                          
-        ul
-          for asesor,i in asesores
-            li(id='ele'+i)
-              .col.full.m-half
-                .card
-                    .card-image
-                        img.activator(src="/img/header-asesor.jpg", alt="user bg")
-                    .card-content.light-blue.lighten-4
-                        img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
-                        span.card-title.activator.grey-text.text-darken-4(id=''+i)= asesor.nom_ase
-                        .pt-2
-                            img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-                            p.inline Asesor
-                        .pt-2
-                            img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-                            p.inline= `Zona: ${asesores[i].nom_zon}`
-        //-     Historial de pagos
-        .col.full.m-full
-            ul.collection.z-depth-1
-                li.collection-item.avatar.pt-3.pb-3
-                    img.icon.circle(src="/img/icons/indigo/icons8_Graph_50px.png")
-                    h6.collection-header.bold Pagos pendientes
-                    p Todos los que faltan el dia de hoy
-                if !clientes
-                    li.collection-item
-                        .row.mb-0
-                            .col.full
-                                p.collections-title No hay pagos pendientes el dia de hoy :)
-                else if clientes
-                    for cli,i in clientes
-                        li.collection-item
-                            .row.mb-0
-                                .col.five_twelfths
-                                    p.collections-title= cli.nom_cli
-                                    p.collections-content= `$${prestamos[i].mod_pre}`
-                                .col.seven_twelfths
-                                    span.task-cat.blocked.grey-text.text-darken-4= `Asesor a cargo: ${prestamos[i].nom_ase}`
-        //- ul
-        //-   for cli,i in clientes
-        //-     li(id='ele'+i)
-        //-       .col.full.m-half
-        //-         .card
-        //-             .card-image
-        //-                 img.activator(src="/img/header-asesor.jpg", alt="user bg")
-        //-             .card-content.light-blue.lighten-4
-        //-                 img.circle.responsive-img.activator.card-profile-image.p-2(src="/img/avatar.png", alt="")
-        //-                 span.card-title.activator.grey-text.text-darken-4(id=''+i)= cli.nom_cli
-        //-                 .pt-2
-        //-                     img.icon.va-middle(src="/img/icons/icons8_Collaborator_Male_50px.png", alt="")
-        //-                     p.inline Prestamin
-        //-                 .pt-2
-        //-                     img.icon.va-middle.inline(src="/img/icons/icons8_Envelope_50px.png", alt="")
-        //-                     p.inline= `asesor: ${prestamos[i].nom_ase}`
+        for info in prestamos
+          li.collection-item
+              .row.mb-0
+                  .col.five_twelfths  
+                    //- p.collections-content= info.id_pre
+                    //- p.collections-content= info.moi_pre
+                    //- p.collections-content= info.mof_pre
+                    //- p.collections-content= info.mod_pre
+                    //- p.collections-content= parseDate(info.fec_pre)   
+                    - var values = [info.mod_pre];
+                    ul
+                      each val in values
+                        li#valu(style="visibility: hidden")= val
+                      else
+                        li There are no values
+        script(src="/js/canva.js")    
         
-        //- br
-        //- a(href="/admin/registrar")
-        //-     p Ir a agregar
-    else if user.id_tus == 4
-        if msg
-            p= msg
-        if !msg
-            -var parseDate = function parseDate(date) { let dias = ["Lu", "Ma.", "Mi.", "Ju.", "Vie", "Sa.","Do."]; let meses = ["En.", "Feb.", "Mzo.", "Abr.", "My", "Jun.", "Jul.", "Ag.", "Sep.", "Oct.", "Nov.", "Dic."]; return `${dias[date.getDay()]} ${date.getDate()}, ${meses[date.getMonth()]} ${date.getFullYear()}`; }
-            .col.full
-                .card
-                    li.card-header.deep-orange.accent-2
-                        .card-title
-                            img.icon-big.margin.right(src="/img/icons/white/icons8_Credit_Card_50px.png", alt="")
-                            h4.flight-card-title.inline Ingresos por dia
-                    .white-text.p-1
-                                canvas#myChart(style="width: 100%; height: 200%")
-            //- .col-md-4
-            //-   h4.text-center Ingresos por dia 
-            //-   canvas#myChart(style="width: 70%; height: 100%")
-            
-            for info in prestamos
-              li.collection-item
-                  .row.mb-0
-                      .col.five_twelfths  
-                        //- p.collections-content= info.id_pre
-                        //- p.collections-content= info.moi_pre
-                        //- p.collections-content= info.mof_pre
-                        //- p.collections-content= info.mod_pre
-                        //- p.collections-content= parseDate(info.fec_pre)   
-                        - var values = [info.mod_pre];
-                        ul
-                          each val in values
-                            li#valu(style="visibility: hidden")= val
-                          else
-                            li There are no values
-            script(src="/js/canva.js")    
-            
-    else 
-        p Necesitas iniciar sesión
+else 
+    p Necesitas iniciar sesión

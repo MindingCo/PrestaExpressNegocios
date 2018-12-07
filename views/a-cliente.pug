@@ -1,48 +1,38 @@
-extends layouth
-
-append jscss
-
-append content
-  - var montoap= cliente.mod_pre
-  - var action= '/asesor/pago/'+ cliente.id_cli  
-  .rows
-  
-  blockquote  
-    h2= cliente.nom_cli
-    
-
-  br
-  .divider
-  .section
+- var montoap= cliente.mod_pre
+- var action= '/asesor/pago/'+ cliente.id_cli  
+.rows
+    blockquote  
+        h2= cliente.nom_cli
+    br
+    .divider
+    .section
         p  #{cliente.dih_cli}
         p  #{cliente.din_cli}
         p  #{cliente.tel_cli}
-        p  #{cliente.mod_pre}  
-      
-  .divider
-  .section
-      if message
-          p= message
-      if !message
-       .row
-         form.col.s12(method="post" action=action)
-          .row
-            .input-filed.col.s6
-                input(value=montoap type="text" id="montoa" class="validate" disabled)
-                label(for="montoa") Monto a pagar
-            .input-filed.col.s6
-                input(placeholder="Monto recibido" type="text" id="monto" name="montorecibido" class="validate")
-                label(for="monto") Monto recibido
-          .row
-            .input-filed.col.s12
-                input(placeholder="Comentario" type="text" id="comen" class="validate" name="comen")
-                label(for="comen") Comentario
-          .row
-            .input-filed.col.s12
-                input(value="Envíar" type="submit" class="validate")
-       .row    
-        p Para que el pago sea válido, solo se debe ingresar números en los campos del monto; no puede haber montos negativos;  
-        p a la suma del monto recibido con el total pagado anteriormente no puede sobrepasar el monto que se prestó; Los comenarios(en caso de realizar alguno)
-        p solo se admiten letras y los caracteres #,%,+,-, El monto recibido no puede ser mayor que el monto que se debe de recibir.
-        p En caso que los datos ingresados no seas válidos, el formulario saldrá de nuevo; pero si los datos han sido válidos y el pago se ha registrado, aparecerá un mensaje 
-  
+        p  #{cliente.mod_pre}        
+    .divider
+    .section
+        if message
+            p= message
+        if !message
+            .row
+                form.col.s12(method="post" action=action)
+                    .row
+                        .input-filed.col.s6
+                            input(value=montoap type="text" id="montoa" class="validate" disabled)
+                            label(for="montoa") Monto a pagar
+                        .input-filed.col.s6
+                            input(placeholder="Monto recibido" type="text" id="monto" name="montorecibido" class="validate")
+                            label(for="monto") Monto recibido
+                    .row
+                        .input-filed.col.s12
+                            input(placeholder="Comentario" type="text" id="comen" class="validate" name="comen")
+                            label(for="comen") Comentario
+                    .row
+                        .input-filed.col.s12
+                            input(value="Envíar" type="submit" class="validate")
+           .row    
+            p Para que el pago sea válido, solo se debe ingresar números en los campos del monto; no puede haber montos negativos;  
+            p a la suma del monto recibido con el total pagado anteriormente no puede sobrepasar el monto que se prestó; Los comenarios(en caso de realizar alguno)
+            p solo se admiten letras y los caracteres #,%,+,-, El monto recibido no puede ser mayor que el monto que se debe de recibir.
+            p En caso que los datos ingresados no seas válidos, el formulario saldrá de nuevo; pero si los datos han sido válidos y el pago se ha registrado, aparecerá un mensaje 

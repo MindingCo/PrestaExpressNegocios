@@ -56,3 +56,15 @@ $(document).ready(() =>
             $('#extracamp').html('')
     });
 })
+
+function go(site, values, method) {
+    $.ajax({
+        method: method?method:"GET",
+        url: site,
+        data: values,
+        success: function(result)
+        {
+            $('#content > div').html(result)
+        }
+    })
+}
