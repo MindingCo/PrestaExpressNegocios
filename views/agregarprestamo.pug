@@ -1,4 +1,3 @@
-script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js")
 .col.s12.m6.section.s-h-half
     h5 Prestamo
     .divider
@@ -9,22 +8,22 @@ script(src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/mater
         .section
             .row
                 .input-field.valign-wrapper
-                    input#cliente.validate.col.s10(name='cliente', type='text', required)
+                    input#cliente.validate.col.s10(name='Cliente', type='text', required)
                     label(for='cliente') Cliente
         .section
             .row
                 .input-field.valign-wrapper
-                    input#nueva.validate.col.s10(name='asesor', type='text', required)
+                    input#nueva.validate.col.s10(name='Asesor a cargo', type='text', required)
                     label(for='nueva') Asesor 
         .section
             .row
                 .input-field.valign-wrapper
-                    input#moi.validate.col.s10(name='montoi', type='text', required)
+                    input#moi.validate.col.s10(name='Cantidad del prestamo', type='text', required)
                     label(for='moi') Moi
         .section
             .row
                 .input-field.valign-wrapper
-                    input#mod.validate.col.s10(name='montod', type='text', required)
+                    input#mod.validate.col.s10(name='Monto a pagar diariamente', type='text', required)
                     label(for='mod') Mod
         .section.right-align
             input.btn.hoverable(type='submit', value='Guardar cambios')
