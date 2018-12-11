@@ -23,7 +23,7 @@ const conf_https =
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '443');
+const port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 /**
