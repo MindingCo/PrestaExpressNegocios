@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "set NODE_ENV=production && nodemon ./bin/www",
-    "begin": "nodemon start"
+    "start": "node ./bin/www"
+    
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
