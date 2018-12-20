@@ -3,6 +3,7 @@ html
     head
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="shortcut icon", type="image/ico" href="/img/Presta.ico")
         title=  title
         
         //- css
@@ -33,7 +34,8 @@ html
         block jscss
     body.row
         #loader-wrapper
-            #loader
+            #loader.display-container(style='background-color: rgba(255,255,255,0.5); position: fixed; width: 100%; height: 100%; z-index: 100;')
+                img.display-middle(src="img/loader.gif")
             .loader-section.section-left
             .loader-section.section-right
         aside.col.quarter.xl-sixth.hide_s.p-0.white

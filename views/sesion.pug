@@ -28,7 +28,7 @@ style(type="text/css").
             .card-content.white
                 .row.flight-state-wrapper
                     .col.full.m-two_thirds.l-seven_twelfths.ha-center
-                        form#modify.w.full.container(method='post', action='/sesion')
+                        form#modify.w.full.container(method='post', action='/sesion', onsubmit='changePass(event)')
                             div.row.input-field.valign-wrapper.display-container
                                 i.material-icons.prefix vpn_key
                                 input#antigua.validate(name='contraactual', type='password', pattern=".{6,16}", required)
@@ -45,9 +45,11 @@ style(type="text/css").
                                 label(for='confirmacion') Confirmar contraseña nueva
                                 span.helper-text.red-text
                             div.row
-                                button#save-changes.btn.waves-effect.hoverable(type='submit')
-                                    i.material-icons check
-                                    span Guardar cambios  
+                                button#modificar-pass.btn.inline(type="submit")
+                                    i.material-icons.va-middle check
+                                    span.va-middle Guardar cambios  
+                            div.row
+                                pre#message=message
     .center-align
         a(href='/logout')
             .btn Cerrar Sesion

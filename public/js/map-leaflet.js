@@ -1,5 +1,5 @@
 window.onload = function() {
-  var map = L.map('mapita').setView([19.45, -99.17], 14);
+  var map = L.map('mapita');
 
   const tileURL = 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const tileURL2 = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png';
@@ -10,17 +10,18 @@ window.onload = function() {
   var socket2 = io('https://prestaexpressnegocios.me', {forceNew: true})
 
   // Marker
-  const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
-  marker.bindPopup('Cecyt 9!');
-  map.addLayer(marker);
+  // const marker = L.marker([19.45315,-99.1750]); // CDMX, Popotla
+  // marker.bindPopup('Cecyt 9!');
+  // map.addLayer(marker);
 
   // Geolocation
   map.locate({enableHighAccuracy: true})
   map.on('locationfound', (e) => {
     const coords = [e.latlng.lat, e.latlng.lng];
     const newMarker = L.marker(coords);
-    newMarker.bindPopup("nom");
+    newMarker.bindPopup("Tú");
     map.addLayer(newMarker);
+    map.setView(coords, 14)
     socket2.emit('userCoordinates', e.latlng);
   });
   //Obtener ID asesor

@@ -7,36 +7,37 @@
 var app = require('../app');
 var debug = require('debug')('prestaexpressnegocios:server');
 // Requerimientos para servidor https
-var https = require('https');
-const fs = require('fs');
-const conf_https =
-{
-    ca: fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
-    key: fs.readFileSync('./ssl/pen.key'),
-    cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt')
-}
+    // var https = require('https');
+    // const fs = require('fs');
+    // const conf_https =
+    // {
+    //     ca: fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
+    //     key: fs.readFileSync('./ssl/pen.key'),
+    //     cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt')
+    // }
 
 // End de procedimientos
-// var http = require('http');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '443');
+const port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-// var server = https.createServer(app);
-var server = https.createServer(conf_https, app);
+var server = http.createServer(app);
+// var server = https.createServer(conf_https, app);
 // Servidor 2 para ponchis >:v
-var app2 = require('../app');
-const port2 = normalizePort(process.env.PORT || '666');
-app2.set('port', port2);
-https.createServer(conf_https, app2).listen(666)
-console.log(`Corriendo servidor 2 en ${port2}`);
+
+// var app2 = require('../app');
+// const port2 = normalizePort(process.env.PORT || '666');
+// app2.set('port', port2);
+// http.createServer(conf_https, app2).listen(666)
+// console.log(`Corriendo servidor 2 en ${port2}`);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -46,7 +47,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-console.log(`Ejecutando en:\n https://localhost:${port}`);
+console.log(`Ejecutando en:\n localhost:${port}`);
 
 /**
  * Normalize a port into a number, string, or false.

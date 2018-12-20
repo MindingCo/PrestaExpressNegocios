@@ -953,22 +953,27 @@ controller.inicio = (req, res) => {
 };
 
 controller.mcontraseña = (req, res) => {
+    console.log('recepcion valores');
+    console.log(req.body);
+    var i
+    console.log('x' + i++);
     const contra_actual = req.body.contraactual;
+    console.log('x' + i++);
     const contra_nueva = req.body.newcontra;
+    console.log('x' + i++);
     const confirm_contra_nueva = req.body.connewcontra;
+    console.log('x' + i++);
+    console.log('valores cachados');
 
     let invalid = valid.contra(contra_actual, "contraseña actual");
     if (invalid)
-        return res.render("sesion", {user: req.user, error: invalid});
+        return invalid;
     invalid = valid.contra(contra_nueva, "contraseña nueva");
     if (invalid)
-        return res.render("sesion", {user: req.user, error: invalid});
+        return invalid;
 
     if (contra_nueva !== confirm_contra_nueva) {
-        return res.render('sesion', {
-            user: req.user,
-            error: "La nueva contraseña no coincide en ambos campos"
-        });
+        return "La nueva contraseña no coincide en ambos campos"
     }
     else {
       connection.query('SELECT * FROM usuario where id_usu= ?', [req.user.id_usu], (err, usu) => {
@@ -983,10 +988,7 @@ controller.mcontraseña = (req, res) => {
           console.log(JSON.stringify(usu));
           if (!bcrypt.compareSync(contra_actual, usu[0].con_usu)) {
            console.log('contra incorrecta');
-           return res.render('sesion', {
-              user: req.user,
-              error:  "Contraseña actual incorrecta"
-            });
+           return "Contraseña actual incorrecta"
           }
           else {
             var con_usu= bcrypt.hashSync(contra_nueva, null, null);
@@ -1000,10 +1002,7 @@ controller.mcontraseña = (req, res) => {
                 });
              }
              console.log('Todo bien');
-             res.render('sesion', {
-                user: req.user,
-                message:"Se ha cambiado la contraseña con éxito."
-             });
+             return "Se ha cambiado la contraseña con éxito."
             });
           }
       });
