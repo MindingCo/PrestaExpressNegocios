@@ -11,9 +11,9 @@ var https = require('https');
 const fs = require('fs');
 const conf_https =
 {
-    ca: fs.readFileSync('../ssl/prestaexpressnegocios_me.ca-bundle'),
-    key: fs.readFileSync('../ssl/prestaexpressnegocios_me.p7b'),
-    cert: fs.readFileSync('../ssl/prestaexpressnegocios_me.crt')
+    ca: fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
+    key: fs.readFileSync('./ssl/pen.key'),
+    cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt')
 }
 
 // End de procedimientos
