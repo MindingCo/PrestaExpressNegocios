@@ -7,17 +7,17 @@
 var app = require('../app');
 var debug = require('debug')('prestaexpressnegocios:server');
 // Requerimientos para servidor https
-    // var https = require('https');
-    // const fs = require('fs');
-    // const conf_https =
-    // {
-    //     ca: fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
-    //     key: fs.readFileSync('./ssl/pen.key'),
-    //     cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt')
-    // }
+var https = require('https');
+const fs = require('fs');
+const conf_https =
+{
+    ca: fs.readFileSync('./ssl/prestaexpressnegocios_me.ca-bundle'),
+    key: fs.readFileSync('./ssl/prestaexpressnegocios_me.p7b'),
+    cert: fs.readFileSync('./ssl/prestaexpressnegocios_me.crt')
+}
 
 // End de procedimientos
-var http = require('http');
+// var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -29,8 +29,8 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app);
-// var server = https.createServer(conf_https, app);
+// var server = http.createServer(app);
+var server = https.createServer(conf_https, app);
 // Servidor 2 para ponchis >:v
 
 // var app2 = require('../app');
