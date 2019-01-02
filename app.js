@@ -13,7 +13,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var indexRouter = require('./routes/index');
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 736;
 
 var passport = require('passport');
 var flash    = require('connect-flash');
