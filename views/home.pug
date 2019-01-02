@@ -54,9 +54,12 @@ if user.id_tus == 1
                             span.task-cat.blocked.grey-text.text-darken-4= pago.com_pag
 else if user.id_tus == 2
     .col.full
-        .card.p-1
-            #mapita(style="width: 90vw; height: 90vh; z-index: 0")
-            p#zzz(style="visibility: hidden")= user.nom_usu  
+        #map.card.p-1(style="min-height: 40vh;")
+        script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDcgh5YYJeQJJ8NpN78zlR1VAm8ax4bANM&callback=initMap', async, defer)
+        
+        
+        //- #mapita(style="width: 90vw; height: 90vh; z-index: 0")
+        //- p#zzz(style="visibility: hidden")= user.nom_usu  
     //- //-    Seccion de cliente (max 10)
     //- section.margin.beautyCard.floating.white
     //-     .container.margin-t

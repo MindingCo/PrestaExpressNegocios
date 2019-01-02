@@ -1,5 +1,14 @@
-if (document.location.hostname == '31.220.53.147')
-    document.location.replace('https://prestaexpressnegocios.me')
+// if (document.location.hostname == '31.220.53.147')
+//     document.location.replace('https://prestaexpressnegocios.me')
+var map;
+var cliente;
+var ubicacion;
+var MEXICO_BOUNDS = {
+        north: 19.592757,
+        south: 19.188769,
+        west: -99.326537,
+        east: -98.960461,
+      };
 $(document).ready(function ()
 {
     loader(false)
@@ -79,6 +88,35 @@ $(document).ready(function ()
     // alert('document listo x2')
 })
 
+function initMap() {
+    $.ajax({
+        method: "POST",
+        url: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDcgh5YYJeQJJ8NpN78zlR1VAm8ax4bANM",
+        beforeSend: function () { loader(true);},
+        error: function (result) { alert('Hubo un error'); alert(result.message); },
+        complete: function () { loader(false); },
+        success: function(result) {
+            ubicacion = result.location
+            map = new google.maps.Map(document.getElementById('map'),
+            {
+                center: ubicacion,
+                zoom: 17,
+                restriction: { latLngBounds: MEXICO_BOUNDS, strictBounds: false, },
+                streetViewControl: false,
+                fullscreenControl: true,
+                fullscreenControlOptions: { position: google.maps.ControlPosition.RIGHT_BOTTOM },
+                zoomControl: false,
+                mapTypeControl: false
+            })
+            cliente = new google.maps.Marker({position: ubicacion, map: map});
+        }
+    });
+}
+function center(coords) {
+    map.setCenter(coords)
+    cliente.position = coords;
+}
+
 function loader(bol) {
     $('#loader').css({"display": (bol?"initial":"none")})
 }
@@ -137,50 +175,4 @@ function changePass(e) {
                 loader(false)
             }
     });
-    // alert('hla')
-    // let pc, np, cnp;
-    // pc = $('#antigua').val();
-    // np = $('#nueva').val();
-    // cnp = $('#confirmacion').val();
-    // alert(pc);
-    // alert(np);
-    // alert(cnp);
-    // alert('empieza ajax')
-    // $.ajax(
-    // {
-    //     method:'post',
-    //     url: '/sesion',
-    //     context: document.body,
-    //     data:
-    //     {
-    //         contraactual: pc,
-    //         newcontra: np,
-    //         connewcontra: cnp
-    //     },
-    //     beforeSend: function () { loader(true) },
-    //     success: function (result, textStatus, jqXHR)
-    //     {
-    //         alert('success');
-    //         alert(result)
-    //         alert(textStatus)
-    //         alert(jqXHR)
-    //         $('#message').html(result);
-    //         loader(false)
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown)
-    //     {
-    //         alert('Hubo un error')
-    //         alert(jqXHR)
-    //         alert(textStatus)
-    //         alert(errorThrown)
-    //         loader(false)
-    //     },
-    //     complete: function (jqXHR, textStatus )
-    //     {
-    //         alert('completado')
-    //         alert(jqXHR)
-    //         alert(textStatus)
-    //         loader(false)
-    //     }
-    // })
 }
